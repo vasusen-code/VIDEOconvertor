@@ -14,5 +14,14 @@ async def start(event):
 @Asst.on(events.callbackquery.CallbackQuery(data="plugins"))
 async def menu(event):
     await event.edit("",
-                     buttons=[
+                    buttons=[[
+                         Button.inline("info.", data="info"),
+                         Button.inline("NOTICE", data="notice")],
+                         [
+                         Button.inline("PREMIUM", data="premium"),
+                         Button.inline("Help.", data="help")],
+                         [
+                         Button.url("DEVELOPER", url=f"{DEV}")]])
+    
+                   
                          
