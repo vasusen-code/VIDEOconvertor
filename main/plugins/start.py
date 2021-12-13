@@ -2,7 +2,7 @@ from .. import Drone
 from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
 from LOCAL.localisation import JPG as file
-from LOCAL.localisation import info_text, spam_notice, help_text, DEV
+from LOCAL.localisation import info_text, spam_notice, help_text, DEV, premium_text, SUPPORT_LINK
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
@@ -36,6 +36,15 @@ async def notice(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="premium"))
 async def premium(event):
-    await event.answer('You can purchase a package of 70Rs(aprx 1$) per month for renting a bot on heroku, hence no restrictions for usage.' alert=True)
+    await event.answer(f'{premium_text}', alert=True)
     
+    
+@Drone.on(events.callbackquery.CallbackQuery(data="info"))
+async def help(event):
+    await event.edit('**HELP:**
+                    buttons=[[
+                         Button.inline("PLUGINS.", data="plugins"),
+                         Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
+                         [
+                         Button.inline("Menu.", data="menu")]])
     
