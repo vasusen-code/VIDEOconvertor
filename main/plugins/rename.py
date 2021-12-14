@@ -3,12 +3,12 @@
 
 import time
 from datetime import datetime as dt
-from .. import Drone
+from .. import Drone, BOT_UN
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyutils import rename
 from ethon.pyfunc import video_metadata
-from LOCAL.localisations import SUPPORT_LINK
+from LOCAL.localisation import SUPPORT_LINK, JPG, 
 
 async def media_rename(event, msg, out):
     await event.edit('Trying to process
@@ -59,7 +59,8 @@ async def media_rename(event, msg, out):
         if not 'video' in mime:
             UT = time.time()
             uploader = await fast_upload()
-            await Drone.send_file(event.chat_id, uploader, caption="**Renamed by** {BOT_UN}\n\nTotal time:{net_time}, thumb=JPG, force_document=True)
+            net_time = round(DT - UT)
+            await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
         else:
     except Exception as e:
         await event.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
