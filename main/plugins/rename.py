@@ -17,31 +17,44 @@ async def media_rename(event, msg, new_name):
     DT = time.time()
     mime = msg.document.mime_type
     if 'mp4' in mime:
-        name =  "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+        out = new_name + dt.now().isoformat("_", "seconds") + ".mp4"
     elif 'x-matroska' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".mkv"            
     elif 'webm' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".webm"
     elif 'zip' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".zip" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".zip"            
     elif 'jpg' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".jpg" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".jpg"
     elif 'png' in mime:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".png" 
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".png"
+        out = new_name + dt.now().isoformat("_", "seconds") + ".png"
     elif 'pdf' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".pdf" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".pdf"
     elif 'rar' in mime:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".rar" 
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".rar"
+        out = new_name + dt.now().isoformat("_", "seconds") + ".rar"
     elif 'mp3' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp3" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".mp3"
     elif 'ogg' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".ogg" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".ogg"          
     elif 'flac' in mime:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".flac"   
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".flac"  
+        out = new_name + dt.now().isoformat("_", "seconds") + ".flac"
     elif 'wav' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".wav" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".wav"
     elif 'webp' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webp" 
+        out = new_name + dt.now().isoformat("_", "seconds") + ".webp"
     else:
         default_name = msg.file.name
         if not default_name:
