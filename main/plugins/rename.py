@@ -6,9 +6,11 @@ from datetime import datetime as dt
 from .. import Drone
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
+from ethon.pyutils import rename
 from ethon.pyfunc import video_metadata
 
-async def media_rename(event, msg):
+async def media_rename(event, msg, out):
+    await event.edit('Trying to process
     Drone = event.client
     DT = time.time()
     mime = msg.document.mime_type
@@ -39,7 +41,10 @@ async def media_rename(event, msg):
     elif 'webp' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webp" 
     else:
-        
-    await Drone.fast_download(name, media, Drone, event, DT, "**DOWNLOADING:**")
+    try:  
+        await Drone.fast_download(name, media, Drone, event, DT, "**DOWNLOADING:**")
+    except Exception as e:
+        await event.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        return
        
     
