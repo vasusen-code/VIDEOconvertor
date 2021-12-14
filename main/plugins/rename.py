@@ -12,6 +12,31 @@ async def media_rename(event, msg):
     DT = time.time()
     mime = msg.document.mime_type
     if 'mp4' in mime:
+        name =  "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+    elif 'mkv' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
+    elif 'webm' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
+    elif 'zip' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".zip" 
+    elif 'jpg' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".jpg" 
+    elif 'png' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".png" 
+    elif 'pdf' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".pdf" 
+    elif 'rar' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".rar" 
+    elif 'mp3' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp3" 
+    elif 'ogg' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".ogg" 
+    elif 'flac' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".flac"   
+    elif 'wav' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".wav" 
+    else:
+        
     await Drone.fast_download(media, Drone, event, DT, "**DOWNLOADING:**")
        
     
