@@ -9,5 +9,6 @@ from ethon.pyfunc import video_metadata
 
 async def media_rename(event, media):
     Drone = event.client
+    DT = time.time()
     await Drone.fast_download(media, Drone, event, DT, "**DOWNLOADING:**")
     
