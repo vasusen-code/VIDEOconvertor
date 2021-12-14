@@ -64,9 +64,10 @@ async def media_rename(event, msg, out):
         else:
             if 'mp4' in mime:
                 metadata = video_metadata(msg.media)
-                width = metadata["width]
+                width = metadata["width"]
                 height = metadata["height"]
                 duration = metadata["duration"]
+                attr = [DocumentAttributeVideo(duration=int(duration), w=width, h=height, supports_streaming=True)]
                 UT = time.time()
                 uploader = await fast_upload()
                 net_time = round(DT - UT)
