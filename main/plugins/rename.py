@@ -2,6 +2,7 @@
 #Github.com/Vasusen-code
 
 import time
+from datetime import datetime as dt
 from .. import Drone
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
