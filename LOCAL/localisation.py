@@ -16,4 +16,4 @@ DEV = "https://t.me/ChauhanMahesh"
 
 spam_notice = "This bot is hosted on heroku, and hence can run just run one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
 
-JPG = "https://telegra.ph/VIDEO-CONVERTOR-IMG-12-13"
+JPG = "LOCAL/Video_convertor.jpg"
