@@ -35,8 +35,10 @@ async def media_rename(event, msg):
         name = "media_" + dt.now().isoformat("_", "seconds") + ".flac"   
     elif 'wav' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".wav" 
+    elif 'webp' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".webp" 
     else:
         
-    await Drone.fast_download(media, Drone, event, DT, "**DOWNLOADING:**")
+    await Drone.fast_download(name, media, Drone, event, DT, "**DOWNLOADING:**")
        
     
