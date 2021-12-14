@@ -8,6 +8,7 @@ from telethon import events
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyutils import rename
 from ethon.pyfunc import video_metadata
+from LOCAL.localisations import SUPPORT_LINK
 
 async def media_rename(event, msg, out):
     await event.edit('Trying to process
@@ -16,7 +17,7 @@ async def media_rename(event, msg, out):
     mime = msg.document.mime_type
     if 'mp4' in mime:
         name =  "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
-    elif 'mkv' in mime:
+    elif 'x-matroska' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
     elif 'webm' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
@@ -45,6 +46,24 @@ async def media_rename(event, msg, out):
         await Drone.fast_download(name, media, Drone, event, DT, "**DOWNLOADING:**")
     except Exception as e:
         await event.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        print(e)
         return
-       
+    await event.edit("Renaming.")
+    try:
+        rename(name, out)
+    except Exception as e:
+        await event.edit(f"An error occured while renaming.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        print(e)
+        return
+    try:
+        if not 'video' in mime:
+            UT = time.time()
+            uploader = await fast_upload()
+            await Drone.send_file(event.chat_id, uploader, caption="**Renamed by** {BOT_UN}\n\nTotal time:{net_time}, thumb=JPG, force_document=True)
+        else:
+    except Exception as e:
+        await event.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        print(e)
+        return
+
     
