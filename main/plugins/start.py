@@ -48,3 +48,10 @@ async def help(event):
                          [
                          Button.inline("Menu.", data="menu")]])
     
+@Drone.on(events.callbackquery.CallbackQuery(data="plugins"))
+async def plugins(event):
+    await event.edit(f'{help_text}')
+    
+    
+    
+    
