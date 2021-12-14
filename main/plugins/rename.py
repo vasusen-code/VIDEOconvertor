@@ -43,8 +43,24 @@ async def media_rename(event, msg, out):
     elif 'webp' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webp" 
     else:
+        default_name = msg.file.name
+        if not default_name:
+            await event.edit("Failed fetching extension of your file.")
+        else:
+            try:
+                name = msg.file.name
+                await Drone.fast_download(name, msg.media, Drone, event, DT, "**DOWNLOADING:**")
+                rename(name, out)
+                UT = time.time()
+                uploader = await fast_upload(name, msg.media, UT, Drone, event, '**UPLOADING:**')
+                net_time = round(DT - UT)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
+            except Exception as e:
+                await event.edit(f"An error occured.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+                print(e)
+                return
     try:  
-        await Drone.fast_download(name, media, Drone, event, DT, "**DOWNLOADING:**")
+        await Drone.fast_download(name, msg.media, Drone, event, DT, "**DOWNLOADING:**")
     except Exception as e:
         await event.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
         print(e)
