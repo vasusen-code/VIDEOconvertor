@@ -32,14 +32,14 @@ async def info(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="notice"))
 async def notice(event):
-    await event.answer(f'{notice_text}', alert=True)
+    await event.answer(f'{spam_notice}', alert=True)
     
 @Drone.on(events.callbackquery.CallbackQuery(data="premium"))
 async def premium(event):
     await event.answer(f'{premium_text}', alert=True)
     
     
-@Drone.on(events.callbackquery.CallbackQuery(data="info"))
+@Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
     await event.edit('**👥HELP.**',
                     buttons=[[
