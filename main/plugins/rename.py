@@ -9,6 +9,7 @@ from ethon.telefunc import fast_download, fast_upload
 from ethon.pyutils import rename
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK, JPG, 
+from telethon.tl.types import DocumentAttributeVideo
 
 async def media_rename(event, msg, out):
     await event.edit('Trying to process
@@ -58,7 +59,7 @@ async def media_rename(event, msg, out):
     try:
         if not 'video' in mime:
             UT = time.time()
-            uploader = await fast_upload()
+            uploader = await fast_upload(name, msg.media, UT, Drone, event, '**UPLOADING:**')
             net_time = round(DT - UT)
             await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
         else:
@@ -69,9 +70,14 @@ async def media_rename(event, msg, out):
                 duration = metadata["duration"]
                 attr = [DocumentAttributeVideo(duration=int(duration), w=width, h=height, supports_streaming=True)]
                 UT = time.time()
-                uploader = await fast_upload()
+                uploader = await fast_upload(name, msg.media, UT, Drone, event, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attr, force_document=False)
+            else:
+                UT = time.time()
+                uploader = await fast_upload(name, msg.media, UT, Drone, event, '**UPLOADING:**')
+                net_time = round(DT - UT)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
     except Exception as e:
         await event.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
         print(e)
