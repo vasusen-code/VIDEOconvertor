@@ -62,6 +62,15 @@ async def media_rename(event, msg, out):
             net_time = round(DT - UT)
             await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
         else:
+            if 'mp4' in mime:
+                metadata = video_metadata(msg.media)
+                width = metadata["width]
+                height = metadata["height"]
+                duration = metadata["duration"]
+                UT = time.time()
+                uploader = await fast_upload()
+                net_time = round(DT - UT)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attr, force_document=False)
     except Exception as e:
         await event.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
         print(e)
