@@ -11,7 +11,7 @@ from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK, JPG, 
 from telethon.tl.types import DocumentAttributeVideo
 
-async def media_rename(event, msg, out):
+async def media_rename(event, msg, new_name):
     await event.edit('Trying to process
     Drone = event.client
     DT = time.time()
@@ -49,6 +49,8 @@ async def media_rename(event, msg, out):
         else:
             try:
                 name = msg.file.name
+                ext = (name.split("."))[1]
+                out = new_name + "." + ext
                 await Drone.fast_download(name, msg.media, Drone, event, DT, "**DOWNLOADING:**")
                 rename(name, out)
                 UT = time.time()
