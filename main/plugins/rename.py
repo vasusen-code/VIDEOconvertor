@@ -71,20 +71,20 @@ async def media_rename(event, msg, new_name):
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
             except Exception as e:
-                await event.edit(f"An error occured.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+                await event.edit(f"An error occured.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
                 print(e)
                 return
     try:  
         await Drone.fast_download(name, msg.media, Drone, event, DT, "**DOWNLOADING:**")
     except Exception as e:
-        await event.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        await event.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
     await event.edit("Renaming.")
     try:
         rename(name, out)
     except Exception as e:
-        await event.edit(f"An error occured while renaming.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        await event.edit(f"An error occured while renaming.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
     try:
@@ -110,7 +110,7 @@ async def media_rename(event, msg, new_name):
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
     except Exception as e:
-        await event.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})")
+        await event.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
 
