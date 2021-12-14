@@ -3,6 +3,7 @@
 
 from .. import Drone 
 from telethon import events, Button
+from main.plugins.rename import media_rename
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -27,3 +28,6 @@ async def compin(event):
             return
     
       
+@Drone.on(events.callbackquery.CallbackQuery(data="rename"))
+async def rename(event):
+             
