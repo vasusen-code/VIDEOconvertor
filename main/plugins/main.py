@@ -30,4 +30,10 @@ async def compin(event):
       
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):
-             
+    async with Drone.conversation(id) as conv: 
+        await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.")
+        m = await conv.get_reply()
+        name = m.text
+        asyncio.sleep(60)                        
+        if not m:
+            await event.                   
