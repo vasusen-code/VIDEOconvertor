@@ -102,23 +102,23 @@ async def media_rename(event, msg, new_name):
             await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
         else:
             if 'mp4' in mime:
-                metadata = video_metadata(msg.media)
+                metadata = video_metadata(out)
                 width = metadata["width"]
                 height = metadata["height"]
                 duration = metadata["duration"]
                 attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
                 UT = time.time()
-                uploader = await fast_upload(f'{name}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
+                uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attributes, force_document=False)
             elif msg.video:
-                metadata = video_metadata(msg.media)
+                metadata = video_metadata(out)
                 width = metadata["width"]
                 height = metadata["height"]
                 duration = metadata["duration"]
                 attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
                 UT = time.time()
-                uploader = await fast_upload(f'{name}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
+                uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attributes, force_document=False)            
             else:
