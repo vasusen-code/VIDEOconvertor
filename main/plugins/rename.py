@@ -1,6 +1,7 @@
 #TG:ChauhanMahesh/DroneBots
 #Github.com/Vasusen-code
 
+import os
 import time
 from datetime import datetime as dt
 from .. import Drone, BOT_UN
@@ -132,3 +133,5 @@ async def media_rename(event, msg, new_name):
         print(e)
         return
     await edit.delete()
+    os.remove(name)
+    os.remove(out)
