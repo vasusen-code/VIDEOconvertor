@@ -9,7 +9,7 @@ from main.plugins.rename import media_rename
 async def compin(event):
     if event.is_private:
         media = event.media
-        video = event.document.mime_type
+        video = event.file.mime_type
         if media:
             if 'video' in video:
                 await event.reply("📽",
