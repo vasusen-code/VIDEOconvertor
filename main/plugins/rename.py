@@ -71,7 +71,7 @@ async def media_rename(event, msg, new_name):
                 await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
                 rename(name, out)
                 UT = time.time()
-                uploader = await fast_upload(out, msg.media, UT, Drone, edit, '**UPLOADING:**')
+                uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
             except Exception as e:
@@ -94,7 +94,7 @@ async def media_rename(event, msg, new_name):
     try:
         if not 'video' in mime:
             UT = time.time()
-            uploader = await fast_upload(out, msg.media, UT, Drone, edit, '**UPLOADING:**')
+            uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
             net_time = round(DT - UT)
             await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
         else:
@@ -105,12 +105,12 @@ async def media_rename(event, msg, new_name):
                 duration = metadata["duration"]
                 attr = [DocumentAttributeVideo(duration=int(duration), w=width, h=height, supports_streaming=True)]
                 UT = time.time()
-                uploader = await fast_upload(out, msg.media, UT, Drone, edit, '**UPLOADING:**')
+                uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attr, force_document=False)
             else:
                 UT = time.time()
-                uploader = await fast_upload(out, msg.media, UT, Drone, edit, '**UPLOADING:**')
+                uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, force_document=True)
     except Exception as e:
