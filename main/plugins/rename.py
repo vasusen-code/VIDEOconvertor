@@ -106,7 +106,7 @@ async def media_rename(event, msg, new_name):
                 width = metadata["width"]
                 height = metadata["height"]
                 duration = metadata["duration"]
-                attributes = [DocumentAttributeVideo(duration=int(duration), w=width, h=height, supports_streaming=True)]
+                attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
                 UT = time.time()
                 uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
