@@ -1,6 +1,8 @@
 import time
 import math
 import re
+import subprocess
+import shell
 from ethon.pyfunc import total_frames as tf
 from telethon import events
 
