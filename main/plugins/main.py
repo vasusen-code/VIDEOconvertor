@@ -5,6 +5,7 @@ import os
 from .. import Drone 
 from telethon import events, Button
 from main.plugins.rename import media_rename
+from main.plugins.compressor import compress
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
