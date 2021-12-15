@@ -15,6 +15,10 @@ async def media_rename(event, msg, new_name):
     edit = await event.client.send_message(event.chat_id, 'Trying to process.', reply_to=msg.id)
     Drone = event.client
     DT = time.time()
+    if hasattr(msg.media, "document"):
+        file = msg.media.document
+    else:
+        file = msg.media
     mime = msg.document.mime_type
     if 'mp4' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
@@ -64,7 +68,7 @@ async def media_rename(event, msg, new_name):
                 name = msg.file.name
                 ext = (name.split("."))[1]
                 out = new_name + "." + ext
-                await fast_download(name, msg.media, Drone, edit, DT, "**DOWNLOADING:**")
+                await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
                 rename(name, out)
                 UT = time.time()
                 uploader = await fast_upload(out, msg.media, UT, Drone, edit, '**UPLOADING:**')
@@ -75,7 +79,7 @@ async def media_rename(event, msg, new_name):
                 print(e)
                 return
     try:  
-        await fast_download(name, msg.media, Drone, edit, DT, "**DOWNLOADING:**")
+        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
