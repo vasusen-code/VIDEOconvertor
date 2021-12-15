@@ -37,9 +37,8 @@ def humanbytes(size):
         size /= 1024
     return f"{size:.2f} {unit}"
    
-async def ffmpeg_progress(cmd, file, progress, event, ps_name):
+async def ffmpeg_progress(cmd, file, progress, now, event, ps_name):
     total_frames = tf(file)
-    now = time.time()
     with open(progress, "w") as fk:
         pass
     proce = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
