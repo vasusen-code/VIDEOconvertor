@@ -36,12 +36,34 @@ async def compress(event, msg):
         ext = (name.split("."))[1]
         out = new_name + ext
     DT = time.time()
-    await fast_download()
+    try:
+        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     cmd
-    await ffmpeg_progress(cmd, edit, '**COMPRESSING:**')
+    try:
+        await ffmpeg_progress(cmd, edit, '**COMPRESSING:**')
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
+    text = f'**COMPRESSED by : {BOT_UN}\n\nbefore compressing : `{i_size}\nafter compressing : `{f_size}`'
     UT = time.time()
-    uploader = await fast_upload()
-    await Drone.send_file(event.chat_id, uploader, captio=text, thumb=JPG2, attributes=attributes, force_document=False)
+    metadata = video_metadata(out)
+    width = metadata["width"]
+    height = metadata["height"]
+    duration = metadata["duration"]
+    attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
+    try:
+        uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
+        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG2, attributes=attributes, force_document=False)
+    except Exception:
+        try:
+            uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
+            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
+        except Exception as e:
+            print(e)
+            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out)
