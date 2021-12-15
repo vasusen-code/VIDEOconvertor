@@ -64,7 +64,7 @@ async def media_rename(event, msg, new_name):
                 name = msg.file.name
                 ext = (name.split("."))[1]
                 out = new_name + "." + ext
-                await Drone.fast_download(name, msg.media, Drone, edit, DT, "**DOWNLOADING:**")
+                await fast_download(name, msg.media, Drone, edit, DT, "**DOWNLOADING:**")
                 rename(name, out)
                 UT = time.time()
                 uploader = await fast_upload(out, msg.media, UT, Drone, edit, '**UPLOADING:**')
@@ -75,7 +75,7 @@ async def media_rename(event, msg, new_name):
                 print(e)
                 return
     try:  
-        await Drone.fast_download(name, msg.media, Drone, edit, DT, "**DOWNLOADING:**")
+        await fast_download(name, msg.media, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
