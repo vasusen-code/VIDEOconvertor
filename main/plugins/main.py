@@ -24,9 +24,6 @@ async def compin(event):
                 await event.reply('📦',
                             buttons=[  
                                 [Button.inline("RENAME", data="rename"),
-        else:
-            return
-    
       
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):                            
