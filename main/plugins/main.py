@@ -28,7 +28,8 @@ async def compin(event):
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):                            
     button = await event.get_message()
-    msg = await button.get_reply_message()                            
+    msg = await button.get_reply_message()  
+    await event.delete()
     async with Drone.conversation(event.chat_id) as conv: 
         cm = await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.")                              
         try:
