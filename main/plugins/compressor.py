@@ -10,6 +10,7 @@ from datetime import datetime as dt
 from .. import Drone, BOT_UN
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
+from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2
 from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
