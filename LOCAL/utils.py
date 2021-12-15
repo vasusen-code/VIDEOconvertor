@@ -28,8 +28,8 @@ def time_formatter(milliseconds: int) -> str:
         return tmp[:-1]
     else:
         return tmp
-
- def humanbytes(size):
+ 
+def humanbytes(size):
     if size in [None, ""]:
         return "0 B"
     for unit in ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]:
