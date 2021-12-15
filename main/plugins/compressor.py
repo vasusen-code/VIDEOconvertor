@@ -18,6 +18,10 @@ async def compress(event, msg):
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
+    if hasattr(msg.media, "document"):
+        file = msg.media.document
+    else:
+        file = msg.media
     mime = msg.file.mime_type
     if 'mp4' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
