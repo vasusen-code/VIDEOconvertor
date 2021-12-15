@@ -38,6 +38,7 @@ async def rename(event):
             if not m:                
                 return await cm.edit("No response found.")
         except Exception as e: 
+            print(e)
             return await cm.edit("An error occured while waiting for the response.")
     await media_rename(event, msg, new_name)                     
                    
