@@ -5,6 +5,7 @@ import asyncio
 import time
 import subprocess
 import re
+import os
 from datetime import datetime as dt
 from .. import Drone, BOT_UN
 from telethon import events
