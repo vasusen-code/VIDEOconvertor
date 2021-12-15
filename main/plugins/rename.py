@@ -19,7 +19,7 @@ async def media_rename(event, msg, new_name):
         file = msg.media.document
     else:
         file = msg.media
-    mime = msg.document.mime_type
+    mime = msg.file.mime_type
     if 'mp4' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
         out = new_name + ".mp4"
