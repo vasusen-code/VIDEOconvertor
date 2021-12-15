@@ -4,6 +4,7 @@
 import time
 import math
 import re
+import asyncio
 import subprocess
 from ethon.pyfunc import total_frames as tf
 from telethon import events
