@@ -23,6 +23,9 @@ async def media_rename(event, msg, new_name):
     if 'mp4' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
         out = new_name + ".mp4"
+    elif msg.video:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+        out = new_name + ".mp4"
     elif 'x-matroska' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
         out = new_name + ".mkv"            
@@ -84,7 +87,7 @@ async def media_rename(event, msg, new_name):
         await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
-    await event.edit("Renaming.")
+    await edit.edit("Renaming.")
     try:
         rename(name, out)
     except Exception as e:
@@ -108,6 +111,16 @@ async def media_rename(event, msg, new_name):
                 uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
                 await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attr, force_document=False)
+            elif msg.video:
+                metadata = video_metadata(msg.media)
+                width = metadata["width"]
+                height = metadata["height"]
+                duration = metadata["duration"]
+                attr = [DocumentAttributeVideo(duration=int(duration), w=width, h=height, supports_streaming=True)]
+                UT = time.time()
+                uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
+                net_time = round(DT - UT)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=JPG, attributes=attr, force_document=False)            
             else:
                 UT = time.time()
                 uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
