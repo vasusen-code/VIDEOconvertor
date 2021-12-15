@@ -41,7 +41,7 @@ async def compress(event, msg):
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
-    cmd
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 27 """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, edit, '**COMPRESSING:**')
     except Exception as e:
