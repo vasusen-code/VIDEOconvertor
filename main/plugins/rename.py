@@ -117,5 +117,4 @@ async def media_rename(event, msg, new_name):
         await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
-
-    
+    await edit.delete()
