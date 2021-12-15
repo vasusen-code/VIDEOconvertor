@@ -46,10 +46,11 @@ async def compress(event, msg):
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
-    progress = f"progress-{time.time()}.txt"
+    FT = time.time()
+    progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 27 """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, file, progress, edit, '**COMPRESSING:**')
+        await ffmpeg_progress(cmd, file, progress, FT, edit, '**COMPRESSING:**')
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
