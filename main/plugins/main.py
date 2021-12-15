@@ -1,6 +1,7 @@
 #Tg:ChauhanMahesh/Dronebots
 #Github.com/vasusen-code
 
+import os
 from .. import Drone 
 from telethon import events, Button
 from main.plugins.rename import media_rename
@@ -24,7 +25,9 @@ async def compin(event):
                 await event.reply('📦',
                             buttons=[  
                                 [Button.inline("RENAME", data="rename")]])
-      
+
+#-----------------------------------------------------------------------------------------
+
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):                            
     button = await event.get_message()
@@ -43,3 +46,15 @@ async def rename(event):
             return await cm.edit("An error occured while waiting for the response.")
     await media_rename(event, msg, new_name)                     
                    
+@Drone.on(events.callbackquery.CallbackQuery(data="compress"))
+async def compress(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        await compress(event, msg)
+        os.rmdir("compressmedia")
+    else:
+        await event.edit("Another process in progress!")
+    
