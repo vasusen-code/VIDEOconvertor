@@ -1,3 +1,6 @@
+#TG:ChauhanMahesh/DroneBots
+#Github.com/vasusen-code
+
 import time
 import math
 import re
