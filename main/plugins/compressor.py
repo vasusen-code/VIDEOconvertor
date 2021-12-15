@@ -47,7 +47,9 @@ async def compress(event, msg):
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
-    text = f'**COMPRESSED by : {BOT_UN}\n\nbefore compressing : `{i_size}\nafter compressing : `{f_size}`'
+    i_size = os.path.getsize(name)
+    f_size = os.path.getsize(out)
+    text = f'**COMPRESSED by : {BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
     UT = time.time()
     metadata = video_metadata(out)
     width = metadata["width"]
