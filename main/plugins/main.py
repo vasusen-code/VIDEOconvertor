@@ -48,7 +48,7 @@ async def rename(event):
     await media_rename(event, msg, new_name)                     
                    
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
-async def compress(event):
+async def compresss(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
     if not os.path.isdir("compressmedia"):
