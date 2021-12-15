@@ -8,7 +8,7 @@ from telethon import events
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyutils import rename
 from ethon.pyfunc import video_metadata
-from LOCAL.localisation import SUPPORT_LINK, JPG
+from LOCAL.localisation import SUPPORT_LINK, JPG2
 from telethon.tl.types import DocumentAttributeVideo
 
 async def media_rename(event, msg, new_name):
