@@ -38,7 +38,7 @@ async def media_rename(event, msg, new_name):
     elif 'png' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".png"
         out = new_name + ".png"
-    elif 'pdf' in mime
+    elif 'pdf' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".pdf" 
         out = new_name + ".pdf"
     elif 'rar' in mime:
