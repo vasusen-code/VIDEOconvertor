@@ -29,7 +29,7 @@ async def compin(event):
     
       
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
-async def rename(event):
+async def rename(event):                            
     button = await event.get_message()
     msg = await button.get_reply_message()                            
     async with Drone.conversation(id) as conv: 
