@@ -9,7 +9,7 @@ from telethon import events
 from LOCAL.localisation import SUPPORT_LINK, JPG
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import bash
-
+from datetime import datetime as dt
 async def mp3(event, msg):
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
@@ -17,8 +17,11 @@ async def mp3(event, msg):
         file = msg.media.document
     else:
         file = msg.media
+    x = msg.file.name
     mime = msg.file.mime_type
-    if 'mp4' in mime:
+    if x:
+        name = msg.file.name
+    elif 'mp4' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
     elif msg.video:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
@@ -26,9 +29,10 @@ async def mp3(event, msg):
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
     elif 'webm' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webm"      
+    if x:
+        out = ((msg.file.name).split("."))[0]
     else:
-        name = msg.file.name
-    out = dt.now().isoformat("_", "seconds")
+        out = dt.now().isoformat("_", "seconds")
     try:
         DT = time.time()
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
@@ -59,8 +63,11 @@ async def flac(event, msg):
         file = msg.media.document
     else:
         file = msg.media
+    x = msg.file.name
     mime = msg.file.mime_type
-    if 'mp4' in mime:
+    if x:
+        name = msg.file.name
+    elif 'mp4' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
     elif msg.video:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
@@ -68,9 +75,10 @@ async def flac(event, msg):
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
     elif 'webm' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webm"      
+    if x:
+        out = ((msg.file.name).split("."))[0]
     else:
-        name = msg.file.name
-    out = dt.now().isoformat("_", "seconds")
+        out = dt.now().isoformat("_", "seconds")
     try:
         DT = time.time()
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
