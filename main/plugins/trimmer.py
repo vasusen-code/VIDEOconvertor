@@ -9,6 +9,7 @@ from .. import Drone, BOT_UN
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata, bash
+from ethon.pyutils import rename
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
@@ -30,10 +31,10 @@ async def trim(event, msg, st, et):
         out = new_name + ".mp4"
     elif 'x-matroska' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
-        out = new_name + ".mp4"            
+        out = new_name + ".mkv"       
     elif 'webm' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
-        out = new_name + ".mp4"
+        out = new_name + ".webm"
     else:
         name = msg.file.name
         ext = (name.split("."))[1]
@@ -47,6 +48,7 @@ async def trim(event, msg, st, et):
     try:
         await edit.edit("Trimming.")
         bash(f'ffmpeg -i {name} -ss {st} to {et} -c copy {out}')
+        rename(out, (new_name + '_2_' + '.mp4'))
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while trimming!\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
