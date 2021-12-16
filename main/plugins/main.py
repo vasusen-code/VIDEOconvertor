@@ -56,8 +56,7 @@ async def back(event):
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
 async def vtmp3(event):
     button = await event.get_message()
-    msg = await button.get_reply_message()  
-    await event.delete()
+    msg = await button.get_reply_message() 
     if not os.path.isdir("audioconvert"):
         await event.delete()
         os.mkdir("audioconvert")
@@ -70,7 +69,6 @@ async def vtmp3(event):
 async def vtflac(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    await event.delete()
     if not os.path.isdir("audioconvert"):
         await event.delete()
         os.mkdir("audioconvert")
