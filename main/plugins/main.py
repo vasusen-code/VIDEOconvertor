@@ -29,6 +29,18 @@ async def compin(event):
 
 #-----------------------------------------------------------------------------------------
 
+@Drone.on(events.callbackquery.CallbackQuery(data="convert"))
+async def convert(event):
+    buttons=[
+        [Button.inline("MP3", data="mp3"),
+         Button.inline("FLAC", data="flac"),
+         Button.inline("WAV", data="wav")],
+        [Button.inline("MP4", data="mp4"),
+         Button.inline("WEBM", data="webm"),
+         Button.inline("MKV", data="mkv")],
+        [Button.inline("FILE", data="file"),
+         Button.inline("VIDEO", data="video")]])
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):                            
     button = await event.get_message()
