@@ -47,7 +47,7 @@ async def trim(event, msg, st, et):
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     try:
         await edit.edit("Trimming.")
-        bash(f'ffmpeg -i {name} -ss {st} to {et} -c copy {out}')
+        bash(f'ffmpeg -i {name} -ss {st} -t {et} -acodec copy -vcodec copy {out}')
         rename(out, (new_name + '_2_' + '.mp4'))
     except Exception as e:
         print(e)
