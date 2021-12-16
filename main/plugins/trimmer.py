@@ -56,7 +56,7 @@ async def trim(event, msg, st, et):
     UT = time.time()
     text = f"**TRIMMED by :** @{BOT_UN}"
     try:
-        metadata = video_metadata(out)
+        metadata = video_metadata(out2)
         width = metadata["width"]
         height = metadata["height"]
         duration = metadata["duration"]
