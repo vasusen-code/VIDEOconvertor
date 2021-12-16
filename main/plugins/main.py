@@ -171,7 +171,7 @@ async def vtrim(event):
             print(e)
             return await xx.edit("An error occured while waiting for the response.")
         try:
-            xy = await conv.send_message("\n**NOTE:** `.ext` is not required.")                              
+            xy = await conv.send_message("send me the end time of the video you want to trim till as a reply to this.  \n\nIn format hh:mm:ss , for eg: `01:20:69` ")  
             y = await conv.get_reply()
             et = y.text
             await xy.delete()                    
@@ -180,5 +180,5 @@ async def vtrim(event):
         except Exception as e: 
             print(e)
             return await xy.edit("An error occured while waiting for the response.")
-        
+        await trim(event, msg, st, et)
             
