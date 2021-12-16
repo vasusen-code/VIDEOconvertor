@@ -66,8 +66,8 @@ async def vtmp3(event):
     else:
         await event.edit("Another process in progress!")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
-async def vtmp3(event):
+@Drone.on(events.callbackquery.CallbackQuery(data="flac"))
+async def vtflac(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
     await event.delete()
