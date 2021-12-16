@@ -6,6 +6,7 @@ from .. import Drone
 from telethon import events, Button
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
+from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
