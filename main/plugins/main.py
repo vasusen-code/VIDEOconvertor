@@ -30,7 +30,7 @@ async def compin(event):
 
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
-    await event.edit("🔃CONVERT:
+    await event.edit("🔃**CONVERT:**",
                     buttons=[
                         [Button.inline("MP3", data="mp3"),
                          Button.inline("FLAC", data="flac"),
