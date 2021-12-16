@@ -151,5 +151,95 @@ async def mp4(event, msg):
     os.remove(name)                           
     os.remove(f'{out}.mp4')                 
                                            
-                      
+async def mkv(event, msg):
+    Drone = event.client
+    edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
+    if hasattr(msg.media, "document"):
+        file = msg.media.document
+    else:
+        file = msg.media
+    x = msg.file.name
+    mime = msg.file.mime_type
+    if x:
+        name = msg.file.name
+    elif 'mp4' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+    elif msg.video:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+    elif 'x-matroska' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
+    elif 'webm' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".webm"      
+    if x:
+        out = ((msg.file.name).split("."))[0] + ".mkv"
+    else:
+        out = dt.now().isoformat("_", "seconds") + ".mkv"
+    try:
+        DT = time.time()
+        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while downloading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    try:
+        await edit.edit("Converting.")
+        rename(name, f'{out}')
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while converting!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    try:
+        UT = time.time()
+        uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
+        await Drone.send_file(event.chat_id, uploader, thumb=JPG, caption=f'**AUDIO EXTRACTED by** : @{BOT_UN}', force_document=True)
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    await edit.delete()
+    os.remove(name)                           
+    os.remove(f'{out}')
+             
+async def webm(event, msg):
+    Drone = event.client
+    edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
+    if hasattr(msg.media, "document"):
+        file = msg.media.document
+    else:
+        file = msg.media
+    x = msg.file.name
+    mime = msg.file.mime_type
+    if x:
+        name = msg.file.name
+    elif 'mp4' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+    elif msg.video:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+    elif 'x-matroska' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
+    elif 'webm' in mime:
+        name = "media_" + dt.now().isoformat("_", "seconds") + ".webm"      
+    if x:
+        out = ((msg.file.name).split("."))[0] + ".webm"
+    else:
+        out = dt.now().isoformat("_", "seconds") + ".webm"
+    try:
+        DT = time.time()
+        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while downloading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    try:
+        await edit.edit("Converting.")
+        rename(name, f'{out}')
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while converting!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    try:
+        UT = time.time()
+        uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
+        await Drone.send_file(event.chat_id, uploader, thumb=JPG, caption=f'**AUDIO EXTRACTED by** : @{BOT_UN}', force_document=True)
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    await edit.delete()
+    os.remove(name)                           
+    os.remove(f'{out}')
              
