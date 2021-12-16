@@ -6,7 +6,7 @@ import subprocess
 import time
 from .. import BOT_UN
 from telethon import events
-from LOCLAL.localisation import SUPPORT_LINK, JPG
+from LOCAL.localisation import SUPPORT_LINK, JPG
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import bash
 
