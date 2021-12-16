@@ -57,7 +57,7 @@ async def mp3(event, msg):
         return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
     await edit.delete()
     os.remove(name)
-    os.remove(f'{out}.mp3)                           
+    os.remove(f'{out}.mp3')                           
                        
 async def flac(event, msg):
     Drone = event.client
