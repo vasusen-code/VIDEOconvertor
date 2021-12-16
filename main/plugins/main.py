@@ -154,3 +154,31 @@ async def compresss(event):
     else:
         await event.edit("Another process in progress!")
     
+@Drone.on(events.callbackquery.CallbackQuery(data="trim"))
+async def vtrim(event):                            
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    await event.delete()
+    async with Drone.conversation(event.chat_id) as conv: 
+        try:
+            xx = await conv.send_message("send me the start time of the video you want to trim from as a reply to this. \n\nIn format hh:mm:ss , for eg: `01:20:69` ")
+            x = await conv.get_reply()
+            st = x.text
+            await xx.delete()                    
+            if not st:               
+                return await xx.edit("No response found.")
+        except Exception as e: 
+            print(e)
+            return await xx.edit("An error occured while waiting for the response.")
+        try:
+            xy = await conv.send_message("\n**NOTE:** `.ext` is not required.")                              
+            y = await conv.get_reply()
+            et = y.text
+            await xy.delete()                    
+            if not et:                
+                return await xy.edit("No response found.")
+        except Exception as e: 
+            print(e)
+            return await xy.edit("An error occured while waiting for the response.")
+        
+            
