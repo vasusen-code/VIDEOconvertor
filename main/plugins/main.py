@@ -6,7 +6,7 @@ from .. import Drone
 from telethon import events, Button
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
-from main.plugins.convertor import mp3, flac
+from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -76,7 +76,54 @@ async def vtflac(event):
         os.rmdir("audioconvert")
     else:
         await event.edit("Another process in progress!")
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="wav"))
+async def vtwav(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    if not os.path.isdir("audioconvert"):
+        await event.delete()
+        os.mkdir("audioconvert")
+        await wav(event, msg)
+        os.rmdir("audioconvert")
+    else:
+        await event.edit("Another process in progress!")
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="mp4"))
+async def vtmp4(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await event.delete()
+    await mp4(event, msg)
+    
+@Drone.on(events.callbackquery.CallbackQuery(data="mkv"))
+async def vtmkv(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await event.delete()
+    await mkv(event, msg)  
+    
+@Drone.on(events.callbackquery.CallbackQuery(data="webm"))
+async def vtwebm(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await event.delete()
+    await webm(event, msg)  
+    
+@Drone.on(events.callbackquery.CallbackQuery(data="file"))
+async def vtfile(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await event.delete()
+    await file(event, msg)    
 
+@Drone.on(events.callbackquery.CallbackQuery(data="video"))
+async def ftvideo(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await event.delete()
+    await video(event, msg)
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):                            
     button = await event.get_message()
