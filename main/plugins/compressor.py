@@ -11,7 +11,7 @@ from .. import Drone, BOT_UN
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata
-from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2
+from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
@@ -66,7 +66,7 @@ async def compress(event, msg):
     attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
     try:
         uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
-        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, attributes=attributes, force_document=False)
+        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
     except Exception:
         try:
             uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
