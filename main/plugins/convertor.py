@@ -347,6 +347,10 @@ async def video(event, msg):
         name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
     elif 'webm' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webm"      
+    if x:
+        out = ((msg.file.name).split("."))[0] + '.mp4'
+    else:
+        out = dt.now().isoformat("_", "seconds") + '.mp4'
     try:
         DT = time.time()
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
@@ -354,17 +358,24 @@ async def video(event, msg):
         print(e)
         return await edit.edit(f"An error occured while downloading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
     try:
+        await edit.edit("Converting.")
+        rename(name, f'{out}')
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while converting!\n\nContact [SUPPORT]({SUPPORT_LINK})")
+    try:
         metadata = video_metadata(out)
         width = metadata["width"]
         height = metadata["height"]
         duration = metadata["duration"]
         attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]           
         UT = time.time()
-        uploader = await fast_upload(f'{name}', f'{name}', UT, Drone, edit, '**UPLOADING:**')
+        uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
         await Drone.send_file(event.chat_id, uploader, thumb=JPG2, caption=f'**CONVERTED by** : @{BOT_UN}', attributes=attributes, force_document=False)
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
     await edit.delete()
-    os.remove(name)                           
+    os.remove(name)
+    os.remove(out)                           
     
