@@ -54,6 +54,7 @@ async def trim(event, msg, st, et):
         print(e)
         return await edit.edit(f"An error occured while trimming!\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     UT = time.time()
+    text = f"**TRIMMED by :** @{BOT_UN}"
     try:
         metadata = video_metadata(out)
         width = metadata["width"]
