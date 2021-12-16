@@ -6,6 +6,7 @@ from .. import Drone
 from telethon import events, Button
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
+from main.plugins.convertor import mp3, flac
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -27,8 +28,6 @@ async def compin(event):
                             buttons=[  
                                 [Button.inline("RENAME", data="rename")]])
 
-#-----------------------------------------------------------------------------------------
-
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
     buttons=[
@@ -41,6 +40,34 @@ async def convert(event):
         [Button.inline("FILE", data="file"),
          Button.inline("VIDEO", data="video")]])
     
+#-----------------------------------------------------------------------------------------
+
+@Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
+async def vtmp3(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    await event.delete()
+    if not os.path.isdir("audioconvert"):
+        await event.delete()
+        os.mkdir("audioconvert")
+        await mp3(event, msg)
+        os.rmdir("audioconvert")
+    else:
+        await event.edit("Another process in progress!")
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
+async def vtmp3(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    await event.delete()
+    if not os.path.isdir("audioconvert"):
+        await event.delete()
+        os.mkdir("audioconvert")
+        await flac(event, msg)
+        os.rmdir("audioconvert")
+    else:
+        await event.edit("Another process in progress!")
+
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
 async def rename(event):                            
     button = await event.get_message()
