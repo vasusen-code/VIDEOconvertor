@@ -51,12 +51,12 @@ async def trim(event, msg, st, et):
         print(e)
         return await edit.edit(f"An error occured while trimming!\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     UT = time.time()
-    metadata = video_metadata(out)
-    width = metadata["width"]
-    height = metadata["height"]
-    duration = metadata["duration"]
-    attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
     try:
+        metadata = video_metadata(out)
+        width = metadata["width"]
+        height = metadata["height"]
+        duration = metadata["duration"]
+        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
         uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
         await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
     except Exception:
