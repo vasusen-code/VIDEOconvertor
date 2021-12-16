@@ -12,7 +12,7 @@ from ethon.pyfunc import bash
 
 async def mp3(event, msg):
     Drone = event.client
-    edit = await Drone.send_message(even.chat_id, "Trying to process!", reply_to=msg.id)
+    edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
         file = msg.media.document
     else:
@@ -54,7 +54,7 @@ async def mp3(event, msg):
                        
 async def flac(event, msg):
     Drone = event.client
-    edit = await Drone.send_message(even.chat_id, "Trying to process!", reply_to=msg.id)
+    edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
         file = msg.media.document
     else:
