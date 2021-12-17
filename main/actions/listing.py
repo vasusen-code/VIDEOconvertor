@@ -1,7 +1,14 @@
 #Tg:ChauhanMahesh/DroneBots
 #Github.com/vasusen-code
 
-def queue(id, List1, List2):
+def two_trial_queue(id, List1, List2):
+    if not f'{id}' in List1:
+        List1.append(f'{id}')
+    else:
+        return False
+ 
+#Not in use
+def two_trial_queue(id, List1, List2):
     if not f'{id}' in List1:
         List1.append(f'{id}')
     else:
@@ -9,7 +16,8 @@ def queue(id, List1, List2):
             List2.append(f'{id}')
         else:
             return False
-          
+
+#Not in use        
 def ps_queue(id, media, List1, List2):
     List1.append(f'{id}')
     List2.append(media)
