@@ -1,9 +1,9 @@
-from .. import Drone, AUTH_USERS, ACCESS_CHANNEL
+from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
 from telethon import events 
 import pymongo
 from pymongo import MongoClient
 import motor.motor_asyncio
-from TelethonBot.Database.mongodb import Database
+from TelethonBot.Database.mongodb import Database, SESSION_NAME
 
 db = Database(MONGODB_URI, SESSION_NAME)
 
@@ -15,7 +15,16 @@ async def incomming(event):
 
 async def banned(id):
     await db.get_ban_status(id)
+    
+async def LOG_START(event, ps_name):
+    chat = 
+    tag = mention(event.sender_id)
+    xx = await event.client.send_message(chat, f'{ps_name} by {Tag}')
+    return xx
 
+async def LOG_END(event, ps_name):
+    await event.edit(ps_name)
+    
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="/users"))
 async def listusers(event):
     xx = await event.reply("Counting total users on db...")
