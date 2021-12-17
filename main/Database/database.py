@@ -5,13 +5,13 @@ import datetime
 import motor.motor_asyncio
 from .. import MONGODB_URI
 
-SESSION_NAME = 'maxistantdb'
+SESSION_NAME = 'videoconvertor'
 
 class Database:
   
     def __init__(self, MONGODB_URI, SESSION_NAME):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
-        self.db = self._client['maxistantdb']
+        self.db = self._client[SESSION_NAME]
         self.col = self.db.users
         self.ban = self.db.niggas
         
