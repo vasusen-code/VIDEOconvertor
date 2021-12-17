@@ -54,3 +54,7 @@ class Database:
         limit = dict(limited_on=date)
         await self.col.update_one({'id': id}, {'$set': {'limit': limit}})
     
+    async def get_limit(self, id):
+        user = await self.col.find_one({'id':int(id)})
+        return user.get('limit')
+    
