@@ -4,6 +4,7 @@ import pymongo
 from pymongo import MongoClient
 import motor.motor_asyncio
 from TelethonBot.Database.mongodb import Database, SESSION_NAME
+from ethon.teleutils import mention
 
 db = Database(MONGODB_URI, SESSION_NAME)
 
