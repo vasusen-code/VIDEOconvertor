@@ -1,6 +1,7 @@
 from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
 from telethon import events 
 import pymongo
+from decouple import config
 from pymongo import MongoClient
 import motor.motor_asyncio
 from TelethonBot.Database.mongodb import Database, SESSION_NAME
@@ -18,7 +19,7 @@ async def banned(id):
     await db.get_ban_status(id)
     
 async def LOG_START(event, ps_name):
-    chat = 
+    chat = config("LOG_CHANNEL", default=None, cast=int)
     tag = mention(event.sender_id)
     xx = await event.client.send_message(chat, f'{ps_name} by {Tag}')
     return xx
