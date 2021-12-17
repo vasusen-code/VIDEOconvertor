@@ -31,6 +31,12 @@ async def compin(event):
 
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if msg.file.size/1000000 > 1000:
+        await event.edit("Free users cannot convert files greater than size 1GB.",
+                        buttons=[
+                            [Button.inline("PREMIUM.", data="premium")]])
     await event.edit("🔃**CONVERT:**",
                     buttons=[
                         [Button.inline("MP3", data="mp3"),
@@ -146,7 +152,15 @@ async def rename(event):
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def compresss(event):
     button = await event.get_message()
-    msg = await button.get_reply_message()  
+    msg = await button.get_reply_message() 
+    if (msg.file.size)/1000000 > 600:
+        await event.edit("Free users cannot compress more than 600mb.",
+                        buttons=[
+                            [Button.inline("PREMIUM.", data="premium")]])
+    if msg.file.duration > 7200:
+        await event.edit("Fres users cannot compress files having duration more than 2Hr.",
+                        buttons=[
+                            [Button.inline("PREMIUM.", data="premium")]])
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
