@@ -28,7 +28,7 @@ async def LOG_END(event, ps_name):
     
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="/users"))
 async def listusers(event):
-    xx = await event.reply("Counting total users on db...")
+    xx = await event.reply("Counting total users in Database.")
     x = await db.total_users_count()
     await xx.edit(f"Total user(s) {int(x)}")
     
