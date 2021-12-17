@@ -7,7 +7,7 @@ import subprocess
 import re
 import os
 from datetime import datetime as dt
-from .. import Drone, BOT_UN
+from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata
@@ -15,6 +15,7 @@ from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
+from main.actions.handling import LOG_START, LOG_END
 
 async def compress(event, msg):
     Drone = event.client
@@ -42,10 +43,13 @@ async def compress(event, msg):
         ext = (name.split("."))[1]
         out = new_name + ext
     DT = time.time()
+    log = await LOG_START(event, f'**COMPRESS PROCESS STARTED**\n\n[Bot is busy now](https://t.me/{SUPPORT_LINK})')
+    log_end_text = '**COMPRESS PROCESS FINISHED**\n\n[Bot is free now](https://t.me/{SUPPORT_LINK})')
     try:
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         os.rmdir("compressmedia")
+        await LOG_END(log, log_end_text)
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     FT = time.time()
@@ -54,6 +58,7 @@ async def compress(event, msg):
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**COMPRESSING:**')
     except Exception as e:
+        await LOG_END(log, log_end_text)
         os.rmdir("compressmedia")
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
@@ -74,11 +79,11 @@ async def compress(event, msg):
             uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
+            await LOG_END(log, log_end_text)
             os.rmdir("compressmedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out)
-    
-    
+    await LOG_END(log, log_end_text)
