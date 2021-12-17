@@ -1,1 +1,1 @@
-from main.Database.mongodb import database
+from main.Database.database import Database
