@@ -49,12 +49,13 @@ class Database:
         return users
     
     async def limit_user(self, id):
-        x = (datetime.date.today().isoformat()).split("-")
-        date = x[0] + x[1] + x[2]
-        limit = dict(limited_on=date)
+        DT = datetime.date.today().isoformat()
+        limit = dict(limited_on=DT)
         await self.col.update_one({'id': id}, {'$set': {'limit': limit}})
     
     async def get_limit(self, id):
         user = await self.col.find_one({'id':int(id)})
-        return user.get('limit')
+        DT = datetime.date.today().isoformat()
+        default = dict(limited_on=DT)
+        return user.get('limit', default)
     
