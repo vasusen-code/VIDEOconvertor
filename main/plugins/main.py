@@ -8,6 +8,7 @@ from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
+from LOCAL.localisation import premium_text
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -60,6 +61,10 @@ async def back(event):
                             
 #-----------------------------------------------------------------------------------------
 
+@Drone.on(events.callbackquery.CallbackQuery(data="premium"))
+async def premium(event):
+    await event.answer(f'{premium_text}', alert=True)
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
 async def vtmp3(event):
     button = await event.get_message()
