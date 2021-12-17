@@ -15,6 +15,7 @@ BOT_TOKEN = config("BOT_TOKEN", default=None)
 BOT_UN = config("BOT_UN", default=None)
 AUTH_USERS = config("AUTH_USERS", default=None)
 LOG_CHANNEL = config("LOG_CHANNEL", default=None, cast=int)
+FORCESUB = config("FORCESUB", default=None)
 ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None, cast=int)
 
 Drone = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
