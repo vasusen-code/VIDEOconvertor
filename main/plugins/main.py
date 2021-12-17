@@ -9,6 +9,7 @@ from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from LOCAL.localisation import premium_text
+from main.actions.listing import one_trial_queue
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -60,6 +61,9 @@ async def back(event):
                          Button.inline("TRIM", data="trim")]])
                             
 #-----------------------------------------------------------------------------------------
+
+process1 = []
+process2 = []
 
 @Drone.on(events.callbackquery.CallbackQuery(data="premium"))
 async def premium(event):
@@ -156,6 +160,11 @@ async def rename(event):
                    
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def compresss(event):
+    trial = one_trial_queue(event.sender_id, process1)
+    if trial is False:
+        await event.edit("Free users can only compress 1 video in a day, you've finished your today's trial.",
+                        buttons=[
+                            [Button.inline("PREMIUM.", data="premium")]])
     button = await event.get_message()
     msg = await button.get_reply_message() 
     if (msg.file.size)/1000000 > 600:
@@ -172,7 +181,7 @@ async def compresss(event):
         await compress(event, msg)
         os.rmdir("compressmedia")
     else:
-        await event.edit("Another process in progress!")
+        await event.edit(f"Another process in progress!\n\n[**LOG CHANNEL**](https://t.me/{LOG_CHANNEL})")
     
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):                            
