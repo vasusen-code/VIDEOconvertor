@@ -16,7 +16,8 @@ class Database:
         self.ban = self.db.niggas
         
     def new_user(self, id):
-        return dict(id=id , ban_status=dict(is_banned=False))
+        DT = datetime.date.max.isoformat()
+        return dict(id=id , limit=dict(limited_on=DT))
            
     async def add_user(self,id):
         user = self.new_user(id)
@@ -55,7 +56,7 @@ class Database:
     
     async def get_limit(self, id):
         user = await self.col.find_one({'id':int(id)})
-        DT = datetime.date.today().isoformat()
+        DT = datetime.date.max.isoformat()
         default = dict(limited_on=DT)
         return user.get('limit', default)
     
