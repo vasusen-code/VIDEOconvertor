@@ -1,13 +1,26 @@
-from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
+from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI, FORCESUB
 from telethon import events 
 import pymongo
 from decouple import config
 from pymongo import MongoClient
 import motor.motor_asyncio
 from main.Database.database import Database, SESSION_NAME
+from telethon.errors.rpcerrorlist import UserNotParticipantError
+from telethon.tl.functions.channels import GetParticipantRequest
 
 def mention(name, id):
     return f'[{name}](tg://user?id={id})'
+
+#Forcesub-----------------------------------------------------------------------------------
+
+async def force_sub(id):
+    ok = False
+    try:
+        await Drone(GetParticipantRequest(channel='@{FORCESUB}', participant=id))
+        ok = False
+    except UserNotParticipantError:
+        ok = True 
+    return ok
 
 #Database command handling--------------------------------------------------------------------------
 
