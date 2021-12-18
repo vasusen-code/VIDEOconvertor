@@ -162,17 +162,17 @@ async def rename(event):
 async def compresss(event):
     trial = one_trial_queue(event.sender_id, process1)
     if trial is False:
-        await event.edit("Free users can only compress 1 video in a day, you've finished your today's trial.",
+        return await event.edit("Free users can only compress 1 video in a day, you've finished your today's trial.",
                         buttons=[
                             [Button.inline("PREMIUM.", data="premium")]])
     button = await event.get_message()
     msg = await button.get_reply_message() 
     if (msg.file.size)/1000000 > 600:
-        await event.edit("Free users cannot compress more than 600mb.",
+        return await event.edit("Free users cannot compress more than 600mb.",
                         buttons=[
                             [Button.inline("PREMIUM.", data="premium")]])
     if msg.file.duration > 7200:
-        await event.edit("Fres users cannot compress files having duration more than 2Hr.",
+        return await event.edit("Fres users cannot compress files having duration more than 2Hr.",
                         buttons=[
                             [Button.inline("PREMIUM.", data="premium")]])
     if not os.path.isdir("compressmedia"):
