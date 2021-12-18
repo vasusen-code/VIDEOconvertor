@@ -17,7 +17,7 @@ async def force_sub(id):
     FORCESUB = config("FORCESUB", default=None)
     ok = False
     try:
-        await Drone(GetParticipantRequest(channel='@{FORCESUB}', participant=id))
+        await Drone(GetParticipantRequest(channel=int(FORCESUB), participant=id))
         ok = False
     except UserNotParticipantError:
         ok = True 
