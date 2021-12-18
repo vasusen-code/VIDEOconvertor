@@ -4,7 +4,6 @@ ethon
 telethon-tgcrypto
 cryptg
 pymongo
-pymediainfo
 motor
 pymongo[srv]
 dnspython
