@@ -7,6 +7,8 @@ import motor.motor_asyncio
 from TelethonBot.Database.mongodb import Database, SESSION_NAME
 from ethon.teleutils import mention
 
+#Database command handling--------------------------------------------------------------------------
+
 db = Database(MONGODB_URI, SESSION_NAME)
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
@@ -17,15 +19,6 @@ async def incomming(event):
 
 async def banned(id):
     await db.get_ban_status(id)
-    
-async def LOG_START(event, ps_name):
-    chat = config("LOG_CHANNEL", default=None)
-    Tag = mention(event.sender_id)
-    xx = await event.client.send_message(chat, f'{ps_name} by {Tag}')
-    return xx
-
-async def LOG_END(event, ps_name):
-    await event.edit(ps_name)
     
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="/users"))
 async def listusers(event):
@@ -57,4 +50,15 @@ async def unbban(event):
         await event.reply("Allow who?")
     await db.unbanning(xx)
     await event.reply(f"{xx} Allowed! ")
+    
+#Logging events on tg------------------------------------------------------------------------------------------
+
+async def LOG_START(event, ps_name):
+    chat = config("LOG_CHANNEL", default=None)
+    Tag = mention(event.sender_id)
+    xx = await event.client.send_message(chat, f'{ps_name} by {Tag}')
+    return xx
+
+async def LOG_END(event, ps_name):
+    await event.edit(ps_name)
     
