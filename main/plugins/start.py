@@ -1,8 +1,9 @@
-from .. import Drone
+from .. import Drone, ACCESS_CHANNEL
 from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
 from LOCAL.localisation import JPG as file
 from LOCAL.localisation import info_text, spam_notice, help_text, DEV, premium_text, SUPPORT_LINK
+from ethon.teleutils import mention
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
@@ -10,8 +11,9 @@ async def start(event):
                       buttons=[
                               [Button.inline("Menu.", data="menu")]
                               ])
-                      
-
+    tag = await mention(event.client, event.sender_id)
+    await Drone.send_message(ACCESS_CHANNEL, f'{tag} started the BOT')
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="menu"))
 async def menu(event):
     await event.edit("**📑MENU.**",
