@@ -1,4 +1,4 @@
-from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI, FORCESUB
+from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
 from telethon import events 
 import pymongo
 from decouple import config
@@ -14,6 +14,7 @@ def mention(name, id):
 #Forcesub-----------------------------------------------------------------------------------
 
 async def force_sub(id):
+    FORCESUB = config("FORCESUB", default=None)
     ok = False
     try:
         await Drone(GetParticipantRequest(channel='@{FORCESUB}', participant=id))
