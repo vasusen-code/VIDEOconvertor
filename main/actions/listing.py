@@ -1,7 +1,7 @@
 #Tg:ChauhanMahesh/DroneBots
 #Github.com/vasusen-code
 
-def two_trial_queue(id, List1, List2):
+def one_trial_queue(id, List1):
     if not f'{id}' in List1:
         List1.append(f'{id}')
     else:
