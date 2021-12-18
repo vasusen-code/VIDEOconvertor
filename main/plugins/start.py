@@ -29,7 +29,7 @@ async def menu(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
-    await event.edit(caption=f'**ℹ️NFO:**\n\n{info_text}', file=JPG4
+    await event.edit(caption=f'**ℹ️NFO:**\n\n{info_text}', file=JPG4,
                     buttons=[[
                          Button.inline("Menu.", data="menu2")]])
     
