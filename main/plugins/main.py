@@ -9,7 +9,7 @@ from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from LOCAL.localisation import premium_text
-from main.actions.listing import one_trial_queue
+from main.plugins.__ import one_trial_queue
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
