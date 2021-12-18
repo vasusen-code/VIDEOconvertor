@@ -51,7 +51,7 @@ async def unbban(event):
     await db.unbanning(xx)
     await event.reply(f"{xx} Allowed! ")
     
-#Logging events on tg------------------------------------------------------------------------------------------
+#Logging events on tg---------------------------------------------------------------------------------------------
 
 async def LOG_START(event, ps_name):
     chat = config("LOG_CHANNEL", default=None)
@@ -62,3 +62,29 @@ async def LOG_START(event, ps_name):
 async def LOG_END(event, ps_name):
     await event.edit(ps_name)
     
+#Listing--------------------------------------------------------------------------------------------------------------
+
+def one_trial_queue(id, List1):
+    if not f'{id}' in List1:
+        List1.append(f'{id}')
+    else:
+        return False
+    
+#Not in use
+def two_trial_queue(id, List1, List2):
+    if not f'{id}' in List1:
+        List1.append(f'{id}')
+    else:
+        if not f'{id}' in List2:
+            List2.append(f'{id}')
+        else:
+            return False
+
+#Not in use        
+def ps_queue(id, media, List1, List2):
+    List1.append(f'{id}')
+    List2.append(media)
+    if not len(List1) < 2:
+        return 'EMPTY'
+    if len(List1) > 2:
+        return 'FULL'
