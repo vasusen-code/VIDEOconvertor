@@ -8,14 +8,17 @@ from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
-from LOCAL.localisation import premium_text
-from main.plugins.__ import one_trial_queue
+from LOCAL.localisation import premium_text, forcesubtext
+from main.plugins.__ import one_trial_queue, force_sub
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
     if event.is_private:
         media = event.media
         if media:
+            yy = await force_sub(event.sender_id)
+            if yy is True:
+                return await event.reply(forcesubtext)
             video = event.file.mime_type
             if 'video' in video:
                 await event.reply("📽",
