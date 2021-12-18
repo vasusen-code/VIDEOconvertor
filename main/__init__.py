@@ -17,5 +17,6 @@ AUTH_USERS = config("AUTH_USERS", default=None)
 LOG_CHANNEL = config("LOG_CHANNEL", default=None)
 FORCESUB = config("FORCESUB", default=None)
 ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None)
+MONGODB_URI = config("MONGODB_URI", default=None)
 
 Drone = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
