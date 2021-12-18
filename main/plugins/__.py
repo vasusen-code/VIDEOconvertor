@@ -62,11 +62,12 @@ async def unbban(event):
 async def LOG_START(event, ps_name):
     chat = config("LOG_CHANNEL", default=None)
     Tag = mention(event.sender.first_name, event.sender_id)
-    xx = await event.client.send_message(int(chat), f'{ps_name} by {Tag}')
+    xx = await event.client.send_message(chat=f'@{chat}', f'{ps_name}/n/nUSER: {Tag}')
     return xx
 
 async def LOG_END(event, ps_name):
-    await event.edit(ps_name)
+    chat = config("LOG_CHANNEL", default=None)
+    await event.client.send_message(chat=f'@{chat}', f'{ps_name}')
 
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS, pattern="^/msg (.*)"))
 async def msg(event):
