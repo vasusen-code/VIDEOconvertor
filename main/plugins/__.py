@@ -5,7 +5,9 @@ from decouple import config
 from pymongo import MongoClient
 import motor.motor_asyncio
 from main.Database.database import Database, SESSION_NAME
-from ethon.teleutils import mention
+
+def mention(name, id):
+    return f'[{name}](tg://user?id={id})'
 
 #Database command handling--------------------------------------------------------------------------
 
@@ -59,7 +61,7 @@ async def unbban(event):
 
 async def LOG_START(event, ps_name):
     chat = config("LOG_CHANNEL", default=None)
-    Tag = await mention(event.client, event.sender_id)
+    Tag = mention('', '')
     xx = await event.client.send_message(chat, f'{ps_name} by {Tag}')
     return xx
 
