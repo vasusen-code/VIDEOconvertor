@@ -49,7 +49,8 @@ async def compress(event, msg, List1):
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         os.rmdir("compressmedia")
-        await LOG_END(log, log_end_text)
+        await log.delete()
+        await LOG_END(event, log_end_text)
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     FT = time.time()
@@ -58,7 +59,8 @@ async def compress(event, msg, List1):
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**COMPRESSING:**')
     except Exception as e:
-        await LOG_END(log, log_end_text)
+        await log.delete()
+        await LOG_END(event, log_end_text)
         os.rmdir("compressmedia")
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
@@ -79,7 +81,8 @@ async def compress(event, msg, List1):
             uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
-            await LOG_END(log, log_end_text)
+            await log.delete()
+            await LOG_END(event, log_end_text)
             os.rmdir("compressmedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
@@ -87,4 +90,5 @@ async def compress(event, msg, List1):
     List1.append(f'{event.sender_id}')
     os.remove(name)
     os.remove(out)
-    await LOG_END(log, log_end_text)
+    await log.delete()
+    await LOG_END(event, log_end_text)
