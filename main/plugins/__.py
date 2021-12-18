@@ -4,7 +4,7 @@ import pymongo
 from decouple import config
 from pymongo import MongoClient
 import motor.motor_asyncio
-from TelethonBot.Database.mongodb import Database, SESSION_NAME
+from main.Database.mongodb import Database, SESSION_NAME
 from ethon.teleutils import mention
 
 #Database command handling--------------------------------------------------------------------------
