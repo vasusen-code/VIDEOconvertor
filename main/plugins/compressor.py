@@ -17,7 +17,7 @@ from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.__ import LOG_START, LOG_END
 
-async def compress(event, msg):
+async def compress(event, msg, List1):
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
@@ -84,6 +84,7 @@ async def compress(event, msg):
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
+    List1.append(f'{event.sender_id}')
     os.remove(name)
     os.remove(out)
     await LOG_END(log, log_end_text)
