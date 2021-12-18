@@ -82,9 +82,7 @@ async def msg(event):
 #Listing--------------------------------------------------------------------------------------------------------------
 
 def one_trial_queue(id, List1):
-    if not f'{id}' in List1:
-        List1.append(f'{id}')
-    else:
+    if f'{id}' in List1:
         return False
     
 #Not in use
