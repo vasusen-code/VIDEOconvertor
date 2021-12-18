@@ -178,7 +178,7 @@ async def compresss(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        await compress(event, msg)
+        await compress(event, msg, process1)
         os.rmdir("compressmedia")
     else:
         await event.edit(f"Another process in progress!\n\n[**LOG CHANNEL**](https://t.me/{LOG_CHANNEL})")
