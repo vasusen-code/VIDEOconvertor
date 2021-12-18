@@ -29,21 +29,9 @@ async def menu(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
-    await event.edit(f'**ℹ️NFO:**\n\n{info_text}', file=JPG4,
+    await event.edit(f'**ℹ️NFO:**\n\n{info_text}',
                     buttons=[[
-                         Button.inline("Menu.", data="menu2")]])
-    
-@Drone.on(events.callbackquery.CallbackQuery(data="menu2"))
-async def menu2(event):
-    await event.edit("**📑MENU.**", file=file,
-                    buttons=[[
-                         Button.inline("info.", data="info"),
-                         Button.inline("NOTICE", data="notice")],
-                         [
-                         Button.inline("PREMIUM", data="premium"),
-                         Button.inline("Help.", data="help")],
-                         [
-                         Button.url("DEVELOPER", url=f"{DEV}")]])
+                         Button.inline("Menu.", data="menu")]])
     
 @Drone.on(events.callbackquery.CallbackQuery(data="notice"))
 async def notice(event):
