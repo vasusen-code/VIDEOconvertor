@@ -31,7 +31,10 @@ async def bban(event):
     c = event.pattern_match.group(1)
     if not c:
         await event.reply("Disallow who!?")
-    if c in AUTH_USERS:
+    AUTH = config("AUTH_USERS", default=None)
+    admins = []
+    admins.append(AUTH)
+    if c in admins:
         return await event.reply("I cannot ban an AUTH_USER")
     xx = await db.is_banned(event.sender_id)
     if xx is True:
@@ -39,7 +42,8 @@ async def bban(event):
     else:
         await db.banning(c)
         await event.reply(f"{c} is now disallowed.")
-        
+    admins.remove(AUTH)
+    
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="^/allow (.*)" ))
 async def unbban(event):
     xx = event.pattern_match.group(1)
@@ -61,6 +65,17 @@ async def LOG_START(event, ps_name):
 
 async def LOG_END(event, ps_name):
     await event.edit(ps_name)
+
+@Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS, pattern="^/msg (.*)"))
+async def msg(event):
+    ok = await event.get_reply_message()
+    if not ok:
+        await event.reply("Reply to the message you want to send!")
+    user = event.pattern_match.group(1)
+    if not user:
+        await event.reply("Give the user id you want me to send message. ")
+    await Drone.send_message(int(user) , ok )
+    await event.reply("Messsage sent.")
     
 #Listing--------------------------------------------------------------------------------------------------------------
 
