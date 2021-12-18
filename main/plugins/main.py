@@ -172,7 +172,7 @@ async def compresss(event):
                         buttons=[
                             [Button.inline("PREMIUM.", data="premium")]])
     if msg.file.duration > 7200:
-        return await event.edit("Fres users cannot compress files having duration more than 2Hr.",
+        return await event.edit("Free users cannot compress files having duration more than 2Hr.",
                         buttons=[
                             [Button.inline("PREMIUM.", data="premium")]])
     if not os.path.isdir("compressmedia"):
