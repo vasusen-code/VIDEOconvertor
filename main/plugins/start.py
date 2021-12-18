@@ -11,7 +11,7 @@ async def start(event):
                       buttons=[
                               [Button.inline("Menu.", data="menu")]
                               ])
-    tag = await mention(event.client, event.sender_id)
+    tag = f'[{event.sender.first_name}](tg://user?id={event.sender_id})'
     await Drone.send_message(ACCESS_CHANNEL, f'{tag} started the BOT')
     
 @Drone.on(events.callbackquery.CallbackQuery(data="menu"))
