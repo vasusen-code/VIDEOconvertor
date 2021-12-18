@@ -44,7 +44,7 @@ async def compress(event, msg):
         out = new_name + ext
     DT = time.time()
     log = await LOG_START(event, f'**COMPRESS PROCESS STARTED**\n\n[Bot is busy now](https://t.me/{SUPPORT_LINK})')
-    log_end_text = '**COMPRESS PROCESS FINISHED**\n\n[Bot is free now](https://t.me/{SUPPORT_LINK})')
+    log_end_text = '**COMPRESS PROCESS FINISHED**\n\n[Bot is free now](https://t.me/{SUPPORT_LINK})'
     try:
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
