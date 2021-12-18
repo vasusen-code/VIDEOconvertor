@@ -8,7 +8,7 @@ SUPPORT_LINK = "https://t.me/TeamDrone"
 
 info_text = "This bot is developed by @ChauhanMahesh\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.1"   
 
-help_text = "Send me any video file to start compressing it or any kind of file to rename it.\n\n/compress - negligible loss compression\n/convert - change formats or extract audio of any video\n/rename - rename any file, extension not required\n/trim - cut your videos" 
+help_text = "Send me any media file to know the stuffs i can do.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
 
 premium_text = "contact DEV to rent a bot at 70RS(1$) per month for yourself hosted on heroku for no restrictions on usage."
 
