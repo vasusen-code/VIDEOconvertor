@@ -2,7 +2,7 @@
 #Github.com/vasusen-code
 
 import os
-from .. import Drone, LOG_CHANNEL
+from .. import Drone, LOG_CHANNEL, FORCESUB
 from telethon import events, Button
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
