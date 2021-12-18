@@ -59,7 +59,7 @@ async def unbban(event):
 
 async def LOG_START(event, ps_name):
     chat = config("LOG_CHANNEL", default=None)
-    Tag = mention(event.client, event.sender_id)
+    Tag = await mention(event.client, event.sender_id)
     xx = await event.client.send_message(chat, f'{ps_name} by {Tag}')
     return xx
 
