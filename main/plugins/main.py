@@ -174,35 +174,44 @@ async def compresss(event):
                             [Button.inline("PREMIUM.", data="premium")]])
     button = await event.get_message()
     msg = await button.get_reply_message() 
-    if (msg.file.size)/1000000 > 600:
-        return await event.edit("Free users cannot compress more than 600mb.",
-                        buttons=[
-                            [Button.inline("PREMIUM.", data="premium")]])
+    try: 
+        if (msg.file.size)/1000000 > 600:
+            return await event.edit("Free users cannot compress more than 600mb.",
+                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
+    except Exception:
+        if (msg.document.size)/1000000 > 600:
+            return await event.edit("Free users cannot compress more than 600mb.",
+                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
     try: 
         if msg.file.duration > 7200:
             return await event.edit("Free users cannot compress files having duration more than 2Hr.",
                             buttons=[[Button.inline("PREMIUM.", data="premium")]])
     except Exception:
-        DT = time.time()
-        if hasattr(msg.media, "document"):
-            file = msg.media.document
-        else:
-            file = msg.media
-        name = msg.file.name
-        await fast_download(name, file, Drone, event, DT, "**DOWNLOADING:**")
-        data = video_metadata(name)
-        duration = data['duration']
-        if duration > 7200:
-            os.remove(name)
-            return await event.edit("Free users cannot compress files having duration more than 2Hr.",
-                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
-        if not os.path.isdir("compressmedia"):
-            os.mkdir("compressmedia")
-            await file_compress(event, name, process1)
-            os.rmdir("compressmedia")
-        else:
-            await event.edit(f"Another process in progress!\n\n[**LOG CHANNEL**](https://t.me/{LOG_CHANNEL})")
-        
+        try: 
+            if msg.document.duration > 7200:
+                return await event.edit("Free users cannot compress files having duration more than 2Hr.",
+                                buttons=[[Button.inline("PREMIUM.", data="premium")]])
+        except Exception: 
+            DT = time.time()
+            if hasattr(msg.media, "document"):
+                file = msg.media.document
+            else:
+                file = msg.media
+            name = msg.file.name
+            await fast_download(name, file, Drone, event, DT, "**DOWNLOADING:**")
+            data = video_metadata(name)
+            duration = data['duration']
+            if duration > 7200:
+                os.remove(name)
+                return await event.edit("Free users cannot compress files having duration more than 2Hr.",
+                                buttons=[[Button.inline("PREMIUM.", data="premium")]])
+            if not os.path.isdir("compressmedia"):
+                os.mkdir("compressmedia")
+                await file_compress(event, name, process1)
+                os.rmdir("compressmedia")
+            else:
+                await event.edit(f"Another process in progress!\n\n[**LOG CHANNEL**](https://t.me/{LOG_CHANNEL})")
+           
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
