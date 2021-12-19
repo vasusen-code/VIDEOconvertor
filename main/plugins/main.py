@@ -10,6 +10,8 @@ from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from LOCAL.localisation import premium_text, forcesubtext
 from main.plugins.__ import one_trial_queue, force_sub
+from ethon.telefunc import fast_download
+from ethon.pyfunc import video_metadata
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -174,10 +176,20 @@ async def compresss(event):
         return await event.edit("Free users cannot compress more than 600mb.",
                         buttons=[
                             [Button.inline("PREMIUM.", data="premium")]])
-    if msg.file.duration > 7200:
-        return await event.edit("Free users cannot compress files having duration more than 2Hr.",
-                        buttons=[
-                            [Button.inline("PREMIUM.", data="premium")]])
+    try: 
+        if msg.file.duration > 7200:
+            return await event.edit("Free users cannot compress files having duration more than 2Hr.",
+                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
+    except Exception:
+        DT = time.time()
+        name = msg.file.name
+        await fast_download()
+        data = video_metadata(name)
+        duration = data['duration']
+        if duration > 7200:
+            return await event.edit("Free users cannot compress files having duration more than 2Hr.",
+                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
+   
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
