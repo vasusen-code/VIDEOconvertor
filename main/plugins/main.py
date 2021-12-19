@@ -5,6 +5,7 @@ import os
 import time
 from .. import Drone, LOG_CHANNEL, FORCESUB
 from telethon import events, Button
+from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress, file_compress
 from main.plugins.trimmer import trim
@@ -183,7 +184,10 @@ async def compresss(event):
                             buttons=[[Button.inline("PREMIUM.", data="premium")]])
     except Exception:
         DT = time.time()
-        file = msg.media
+        if hasattr(msg.media, "document"):
+            file = msg.media.document
+        else:
+            file = msg.media
         name = msg.file.name
         await fast_download(name, file, Drone, event, DT, "**DOWNLOADING:**")
         data = video_metadata(name)
