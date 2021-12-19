@@ -182,14 +182,16 @@ async def compresss(event):
                             buttons=[[Button.inline("PREMIUM.", data="premium")]])
     except Exception:
         DT = time.time()
+        file = msg.media
         name = msg.file.name
-        await fast_download()
+        await fast_download(name, file, Drone, event, DT, "**DOWNLOADING:**")
         data = video_metadata(name)
         duration = data['duration']
         if duration > 7200:
+            os.remove(name)
             return await event.edit("Free users cannot compress files having duration more than 2Hr.",
                             buttons=[[Button.inline("PREMIUM.", data="premium")]])
-   
+        
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
