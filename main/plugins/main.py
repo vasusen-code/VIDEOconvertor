@@ -5,7 +5,7 @@ import os
 from .. import Drone, LOG_CHANNEL, FORCESUB
 from telethon import events, Button
 from main.plugins.rename import media_rename
-from main.plugins.compressor import compress
+from main.plugins.compressor import compress, file_compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from LOCAL.localisation import premium_text, forcesubtext
@@ -191,6 +191,12 @@ async def compresss(event):
             os.remove(name)
             return await event.edit("Free users cannot compress files having duration more than 2Hr.",
                             buttons=[[Button.inline("PREMIUM.", data="premium")]])
+        if not os.path.isdir("compressmedia"):
+            os.mkdir("compressmedia")
+            await file_compress(event, name, process1)
+            os.rmdir("compressmedia")
+        else:
+            await event.edit(f"Another process in progress!\n\n[**LOG CHANNEL**](https://t.me/{LOG_CHANNEL})")
         
     if not os.path.isdir("compressmedia"):
         await event.delete()
