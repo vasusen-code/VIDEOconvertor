@@ -206,8 +206,7 @@ async def mp4(event, msg):
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
-    await edit.delete()
-    os.remove(name)                           
+    await edit.delete()                      
     os.remove(f'{out}.mp4')                 
                                            
 async def mkv(event, msg):
