@@ -11,7 +11,7 @@ from main.plugins.compressor import compress, file_compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from LOCAL.localisation import premium_text, forcesubtext
-from main.plugins.__ import one_trial_queue, force_sub
+from main.plugins.__ import one_trial_queue, force_sub, db
 from ethon.telefunc import fast_download
 from ethon.pyfunc import video_metadata
 
@@ -23,6 +23,9 @@ async def compin(event):
             yy = await force_sub(event.sender_id)
             if yy is True:
                 return await event.reply(forcesubtext)
+            banned = await db.is_banned(event.sender_id)
+            if banned is True:
+                return await event.edit(f'you are Banned to use me!\n\ncontact [SUPPORT]({SUPPORT_LINK})')
             video = event.file.mime_type
             if 'video' in video:
                 await event.reply("📽",
