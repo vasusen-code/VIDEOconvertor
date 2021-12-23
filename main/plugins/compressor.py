@@ -87,7 +87,6 @@ async def compress(event, msg):
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
-    List1.append(f'{event.sender_id}')
     os.remove(name)
     os.remove(out)
     await log.delete()
