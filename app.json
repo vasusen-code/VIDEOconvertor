@@ -44,6 +44,10 @@
             "description": "Channel id to which u want user be force subcribed.",
             "value": ""
         },
+        "FORCESUB_UN": {
+            "description": "Forcesub channel's username.",
+            "value": ""
+        },
         "BOT_UN": {
             "description": "Username of your bot.",
             "value": ""
