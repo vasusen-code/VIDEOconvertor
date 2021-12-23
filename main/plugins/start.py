@@ -3,7 +3,7 @@ from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
 from LOCAL.localisation import JPG as file
 from LOCAL.localisation import JPG4
-from LOCAL.localisation import info_text, spam_notice, help_text, DEV, premium_text, SUPPORT_LINK
+from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_text, SUPPORT_LINK
 from ethon.teleutils import mention
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
@@ -22,7 +22,7 @@ async def menu(event):
                          Button.inline("info.", data="info"),
                          Button.inline("NOTICE", data="notice")],
                          [
-                         Button.inline("PREMIUM", data="premium"),
+                         Button.inline("SOURCE", data="premium"),
                          Button.inline("Help.", data="help")],
                          [
                          Button.url("DEVELOPER", url=f"{DEV}")]])
@@ -39,8 +39,7 @@ async def notice(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="premium"))
 async def premium(event):
-    await event.answer(f'{premium_text}', alert=True)
-    
+    await event.client.send_message(event.chat_id, source_text)
     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
