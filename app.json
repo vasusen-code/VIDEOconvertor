@@ -23,6 +23,26 @@
         "BOT_TOKEN": {
             "description": "Bot token, get it from @BotFather.",
             "value": ""
+        },
+        "AUTH_USERS": {
+            "description": "Bot owner's UserID.,
+            "value": ""
+        },
+        "LOG_CHANNEL": {
+            "description": "Log channel username, without using '@'.",
+            "value": ""
+        },
+        "ACCESS_CHANNEL": {
+            "description": "Private group id to spy users.",
+            "value": ""
+        },
+        "MONGODB_URI": {
+            "description": "Your mongodb url here.",
+            "value": ""
+        },
+        "FORCESUB": {
+            "description": "Channel id to which u want user be force subcribed.",
+            "value": ""
         }
     },
     "buildpacks": [
