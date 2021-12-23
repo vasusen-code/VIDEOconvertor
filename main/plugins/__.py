@@ -4,7 +4,7 @@ import pymongo
 from decouple import config
 from pymongo import MongoClient
 import motor.motor_asyncio
-from main.Database.database import Database, SESSION_NAME
+from main.Database.database import *
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
 
