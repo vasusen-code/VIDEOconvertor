@@ -1,6 +1,6 @@
 # VideoConvertor
 
-<a href="https://t.me/teamdrone"><img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-green.svg?logo=telegram"></a>
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
 
 # main branch:
 For personal use without database of any kind of control over the bot.
