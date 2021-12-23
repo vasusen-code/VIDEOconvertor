@@ -39,6 +39,8 @@ Variables required are:
 
 Deploy your own bot on heroku.
 
+`Warning` - There are two different branches available, look(above) which one you want to deploy.
+  
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
 
 If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
