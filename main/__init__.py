@@ -16,6 +16,7 @@ BOT_UN = config("BOT_UN", default=None)
 AUTH_USERS = config("AUTH_USERS", default=None)
 LOG_CHANNEL = config("LOG_CHANNEL", default=None)
 FORCESUB = config("FORCESUB", default=None)
+FORCESUB_UN = config("FORCESUB_UN", default=None)
 ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None)
 MONGODB_URI = config("MONGODB_URI", default=None)
 
