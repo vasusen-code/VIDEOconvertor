@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./LOCAL/20211215_165751.jpg" alt="VideoConvertor poster">
+  <img src="./LOCAL/video_convertor.jpg" alt="VideoConvertor poster">
 </p>
 <h1 align="center">
   <b>VideoConvertor - DroneBots</b>
@@ -35,4 +35,4 @@ Variables required are:
 
 Deploy your own bot on heroku.
 
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="150""/></a></p>
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
