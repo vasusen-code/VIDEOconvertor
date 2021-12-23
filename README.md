@@ -1,24 +1,21 @@
 # VideoConvertor
-![GitHub Repo stars](https://img.shields.io/github/stars/Vasusen-Code/VideoConvertor?color=yellow&style=flat)
-![GitHub forks](https://img.shields.io/github/forks/Vasusen-code/VideoConvertor?color=blue&style=flat)
-![GitHub](https://img.shields.io/github/Vasusen-code/VideoConvertor)
 
 <a href="https://t.me/teamdrone"><img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-green.svg?logo=telegram"></a>
 
 # main branch:
-- For personal use without database of any kind of control over the bot.
-- Variables required are:
+For personal use without database of any kind of control over the bot.
+Variables required are:
 * `API_ID`
 * `API_HASH`
 * `BOT_TOKEN`
 
 # Channel branch
-- To use it for your channel
-- Has forcesub
-- Database
-- LOG channel 
-- ACCESS channel(To spy users)
-- Variables required are:
+To use it for your channel
+Has forcesub
+Database
+LOG channel 
+ACCESS channel(To spy users)
+Variables required are:
 * `API_ID`
 * `API_HASH`
 * `BOT_TOKEN`
@@ -30,4 +27,6 @@
 
 # Deploy
 
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="400""/></a></p>
+Deploy your own bot on heroku.
+
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="300""/></a></p>
