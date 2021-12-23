@@ -39,3 +39,4 @@ Deploy your own bot on heroku.
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
 
 If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
+Add this buildpack if deploying manually: `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
