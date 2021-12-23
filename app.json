@@ -24,6 +24,10 @@
             "description": "Bot token, get it from @BotFather.",
             "value": ""
         }
+        "BOT_UN": {
+            "description": "Your bot username here.",
+            "value": ""
+        }
     },
     "buildpacks": [
         {
