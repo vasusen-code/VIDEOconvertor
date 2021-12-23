@@ -10,7 +10,7 @@ info_text = "This bot is developed by @ChauhanMahesh\n\nWritten in python librar
 
 help_text = "Send me any media file to know the stuffs i can do.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
 
-premium_text = "contact DEV to rent a bot at 70RS(1$) per month for yourself hosted on heroku for no restrictions on usage."
+source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
 
 DEV = "https://t.me/ChauhanMahesh"
 
