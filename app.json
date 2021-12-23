@@ -43,6 +43,10 @@
         "FORCESUB": {
             "description": "Channel id to which u want user be force subcribed.",
             "value": ""
+        },
+        "BOT_UN": {
+            "description": "Username of your bot.",
+            "value": ""
         }
     },
     "buildpacks": [
