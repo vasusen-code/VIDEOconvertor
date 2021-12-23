@@ -25,14 +25,23 @@ To use it for your channel,Has forcesub, Database, LOG channel and ACCESS channe
   
 Variables required are:
 * `API_ID`
+
 * `API_HASH`
+
 * `BOT_TOKEN`
+
 * `LOG_CHANNEL` - Input log channel `username`.
+
 * `ACCESS_CHANNEL` - Input access channel/group `id`
+
 * `FORCESUB` - Channel/group `id` to which u want user be forced to subscribe.
+
 * `MONGODB_URI`
+
 * `AUTH_USERS` - Bot owner `UserId`.
+
 * `FORCESUB_UN` - Username of your forcesub channel.
+
 * `BOT_UN` - Username of yout Bot.
 
 
