@@ -251,8 +251,7 @@ async def mkv(event, msg):
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
-    await edit.delete()
-    os.remove(name)                           
+    await edit.delete()                        
     os.remove(f'{out}')
              
 async def webm(event, msg):
@@ -297,8 +296,7 @@ async def webm(event, msg):
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
-    await edit.delete()
-    os.remove(name)                           
+    await edit.delete()                 
     os.remove(f'{out}')
              
 async def file(event, msg):
@@ -384,6 +382,5 @@ async def video(event, msg):
         print(e)
         return await edit.edit(f"An error occured while uploading!\n\nContact [SUPPORT]({SUPPORT_LINK})")
     await edit.delete()
-    os.remove(name)
     os.remove(out)                           
     
