@@ -7,8 +7,16 @@
 
 <b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
 
+<p align="left">
+<a href="https://github.com/AbirHasan2005"><img src="https://img.shields.io/badge/GitHub-Follow%20on%20GitHub-inactive.svg?logo=github"></a>
+</p>
 
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
+<p align="right">
+<a href="https://github.com/vasusen-code/Videoconvertor"> <img src="https://img.shields.io/badge/Github-public%20branch-blueViolet?style=for-the-badge&logo=github" width="200""/></a>
+</p>
+
+
+<p>/p>
 
 # Public branch
 To use it for your channel,Has forcesub, Database, LOG channel and ACCESS channel(To spy users).
