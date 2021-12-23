@@ -2,7 +2,7 @@ from .. import Drone
 from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
 from LOCAL.localisation import JPG as file
-from LOCAL.localisation import info_text, spam_notice, help_text, DEV, premium_text, SUPPORT_LINK
+from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_text, SUPPORT_LINK
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
@@ -19,7 +19,7 @@ async def menu(event):
                          Button.inline("info.", data="info"),
                          Button.inline("NOTICE", data="notice")],
                          [
-                         Button.inline("PREMIUM", data="premium"),
+                         Button.inline("SOURCE", data="source"),
                          Button.inline("Help.", data="help")],
                          [
                          Button.url("DEVELOPER", url=f"{DEV}")]])
@@ -34,10 +34,12 @@ async def info(event):
 async def notice(event):
     await event.answer(f'{spam_notice}', alert=True)
     
-@Drone.on(events.callbackquery.CallbackQuery(data="premium"))
-async def premium(event):
-    await event.answer(f'{premium_text}', alert=True)
-    
+@Drone.on(events.callbackquery.CallbackQuery(data="source"))
+async def source(event):
+    await Drone.send_message(event.chat_id, source_text,
+                    buttons=[[
+                         Button.url("GITHUB.", url="https://github.com/Vasusen-code/VideoConvertor/tree/public")]])
+
     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
