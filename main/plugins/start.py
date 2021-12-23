@@ -22,7 +22,7 @@ async def menu(event):
                          Button.inline("info.", data="info"),
                          Button.inline("NOTICE", data="notice")],
                          [
-                         Button.inline("SOURCE", data="premium"),
+                         Button.inline("SOURCE", data="source"),
                          Button.inline("Help.", data="help")],
                          [
                          Button.url("DEVELOPER", url=f"{DEV}")]])
@@ -37,8 +37,8 @@ async def info(event):
 async def notice(event):
     await event.answer(f'{spam_notice}', alert=True)
     
-@Drone.on(events.callbackquery.CallbackQuery(data="premium"))
-async def premium(event):
+@Drone.on(events.callbackquery.CallbackQuery(data="source"))
+async def source(event):
     await event.client.send_message(event.chat_id, source_text)
     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
