@@ -49,7 +49,7 @@ AUTH_USERS COMMANDS:
   - `/disallow <id>` : to ban
   - `/allow <id>` : to unban
   - `/users` : count total users
-  - `/mgs <id>` : give this command replying to a message
+  - `/msg <id>` : give this command replying to a message
 
 Deploy your own bot on heroku.
 
