@@ -1,7 +1,7 @@
 # VideoConvertor
 
 <p align="center">
-  <img src="./resources/extras/logo_readme.jpg" alt="DroneBots Logo">
+  <img src="./LOCAL/20211215_165751.jpg" alt="VideoConvertor poster">
 </p>
 <h1 align="center">
   <b>VideoConvertor - DroneBots</b>
