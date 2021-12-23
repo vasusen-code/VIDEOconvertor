@@ -6,7 +6,7 @@
         "Best",
         "telegram",
         "compressor",
-        "bot",
+        "bot"
     ],
     "repository": "https://github.com/vasusen-code/VideoConvertor",
     "website": "",
@@ -36,5 +36,5 @@
         {
             "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
         }
-    ]
+    }
 }
