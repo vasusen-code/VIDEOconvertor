@@ -23,18 +23,23 @@
         "BOT_TOKEN": {
             "description": "Bot token, get it from @BotFather.",
             "value": ""
-        }
+        },
         "BOT_UN": {
             "description": "Your bot username here.",
             "value": ""
         }
-    },
-    "buildpacks": [
-        {
-            "url": "heroku/python"
-        },
-        {
-            "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git",
-        }
-    ]
+  },
+  "addons": [
+  ],
+  "buildpacks": [{
+    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  }, {
+    "url": "heroku/python"
+  }],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
 }
