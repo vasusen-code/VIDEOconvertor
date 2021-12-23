@@ -11,7 +11,7 @@
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-blueViolet?style=for-the-badge&logo=telegram" width="200""/></a></p>
 
 # main branch:
-For personal use without database of any kind of control over the bot.
+For personal use without database or any kind of control over the bot.
   
 Variables required are:
 * `API_ID`
@@ -35,4 +35,4 @@ Variables required are:
 
 Deploy your own bot on heroku.
 
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="300""/></a></p>
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="150""/></a></p>
