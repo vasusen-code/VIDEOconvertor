@@ -8,7 +8,7 @@
 <b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
 
 
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%50Telegram%50Group-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
 
 # Public branch
 To use it for your channel,Has forcesub, Database, LOG channel and ACCESS channel(To spy users).
