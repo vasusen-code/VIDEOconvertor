@@ -8,7 +8,7 @@
 <b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
 
 
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
+<p><a href="https://t.me/DroneBots"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
 
 # main branch(Unmaintained)
 For personal use without database or any kind of control over the bot.
