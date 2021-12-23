@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "description": "Simple basic code for a telegram bot in Telethon.",
+    "name": "VideoConvertor",
+    "description": "A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.",
     "logo": "",
     "keywords": [
         "Best",
