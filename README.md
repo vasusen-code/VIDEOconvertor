@@ -1,5 +1,15 @@
 # VideoConvertor
 
+<p align="center">
+  <img src="./resources/extras/logo_readme.jpg" alt="DroneBots Logo">
+</p>
+<h1 align="center">
+  <b>VideoConvertor - DroneBots</b>
+</h1>
+
+<b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
+
+
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-blueViolet?style=for-the-badge&logo=telegram" width="200""/></a></p>
 
 # main branch:
