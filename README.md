@@ -10,7 +10,7 @@
 
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
 
-# main branch:
+# main branch(Unmaintained)
 For personal use without database or any kind of control over the bot.
   
 Variables required are:
