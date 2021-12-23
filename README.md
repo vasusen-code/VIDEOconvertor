@@ -7,13 +7,14 @@
 
 <b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
 
-
+`Main branch` - For personal use
 <p align="left">
-<a href="https://github.com/vasusen-code/Videoconvertor"> <img src="https://img.shields.io/badge/Github-public%20branch-blue?style=for-the-badge&logo=github" width="200""/></a>
+<a href="https://github.com/vasusen-code/VIDEOconvertor/blob/main"> <img src="https://img.shields.io/badge/Github-main%20branch-blue?style=for-the-badge&logo=github" width="250""/></a>
 </p>
-  
+
+`Public branch` - For your channel
 <p align="left">
-<a href="https://github.com/vasusen-code/Videoconvertor"> <img src="https://img.shields.io/badge/Github-public%20branch-purple?style=for-the-badge&logo=github" width="200""/></a>
+<a href="https://github.com/vasusen-code/VIDEOconvertor/blob/public"> <img src="https://img.shields.io/badge/Github-public%20branch-purple?style=for-the-badge&logo=github" width="250""/></a>
 </p>
 
 # Public branch
