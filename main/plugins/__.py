@@ -25,8 +25,7 @@ async def force_sub(id):
 
 #Database command handling--------------------------------------------------------------------------
 
-def db():
-    return Database(MONGODB_URI, SESSION_NAME)
+db = Database(MONGODB_URI, SESSION_NAME)
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def incomming(event):
