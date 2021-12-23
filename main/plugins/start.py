@@ -39,7 +39,10 @@ async def notice(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="source"))
 async def source(event):
-    await event.client.send_message(event.chat_id, source_text)
+    await Drone.send_message(event.chat_id, source_text,
+                    buttons=[[
+                         Button.url("GITHUB.", url="https://github.com/Vasusen-code/VideoConvertor")]])
+                                    
     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
