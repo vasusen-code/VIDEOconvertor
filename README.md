@@ -4,17 +4,15 @@
 
 # main branch:
 For personal use without database of any kind of control over the bot.
+  
 Variables required are:
 * `API_ID`
 * `API_HASH`
 * `BOT_TOKEN`
 
 # Channel branch
-To use it for your channel
-Has forcesub
-Database
-LOG channel 
-ACCESS channel(To spy users)
+To use it for your channel,Has forcesub, Database, LOG channel and ACCESS channel(To spy users).
+  
 Variables required are:
 * `API_ID`
 * `API_HASH`
