@@ -2,7 +2,7 @@
   <img src="./LOCAL/Wavy_Lst-14_Single-06.jpg" alt="VideoConvertor poster">
 </p>
 <h1 align="center">
-  <b>ᴠɪᴅᴇᴏᴄᴏɴᴠᴇʀᴛᴏʀ - ᴅʀᴏɴᴇʙᴏᴛs</b>
+  <b>ᴠɪᴅᴇᴏ ᴄᴏɴᴠᴇʀᴛᴏʀ</b>
 </h1>
 
 <b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
