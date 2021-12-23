@@ -1,5 +1,3 @@
-# VideoConvertor
-
 <p align="center">
   <img src="./LOCAL/20211215_165751.jpg" alt="VideoConvertor poster">
 </p>
