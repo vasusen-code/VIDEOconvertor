@@ -35,7 +35,6 @@ Variables required are:
 * `FORCESUB_UN` - Username of your forcesub channel.
 * `BOT_UN` - Username of yout Bot.
 
-# Deploy
 
 Deploy your own bot on heroku.
 
