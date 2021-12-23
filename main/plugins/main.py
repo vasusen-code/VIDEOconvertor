@@ -3,17 +3,20 @@
 
 import os
 import time
-from .. import Drone, LOG_CHANNEL
+from .. import Drone, LOG_CHANNEL, FORCESUB_UN
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress, file_compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
-from LOCAL.localisation import source_text, forcesubtext
+from LOCAL.localisation import source_text
 from main.plugins.__ import force_sub, db
 from ethon.telefunc import fast_download
 from ethon.pyfunc import video_metadata
+
+#Don't be a MF by stealing someone's hardwork.
+forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\nAlso join @DroneBots."
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
