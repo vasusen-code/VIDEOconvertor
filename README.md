@@ -17,7 +17,7 @@ Variables required are:
 * `API_ID`
 * `API_HASH`
 * `BOT_TOKEN`
-* `LOG_CHANNEL` - Input log channel/group `id`
+* `LOG_CHANNEL` - Input log channel `username`.
 * `ACCESS_CHANNEL` - Input access channel/group `id`
 * `FORCESUB` - Channel/group `id` to which u want user be forced to subscribe.
 * `MONGODB_URI`
