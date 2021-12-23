@@ -1,3 +1,5 @@
+from main.__int__ import FORCESUB_UN as un
+
 START_TEXT = "Send me any file to begin."
 
 FORCE_SUB_TEXT = "In order to use this bot, you've to join my parent channel."
@@ -24,4 +26,4 @@ JPG3 = "LOCAL/PicsArt_12-16-08.57.15.jpg"
 
 JPG4 = "LOCAL/20211219_000258.jpg"
 
-forcesubtext = "Hey there!To use this bot you've to join @DroneBots.\n\nIf you're banned , then make a request for unban in @TeamDrone."
+forcesubtext = f"Hey there!To use this bot you've to join @{un}.\n\nAlso join @DroneBots."
