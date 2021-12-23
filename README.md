@@ -21,9 +21,10 @@
 <p><a href="https://t.me/DroneBots"> <img src="https://img.shields.io/badge/Telegram-Join%20Channel-gold?style=for-the-badge&logo=telegram" width="220""/></a></p>
 
 # Main branch
-To use it for your channel,Has forcesub, Database, LOG channel and ACCESS channel(To spy users).
-  
-Variables required are:
+Main branch is to deploy a bot for your `personal` use only. For extra features deploy from `public` branch.
+
+VARIABLES required are:
+
 * `API_ID`
 
 * `API_HASH`
