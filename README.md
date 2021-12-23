@@ -7,34 +7,35 @@
 
 <b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
 
+`Main branch` - For personal use
+<p align="left">
+<a href="https://github.com/vasusen-code/VIDEOconvertor/tree/main"> <img src="https://img.shields.io/badge/Github-main%20branch-blue?style=for-the-badge&logo=github" width="220""/></a>
+</p>
 
-<p><a href="https://t.me/DroneBots"> <img src="https://img.shields.io/badge/Telegram-Join%20Channel-gold?style=for-the-badge&logo=telegram" width="200""/></a></p>
+`Public branch` - For your channel
+<p align="left">
+<a href="https://github.com/vasusen-code/VIDEOconvertor/tree/public"> <img src="https://img.shields.io/badge/Github-public%20branch-blue?style=for-the-badge&logo=github" width="220""/></a>
+</p>
 
-# main branch(Unmaintained)
-For personal use without database or any kind of control over the bot.
-  
-Variables required are:
-* `API_ID`
-* `API_HASH`
-* `BOT_TOKEN`
+`Telegran Channel` - DroneBots
+<p><a href="https://t.me/DroneBots"> <img src="https://img.shields.io/badge/Telegram-Join%20Channel-gold?style=for-the-badge&logo=telegram" width="220""/></a></p>
 
-# Channel branch
+# Main branch
 To use it for your channel,Has forcesub, Database, LOG channel and ACCESS channel(To spy users).
   
 Variables required are:
 * `API_ID`
-* `API_HASH`
-* `BOT_TOKEN`
-* `LOG_CHANNEL` - Input log channel/group `id`
-* `ACCESS_CHANNEL` - Input access channel/group `id`
-* `FORCESUB` - Channel/group `id` to which u want user be forced to subscribe.
-* `MONGODB_URI`
-* `AUTH_USERS` - Bot owner `UserId`.
 
-# Deploy
+* `API_HASH`
+
+* `BOT_TOKEN`
+
+* `BOT_UN` - Username of yout Bot.
 
 Deploy your own bot on heroku.
 
+`Warning` - There are two different branches available, look(above) which one you want to deploy.
+  
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
 
 If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
