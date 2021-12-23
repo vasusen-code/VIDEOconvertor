@@ -1,4 +1,5 @@
-from main.__int__ import FORCESUB_UN as un
+#Don't be a thief by stealing other's Hardwork, it took time and effort to make this repo.
+#Respect my work by not making any changes here.
 
 START_TEXT = "Send me any file to begin."
 
@@ -26,4 +27,3 @@ JPG3 = "LOCAL/PicsArt_12-16-08.57.15.jpg"
 
 JPG4 = "LOCAL/20211219_000258.jpg"
 
-forcesubtext = f"Hey there!To use this bot you've to join @{un}.\n\nAlso join @DroneBots."
