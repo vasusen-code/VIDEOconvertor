@@ -3,15 +3,15 @@
 
 import os
 import time
-from .. import Drone, LOG_CHANNEL, FORCESUB
+from .. import Drone, LOG_CHANNEL
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress, file_compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
-from LOCAL.localisation import premium_text, forcesubtext
-from main.plugins.__ import one_trial_queue, force_sub, db
+from LOCAL.localisation import source_text, forcesubtext
+from main.plugins.__ import force_sub, db
 from ethon.telefunc import fast_download
 from ethon.pyfunc import video_metadata
 
@@ -170,58 +170,15 @@ async def rename(event):
                    
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def compresss(event):
-    trial = one_trial_queue(event.sender_id, process1)
-    if trial is False:
-        return await event.edit("Free users can only compress 1 video in a day, you've finished your today's trial.",
-                        buttons=[
-                            [Button.inline("PREMIUM.", data="premium")]])
     button = await event.get_message()
     msg = await button.get_reply_message() 
-    try: 
-        if (msg.file.size)/1000000 > 600:
-            return await event.edit("Free users cannot compress more than 600mb.",
-                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
-    except Exception:
-        if (msg.document.size)/1000000 > 600:
-            return await event.edit("Free users cannot compress more than 600mb.",
-                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
-    try: 
-        if msg.file.duration > 7200:
-            return await event.edit("Free users cannot compress files having duration more than 2Hr.",
-                            buttons=[[Button.inline("PREMIUM.", data="premium")]])
-    except Exception:
-        try: 
-            if msg.document.duration > 7200:
-                return await event.edit("Free users cannot compress files having duration more than 2Hr.",
-                                buttons=[[Button.inline("PREMIUM.", data="premium")]])
-        except Exception: 
-            DT = time.time()
-            if hasattr(msg.media, "document"):
-                file = msg.media.document
-            else:
-                file = msg.media
-            name = msg.file.name
-            await fast_download(name, file, Drone, event, DT, "**DOWNLOADING:**")
-            data = video_metadata(name)
-            duration = data['duration']
-            if duration > 7200:
-                os.remove(name)
-                return await event.edit("Free users cannot compress files having duration more than 2Hr.",
-                                buttons=[[Button.inline("PREMIUM.", data="premium")]])
-            if not os.path.isdir("compressmedia"):
-                os.mkdir("compressmedia")
-                await file_compress(event, name, process1)
-                os.rmdir("compressmedia")
-            else:
-                await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**")
-           
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        await compress(event, msg, process1)
+        await compress(event, msg)
         os.rmdir("compressmedia")
     else:
-        await event.edit(f"Another process in progress!\n\n[**LOG CHANNEL**](https://t.me/{LOG_CHANNEL})")
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**")
     
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):                            
