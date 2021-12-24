@@ -15,7 +15,7 @@ help_text = "Send me any media file to know the stuffs i can do.\n\ncompress - n
 
 source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
 
-DEV = "https://t.me/ChauhanMahesh"
+DEV = "https://t.me/MaheshChauhan"
 
 spam_notice = "This bot is hosted on heroku, and hence can run just run one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
 
