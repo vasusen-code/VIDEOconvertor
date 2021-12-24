@@ -1,5 +1,4 @@
 from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
-from .. import LOG_ID as chat
 from telethon import events 
 import pymongo
 from decouple import config
