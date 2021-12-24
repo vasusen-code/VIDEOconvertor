@@ -1,4 +1,5 @@
 from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
+from .. import LOG_ID as chat
 from telethon import events 
 import pymongo
 from decouple import config
@@ -81,8 +82,8 @@ async def LOG_START(event, ps_name):
     return xx
 
 async def LOG_END(event, ps_name):
-    chat = config("LOG_CHANNEL", default=None)
-    await event.client.send_message(f'@{chat}', f'{ps_name}')
+    chat = config("LOG_ID", default=None)
+    await event.client.send_message(int(LOG_ID), f'{ps_name}')
 
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS, pattern="^/msg (.*)"))
 async def msg(event):
