@@ -18,6 +18,6 @@ spam_notice = "This bot is hosted on heroku, and hence can run just run one proc
 
 JPG = "LOCAL/video_convertor.jpg"
 
-JPG2 = "LOCAL/20211215_165751.jpg"
+JPG2 = "LOCAL/video_convertor.jpg"
 
-JPG3 = "LOCAL/PicsArt_12-16-08.57.15.jpg"
+JPG3 = "LOCAL/video_convertor.jpg"
