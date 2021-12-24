@@ -33,7 +33,7 @@
             "value": ""
         },
         "LOG_ID": {
-            "description": "Log channel `ID`.",
+            "description": "Log channel `ID` (Do not use -100)",
             "value": ""
         },
         "ACCESS_CHANNEL": {
