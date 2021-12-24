@@ -80,7 +80,7 @@ async def LOG_START(event, ps_name):
     xx = await event.client.send_message(int(LOG_ID), text)
     return xx
 
-async def LOG_END(event, ps_name:
+async def LOG_END(event, ps_name):
     await event.client.send_message(int(LOG_ID), f'{ps_name}')
 
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS, pattern="^/msg (.*)"))
