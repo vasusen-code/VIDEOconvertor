@@ -32,7 +32,7 @@ Variables required are:
 
 * `LOG_CHANNEL` - Log channel `username`
   
-* `LOG_ID` - Log channel `id`
+* `LOG_ID` - Log channel `id` (Do not use -100)
 
 * `ACCESS_CHANNEL` - Input access channel/group `id`
 
