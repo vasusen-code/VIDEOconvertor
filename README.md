@@ -31,6 +31,8 @@ Variables required are:
 * `BOT_TOKEN`
 
 * `LOG_CHANNEL` - Log channel `username`
+  
+* `LOG_ID` - Log channel `id`
 
 * `ACCESS_CHANNEL` - Input access channel/group `id`
 
