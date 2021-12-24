@@ -77,13 +77,11 @@ async def unbban(event):
 async def LOG_START(event, ps_name):
     Tag = mention(event.sender.first_name, event.sender_id)
     text = f'{ps_name}\n\nUSER: {Tag}'
-    chat = -100 + LOG_ID
-    xx = await event.client.send_message(int(chat), text)
+    xx = await event.client.send_message(int(LOG_ID), text)
     return xx
 
-async def LOG_END(event, ps_name):
-    chat = -100 + LOG_ID
-    await event.client.send_message(int(chat), f'{ps_name}')
+async def LOG_END(event, ps_name:
+    await event.client.send_message(int(LOG_ID), f'{ps_name}')
 
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS, pattern="^/msg (.*)"))
 async def msg(event):
