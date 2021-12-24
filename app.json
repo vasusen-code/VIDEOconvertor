@@ -32,6 +32,10 @@
             "description": "Log channel username, without using '@'.",
             "value": ""
         },
+        "LOG_ID": {
+            "description": "Log channel `ID`.",
+            "value": ""
+        },
         "ACCESS_CHANNEL": {
             "description": "Private group id to spy users.",
             "value": ""
