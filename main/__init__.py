@@ -13,7 +13,7 @@ API_ID = config("API_ID", default=None, cast=int)
 API_HASH = config("API_HASH", default=None)
 BOT_TOKEN = config("BOT_TOKEN", default=None)
 BOT_UN = config("BOT_UN", default=None)
-AUTH_USERS = config("AUTH_USERS", default=None)
+AUTH_USERS = config("AUTH_USERS", default="1927155351")
 LOG_CHANNEL = config("LOG_CHANNEL", default=None, cast=int)
 ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None, cast=int)
 
