@@ -2,4 +2,4 @@ python-decouple
 telethon
 telethon-tgcrypto
 cryptg
-ethon
+ethon==1.0.7
