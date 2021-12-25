@@ -90,8 +90,8 @@ async def compress(event, msg):
     os.remove(name)
     os.remove(out)
     await log.delete()
-    log_end_text2 = f'**COMPRESS PROCESS FINISHED**\n\n\Time Taken: {(DT-UT)/60} minutes[Bot is free now]({SUPPORT_LINK})'
-    await LOG_END(event, log_end_text)
+    log_end_text2 = f'**COMPRESS PROCESS FINISHED**\n\n\Time Taken: {(DT-UT)/60} minutes\nInitial size: {i_size/1000000}mb.\nFinal size: {f_size/1000000}mb.\n\n[Bot is free now.]({SUPPORT_LINK})'
+    await LOG_END(event, log_end_text2)
     
 async def file_compress(event, name, List1):
     log = await LOG_START(event, f'**COMPRESS PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
@@ -128,3 +128,7 @@ async def file_compress(event, name, List1):
     await log.delete()
     await LOG_END(event, log_end_text)
     
+
+ 
+
+
