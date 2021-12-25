@@ -90,6 +90,7 @@ async def compress(event, msg):
     os.remove(name)
     os.remove(out)
     await log.delete()
+    log_end_text2 = f'**COMPRESS PROCESS FINISHED**\n\n\Time Taken: {(DT-UT)/60} minutes[Bot is free now]({SUPPORT_LINK})'
     await LOG_END(event, log_end_text)
     
 async def file_compress(event, name, List1):
