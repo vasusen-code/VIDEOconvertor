@@ -1,9 +1,9 @@
 python-decouple
 telethon
-ethon
 telethon-tgcrypto
 cryptg
 pymongo
 motor
 pymongo[srv]
 dnspython
+ethon
