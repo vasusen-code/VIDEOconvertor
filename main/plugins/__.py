@@ -53,7 +53,7 @@ async def bban(event):
     admins.append(AUTH)
     if c in admins:
         return await event.reply("I cannot ban an AUTH_USER")
-    xx = await db.is_banned(event.sender_id)
+    xx = await db.is_banned(int(c))
     if xx is True:
         return await event.reply("User is already disallowed!")
     else:
