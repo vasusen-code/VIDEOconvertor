@@ -1,6 +1,6 @@
 python-decouple
 telethon
-ethon
+ethon==1.0.7
 telethon-tgcrypto
 cryptg
 pymongo
