@@ -203,7 +203,7 @@ async def compresss(event):
         await compress(event, msg)
         os.rmdir("compressmedia")
     else:
-        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**")
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
     
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):
