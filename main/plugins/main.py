@@ -48,10 +48,6 @@ async def compin(event):
 async def convert(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if msg.file.size/1000000 > 1000:
-        await event.edit("Free users cannot convert files greater than size 1GB.",
-                        buttons=[
-                            [Button.inline("PREMIUM.", data="premium")]])
     await event.edit("🔃**CONVERT:**",
                     buttons=[
                         [Button.inline("MP3", data="mp3"),
@@ -78,12 +74,11 @@ async def back(event):
 process1 = []
 process2 = []
 
-@Drone.on(events.callbackquery.CallbackQuery(data="premium"))
-async def premium(event):
-    await event.answer(f'{premium_text}', alert=True)
-    
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
 async def vtmp3(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     if not os.path.isdir("audioconvert"):
@@ -96,6 +91,9 @@ async def vtmp3(event):
         
 @Drone.on(events.callbackquery.CallbackQuery(data="flac"))
 async def vtflac(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message()  
     if not os.path.isdir("audioconvert"):
@@ -108,6 +106,9 @@ async def vtflac(event):
         
 @Drone.on(events.callbackquery.CallbackQuery(data="wav"))
 async def vtwav(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     if not os.path.isdir("audioconvert"):
@@ -120,6 +121,9 @@ async def vtwav(event):
         
 @Drone.on(events.callbackquery.CallbackQuery(data="mp4"))
 async def vtmp4(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     await event.delete()
@@ -127,6 +131,9 @@ async def vtmp4(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="mkv"))
 async def vtmkv(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     await event.delete()
@@ -134,6 +141,9 @@ async def vtmkv(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="webm"))
 async def vtwebm(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     await event.delete()
@@ -141,6 +151,9 @@ async def vtwebm(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="file"))
 async def vtfile(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     await event.delete()
@@ -148,13 +161,19 @@ async def vtfile(event):
 
 @Drone.on(events.callbackquery.CallbackQuery(data="video"))
 async def ftvideo(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     await event.delete()
     await video(event, msg)
     
 @Drone.on(events.callbackquery.CallbackQuery(data="rename"))
-async def rename(event):                            
+async def rename(event):    
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message()  
     await event.delete()
@@ -173,6 +192,9 @@ async def rename(event):
                    
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def compresss(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message() 
     if not os.path.isdir("compressmedia"):
@@ -184,7 +206,10 @@ async def compresss(event):
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**")
     
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
-async def vtrim(event):                            
+async def vtrim(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
     button = await event.get_message()
     msg = await button.get_reply_message()  
     await event.delete()
