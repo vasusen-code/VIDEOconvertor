@@ -25,7 +25,7 @@
             "value": ""
         },
         "BOT_UN": {
-            "description": "Your bot username here.",
+            "description": "Your bot username here. Do not use '@'.",
             "value": ""
         }
     },
