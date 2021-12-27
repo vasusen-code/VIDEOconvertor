@@ -133,5 +133,4 @@ async def media_rename(event, msg, new_name):
         print(e)
         return
     await edit.delete()
-    os.remove(name)
     os.remove(out)
