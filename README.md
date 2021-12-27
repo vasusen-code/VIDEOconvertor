@@ -32,9 +32,9 @@ Variables required are:
 
 * `LOG_CHANNEL` - Log channel `username`
   
-* `LOG_ID` - Log channel `id` (Use -100 ahead of id)
+* `LOG_ID` - Log channel `id` `[Should be Public]`
 
-* `ACCESS_CHANNEL` - Input access channel/group `id`
+* `ACCESS_CHANNEL` - Input access channel/group `id` [`SHOULD BE PRIVATE GROUP`]
 
 * `FORCESUB` - Channel/group `id` to which u want user be forced to subscribe.
 
