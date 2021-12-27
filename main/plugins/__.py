@@ -16,6 +16,8 @@ def mention(name, id):
 
 async def force_sub(id):
     FORCESUB = config("FORCESUB", default=None)
+    if not str(FORCESUB).startswith("-100"):
+        FORCESUB = int("-100" + str(FORCESUB))
     ok = False
     try:
         await Drone(GetParticipantRequest(channel=int(FORCESUB), participant=id))
@@ -75,12 +77,16 @@ async def unbban(event):
 #Logging events on tg---------------------------------------------------------------------------------------------
 
 async def LOG_START(event, ps_name):
+    if not str(LOG_ID).startswith("-100"):
+        LOG_ID = int("-100" + str(LOG_ID))
     Tag = mention(event.sender.first_name, event.sender_id)
     text = f'{ps_name}\n\nUSER: {Tag}'
     xx = await event.client.send_message(int(LOG_ID), text, link_preview=False)
     return xx
 
 async def LOG_END(event, ps_name):
+    if not str(LOG_ID).startswith("-100"):
+        LOG_ID = int("-100" + str(LOG_ID))
     await event.client.send_message(int(LOG_ID), f'{ps_name}', link_preview=False)
 
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS, pattern="^/msg (.*)"))
