@@ -45,7 +45,7 @@
             "value": ""
         },
         "FORCESUB": {
-            "description": "Channel id to which u want user be force subcribed.",
+            "description": "Channel id to which u want user be force subcribed.(Use -100 ahead of id.)",
             "value": ""
         },
         "FORCESUB_UN": {
