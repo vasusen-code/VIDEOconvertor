@@ -33,11 +33,11 @@
             "value": ""
         },
         "LOG_ID": {
-            "description": "Log channel `ID` (Use -100 ahead of id.)",
+            "description": "Log channel `ID` (Should be Public)",
             "value": ""
         },
         "ACCESS_CHANNEL": {
-            "description": "Private group id to spy users.",
+            "description": "Private group id to spy users.(Should be public group)",
             "value": ""
         },
         "MONGODB_URI": {
