@@ -1,5 +1,4 @@
-from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
-from .. import LOG_ID 
+from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI 
 from telethon import events 
 import pymongo
 from decouple import config
@@ -81,6 +80,7 @@ async def unbban(event):
 #Logging events on tg---------------------------------------------------------------------------------------------
 
 async def LOG_START(event, ps_name):
+    LOG_ID = config("LOG_ID", default=None)
     if not str(LOG_ID).startswith("-100"):
         LOG_ID = int("-100" + str(LOG_ID))
     Tag = mention(event.sender.first_name, event.sender_id)
@@ -89,6 +89,7 @@ async def LOG_START(event, ps_name):
     return xx
 
 async def LOG_END(event, ps_name):
+    LOG_ID = config("LOG_ID", default=None)
     if not str(LOG_ID).startswith("-100"):
         LOG_ID = int("-100" + str(LOG_ID))
     await event.client.send_message(int(LOG_ID), f'{ps_name}', link_preview=False)
