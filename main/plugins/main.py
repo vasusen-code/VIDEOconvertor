@@ -206,7 +206,7 @@ async def compresss(event):
         index = process1.index(f'{event.sender_id}')
         last = timer[int(index)]
         present = time.time()
-        return await event.edit(f"You have to wait `{300-int(present-last)}` seconds more to start a new process!")
+        return await event.edit(f"You have to wait `{300-int(int(present)-int(last))}` seconds more to start a new process!")
     button = await event.get_message()
     msg = await button.get_reply_message()
     if not os.path.isdir("compressmedia"):
