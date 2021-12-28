@@ -214,7 +214,7 @@ async def compresss(event):
         os.mkdir("compressmedia")
         await compress(event, msg)
         os.rmdir("compressmedia")
-        now = tim.time()
+        now = time.time()
         timer.append(f'{now}')
         process1.append(f'{event.sender_id}')
         await event.client.send_message(event.chat_id, 'You can start a new process again after 5 minutes.')
