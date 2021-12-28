@@ -12,6 +12,10 @@
 <a href="https://github.com/vasusen-code/VIDEOconvertor/tree/main"> <img src="https://img.shields.io/badge/Github-main%20branch-blue?style=for-the-badge&logo=github" width="220""/></a>
 </p>
 
+<p align="right">
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)  
+</p>
+  
 `Public branch` - For your channel
 <p align="left">
 <a href="https://github.com/vasusen-code/VIDEOconvertor/tree/public"> <img src="https://img.shields.io/badge/Github-public%20branch-blue?style=for-the-badge&logo=github" width="220""/></a>
