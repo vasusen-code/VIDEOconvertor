@@ -11,10 +11,6 @@
 <p align="left">
 <a href="https://github.com/vasusen-code/VIDEOconvertor/tree/main"> <img src="https://img.shields.io/badge/Github-main%20branch-blue?style=for-the-badge&logo=github" width="220""/></a>
 </p>
-
-<p align="right">
-[![License](https://www.gnu.org/graphics/gplv3-127x51.png)](LICENSE)
-</p>
   
 `Public branch` - For your channel
 <p align="left">
@@ -71,4 +67,8 @@ Deploy your own bot on heroku.
 
 If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
 Add this buildpack if deploying manually: `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
+
+LICENSE:
+
+[![License](https://www.gnu.org/graphics/gplv3-127x51.png)](LICENSE)
 
