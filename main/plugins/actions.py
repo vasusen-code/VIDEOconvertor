@@ -1,12 +1,10 @@
-from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI 
+from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
 from telethon import events 
-import pymongo
 from decouple import config
-from pymongo import MongoClient
-import motor.motor_asyncio
-from main.Database.database import *
+from main.Database.database import Database
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
+from telegraph import upload_file
 
 def mention(name, id):
     return f'[{name}](tg://user?id={id})'
@@ -31,7 +29,7 @@ async def force_sub(id):
 
 #Database command handling--------------------------------------------------------------------------
 
-db = Database(MONGODB_URI, SESSION_NAME)
+db = Database(MONGODB_URI, 'videoconvertor')
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def incomming(event):
@@ -39,9 +37,6 @@ async def incomming(event):
         await db.add_user(event.sender_id)
     await event.forward_to(int(ACCESS_CHANNEL))
 
-async def banned(id):
-    await db.get_ban_status(id)
-    
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="/users"))
 async def listusers(event):
     xx = await event.reply("Counting total users in Database.")
@@ -55,26 +50,26 @@ async def bban(event):
         await event.reply("Disallow who!?")
     AUTH = config("AUTH_USERS", default=None)
     admins = []
-    admins.append(AUTH)
+    admins.append(f'{int(AUTH)}')
     if c in admins:
         return await event.reply("I cannot ban an AUTH_USER")
     xx = await db.is_banned(int(c))
     if xx is True:
         return await event.reply("User is already disallowed!")
     else:
-        await db.banning(c)
+        await db.banning(int(c))
         await event.reply(f"{c} is now disallowed.")
-    admins.remove(AUTH)
+    admins.remove(f'{int(AUTH)}')
     
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="^/allow (.*)" ))
 async def unbban(event):
     xx = event.pattern_match.group(1)
-    xy = await db.is_banned(xx)
-    if xy is False:
-        return await event.reply("User is already allowed!")
     if not xx:
         await event.reply("Allow who?")
-    await db.unbanning(xx)
+    xy = await db.is_banned(int(xx))
+    if xy is False:
+        return await event.reply("User is already allowed!")
+    await db.unbanning(int(xx))
     await event.reply(f"{xx} Allowed! ")
     
 #Logging events on tg---------------------------------------------------------------------------------------------
@@ -109,6 +104,7 @@ async def msg(event):
     
 #Listing--------------------------------------------------------------------------------------------------------------
 
+#Not in use
 def one_trial_queue(id, List1):
     if f'{id}' in List1:
         return False
@@ -131,3 +127,23 @@ def ps_queue(id, media, List1, List2):
         return 'EMPTY'
     if len(List1) > 2:
         return 'FULL'
+
+    
+#Thumbnail--------------------------------------------------------------------------------------------------------------
+
+async def set_thumbnail(event, img):
+    edit = await event.client.send_message(event.chat_id, 'Trying to process.')
+    try:
+        path = await event.client.download_media(img)
+        meta = upload_file(path)
+        link = f'https://telegra.ph{meta[0]}'
+    except Exception as e:
+        print(e)
+        return await edit.edit("Failed to Upload on Tgraph.")
+    await db.update_thumb_link(event.sender_id, link)
+    await edit.edit("Done!")
+    
+async def rem_thumbnail(event):
+    edit = await event.client.send_message(event.chat_id, 'Trying.')
+    await db.rem_thumb_link(event.sender_id)
+    await edit.edit('Removed!')
