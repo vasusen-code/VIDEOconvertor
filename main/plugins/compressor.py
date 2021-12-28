@@ -15,7 +15,7 @@ from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
-from main.plugins.__ import LOG_START, LOG_END
+from main.plugins.actions import LOG_START, LOG_END
 
 async def compress(event, msg):
     Drone = event.client
