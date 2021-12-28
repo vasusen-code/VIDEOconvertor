@@ -3,15 +3,16 @@
 
 import os
 import time
-from .. import Drone, LOG_CHANNEL, FORCESUB_UN
+from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress, file_compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
-from LOCAL.localisation import source_text
-from main.plugins.__ import force_sub, db
+from main.Database.database import Database
+from LOCAL.localisation import source_text, SUPPORT_LINK
+from main.plugins.actions import force_sub
 from ethon.telefunc import fast_download
 from ethon.pyfunc import video_metadata
 
@@ -20,6 +21,7 @@ forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\nAls
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
+    db = Database(MONGODB_URI, 'videoconvertor')
     if event.is_private:
         media = event.media
         if media:
@@ -28,7 +30,7 @@ async def compin(event):
                 return await event.reply(forcesubtext)
             banned = await db.is_banned(event.sender_id)
             if banned is True:
-                return await event.edit(f'you are Banned to use me!\n\ncontact [SUPPORT]({SUPPORT_LINK})')
+                return await event.reply(f'you are Banned to use me!\n\ncontact [SUPPORT]({SUPPORT_LINK})', link_preview=False)
             video = event.file.mime_type
             if 'video' in video:
                 await event.reply("📽",
@@ -38,7 +40,12 @@ async def compin(event):
                                 [Button.inline("RENAME", data="rename"),
                                  Button.inline("TRIM", data="trim")]
                             ])
-                
+            elif 'png' in video:
+                return
+            elif 'jpeg' in video:
+                return
+            elif 'jpg' in video:
+                return    
             else:
                 await event.reply('📦',
                             buttons=[  
@@ -72,7 +79,7 @@ async def back(event):
 #-----------------------------------------------------------------------------------------
 
 process1 = []
-process2 = []
+timer = []
 
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
 async def vtmp3(event):
@@ -195,13 +202,25 @@ async def compresss(event):
     yy = await force_sub(event.sender_id)
     if yy is True:
         return await event.reply(forcesubtext)
+    if f'{event.sender_id}' in process1:
+        index = process1.index(f'{event.sender_id}')
+        last = timer[int(index)]
+        present = time.time()
+        return await event.edit(f"You have to wait `{300-int(present-last)}` seconds more to start a new process!")
     button = await event.get_message()
-    msg = await button.get_reply_message() 
+    msg = await button.get_reply_message()
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
         await compress(event, msg)
         os.rmdir("compressmedia")
+        now = tim.time()
+        timer.append(f'{now}')
+        process1.append(f'{event.sender_id}')
+        await event.client.send_message(event.chat_id, 'You can start a new process again after 5 minutes.')
+        await asyncio.sleep(300)
+        timer.remove(f'{now}')
+        process1.remove(f'{event.sender_id}')
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
     
