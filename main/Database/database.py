@@ -1,13 +1,14 @@
 #Tg:ChauhanMahesh/DroneBots
 #Github.com/vasusen-code
 
-import datetime
-import motor.motor_asyncio
-from .. import MONGODB_URI
-
-SESSION_NAME = 'videoconvertor'
 
 class Database:
+    import datetime
+    import motor.motor_asyncio
+    from .. import MONGODB_URI
+
+    SESSION_NAME = 'videoconvertor'
+
   
     def __init__(self, MONGODB_URI, SESSION_NAME):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
