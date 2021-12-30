@@ -1,7 +1,7 @@
 #tg:ChauhanMahesh/DroneBots
 #github.com/vasusen-code
 
-from .. import Drone, ACCESS_CHANNEL
+from .. import Drone, ACCESS_CHANNEL, AUTH_USERS
 from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
 from LOCAL.localisation import JPG as file
@@ -107,6 +107,8 @@ async def remt(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="restart"))
 async def res(event):
+    if not f'{event.sender_id}' == f'{int(AUTH_USERS}':
+        return await event.edit("Only authorized user can restart!")
     result = await heroku_restart()
     if result is None:
         await event.edit("You have not filled `HEROKU_API` and `HEROKU_APP_NAME` vars.")
