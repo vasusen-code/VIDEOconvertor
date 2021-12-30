@@ -45,14 +45,19 @@ Variables required are:
 * `FORCESUB_UN` - Username of your forcesub channel.
 
 * `BOT_UN` - Username of yout Bot.
+  
+* `HEROKU_API` - Your heroku api, you can get it from heroku account settings(optional, add only if you want to restart directly from tg.)
 
+* `HEROKU_APP_NAME` - Your heroku app name(optional, add only if you want to restart directly from tg.)
+               
 AUTH_USERS COMMANDS:
   
   - `/disallow <id>` : to ban
   - `/allow <id>` : to unban
   - `/users` : count total users
   - `/msg <id>` : give this command replying to a message
-
+  - menu >> settings >>  `restart`
+  
 Deploy your own bot on heroku.
 
 `Warning` - There are two different branches available, look(above) which one you want to deploy. Go to `main` branch if you need bot for your `personal` needs.
