@@ -1,6 +1,7 @@
 #tg:chauhanMahesh/DroneBots
 #github.com/vasusen-code
 
+import heroku3 
 from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
 from telethon import events 
 from decouple import config
@@ -150,3 +151,25 @@ async def rem_thumbnail(event):
     edit = await event.client.send_message(event.chat_id, 'Trying.')
     await db.rem_thumb_link(event.sender_id)
     await edit.edit('Removed!')
+    
+#Heroku--------------------------------------------------------------------------------------------------------------
+   
+async def restart(event):
+    HEROKU_API = config("HEROKU_API", default=None)
+    HEROKU_APP_NAME = config("HEROKU_APP_NAME", default=None)
+    x = None
+    if not HEROKU_API and HEROKU_APP_NAME:
+        x = None
+    else:
+        try:
+            acc = heroku3.from_key(HEROKU_API)
+            bot = Heroku.apps()[HEROKU_APP_NAME]
+            x = True
+        except Exception as e:
+            print(e)
+            x = False
+    return x
+    
+
+   
+    
