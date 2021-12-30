@@ -43,7 +43,7 @@ async def compress(event, msg):
         out = new_name + ext
     DT = time.time()
     try:
-        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
+        await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         os.rmdir("compressmedia")
         print(e)
