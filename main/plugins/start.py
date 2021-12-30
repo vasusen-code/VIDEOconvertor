@@ -96,7 +96,6 @@ async def sett(event):
         t = await event.client.send_message(event.chat_id, 'Trying.')
         path = await event.client.download_media(x.media)
         os.rename(path, f'./{event.sender_id}.jpg')
-        os.remove(path)
         await t.edit("Temporary thumbnail saved!")
         
 @Drone.on(events.callbackquery.CallbackQuery(data="remt"))
