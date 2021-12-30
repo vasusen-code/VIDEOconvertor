@@ -8,7 +8,7 @@ from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.rename import media_rename
-from main.plugins.compressor import compress, file_compress
+from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from main.Database.database import Database
