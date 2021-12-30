@@ -29,12 +29,12 @@
             "value": ""
         },
         "HEROKU_API": {
-            "description": "Bot owner's UserID.",
+            "description": "Your heroku app name(optional, add only if you want to restart directly from tg.",
             "value": "",
             "required": false
         },
         "HEROKU_APP_NAME": {
-            "description": "Bot owner's UserID.",
+            "description": "Your heroku api, you can get it from heroku account settings(optional, add only if you want to restart directly from tg.",
             "value": "",
             "required": false
         },
