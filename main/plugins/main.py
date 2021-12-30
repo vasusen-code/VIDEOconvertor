@@ -23,12 +23,18 @@ async def compin(event):
                                 [Button.inline("RENAME", data="rename"),
                                  Button.inline("TRIM", data="trim")]
                             ])
-                
+            elif 'png' in video:
+                return
+            elif 'jpeg' in video:
+                return
+            elif 'jpg' in video:
+                return    
             else:
                 await event.reply('📦',
                             buttons=[  
                                 [Button.inline("RENAME", data="rename")]])
 
+                                             
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
     await event.edit("🔃**CONVERT:**",
