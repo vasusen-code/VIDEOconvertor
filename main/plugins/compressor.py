@@ -98,10 +98,10 @@ async def compress(event, msg):
             try:
                 uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
                 await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
-           except Exception as e:
-               os.rmdir("compressmedia")
-               print(e)
-               return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            except Exception as e:
+                os.rmdir("compressmedia")
+                print(e)
+                return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out2)
