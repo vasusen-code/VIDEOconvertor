@@ -6,7 +6,6 @@ from .. import Drone, ACCESS_CHANNEL
 from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
 from LOCAL.localisation import JPG as file
-from LOCAL.localisation import JPG4
 from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_text, SUPPORT_LINK
 from ethon.teleutils import mention
 
