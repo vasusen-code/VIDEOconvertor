@@ -15,8 +15,6 @@ from telethon.tl.types import DocumentAttributeVideo
 
 async def media_rename(event, msg, new_name):
     edit = await event.client.send_message(event.chat_id, 'Trying to process.', reply_to=msg.id)
-    db = Database(MONGODB_URI, 'videoconvertor')
-    T = await db.get_thumb(event.sender_id)
     if os.path(f'./{event.sender_id}.jpg'):
         THUMB = f'./{event.sender_id}.jpg'
     else:
