@@ -97,7 +97,7 @@ async def compress(event, msg):
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     else:
-        metadata = video_metadata(out)
+        metadata = video_metadata(out2)
         width = metadata["width"]
         height = metadata["height"]
         duration = metadata["duration"]
