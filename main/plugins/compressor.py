@@ -77,7 +77,7 @@ async def compress(event, msg):
             os.rmdir("compressmedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-    if 'x-matroska' in mime:
+    elif 'x-matroska' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
@@ -85,22 +85,23 @@ async def compress(event, msg):
             os.rmdir("compressmedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-    metadata = video_metadata(out2)
-    width = metadata["width"]
-    height = metadata["height"]
-    duration = metadata["duration"]
-    attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
-    try:
-        uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
-    except Exception:
+    else:
+        metadata = video_metadata(out2)
+        width = metadata["width"]
+        height = metadata["height"]
+        duration = metadata["duration"]
+        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
-        except Exception as e:
-            os.rmdir("compressmedia")
-            print(e)
-            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
+       except Exception:
+           try:
+               uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
+               await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
+          except Exception as e:
+              os.rmdir("compressmedia")
+              print(e)
+              return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out2)
