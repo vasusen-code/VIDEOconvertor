@@ -28,6 +28,16 @@
             "description": "Bot owner's UserID.",
             "value": ""
         },
+        "HEROKU_API": {
+            "description": "Bot owner's UserID.",
+            "value": "",
+            "required": false
+        },
+        "HEROKU_APP_NAME": {
+            "description": "Bot owner's UserID.",
+            "value": "",
+            "required": false
+        },
         "LOG_CHANNEL": {
             "description": "Log channel username, without using '@'.",
             "value": ""
