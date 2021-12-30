@@ -220,8 +220,8 @@ async def compresss(event):
         process1.append(f'{event.sender_id}')
         await event.client.send_message(event.chat_id, 'You can start a new process again after 5 minutes.')
         await asyncio.sleep(300)
-        timer.remove(f'{now}')
-        process1.remove(f'{event.sender_id}')
+        timer.pop(int(timer.index(f'{now}')))
+        process1.pop(int(process1.index(f'{event.sender_id}')))
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
     
