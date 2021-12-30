@@ -107,7 +107,7 @@ async def remt(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="restart"))
 async def res(event):
-    if not f'{event.sender_id}' == f'{int(AUTH_USERS}':
+    if not f'{event.sender_id}' == f'{int(AUTH_USERS)}':
         return await event.edit("Only authorized user can restart!")
     result = await heroku_restart()
     if result is None:
