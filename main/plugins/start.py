@@ -70,7 +70,7 @@ async def help(event):
                          Button.inline("rem THUMBNAIL.", data='remt')],
                          [
                          Button.inline("PLUGUNS.", data="plugins"),
-                         Button.inline("restart", data="restart),
+                         Button.inline("restart", data="restart"),
                          Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
                          [
                          Button.inline("Menu.", data="menu2")]])
