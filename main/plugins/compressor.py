@@ -27,32 +27,34 @@ async def compress(event, msg):
         file = msg.media
     mime = msg.file.mime_type
     if 'mp4' in mime:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+        n = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
         out = new_name + ".mp4"
     elif msg.video:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
+        n = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
         out = new_name + ".mp4"
     elif 'x-matroska' in mime:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
-        out = new_name + ".mkv"            
+        n = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
+        out = new_name + ".mp4"            
     elif 'webm' in mime:
-        name = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
-        out = new_name + ".webm"
+        n = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
+        out = new_name + ".mp4"
     else:
-        name = msg.file.name
-        ext = (name.split("."))[1]
+        n = msg.file.name
+        ext = (n.split("."))[1]
         out = new_name + ext
     DT = time.time()
     log = await LOG_START(event, f'**COMPRESS PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
     log_end_text = f'**COMPRESS PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
     try:
-        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
+        await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         os.rmdir("compressmedia")
         await log.delete()
         await LOG_END(event, log_end_text)
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
+    name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
+    os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy """{out}""" -y'
@@ -93,42 +95,5 @@ async def compress(event, msg):
     log_end_text2 = f'**COMPRESS PROCESS FINISHED**\n\nTime Taken: {round((time.time()-DT)/60)} minutes\nInitial size: {i_size/1000000}mb.\nFinal size: {f_size/1000000}mb.\n\n[Bot is free now.]({SUPPORT_LINK})'
     await LOG_END(event, log_end_text2)
     
-async def file_compress(event, name, List1):
-    log = await LOG_START(event, f'**COMPRESS PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
-    log_end_text = f'**COMPRESS PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
-    edit = event
-    out = "out_" + dt.now().isoformat("_", "seconds") + (name.split("."))[1]
-    FT = time.time()
-    progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy """{out}""" -y'
-    try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, '**COMPRESSING:**')
-    except Exception as e:
-        await log.delete()
-        await LOG_END(event, log_end_text)
-        os.rmdir("compressmedia")
-        print(e)
-        return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
-    i_size = os.path.getsize(name)
-    f_size = os.path.getsize(out)
-    text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
-    UT = time.time()
-    try:
-        uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
-        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
-    except Exception:
-        await log.delete()
-        await LOG_END(event, log_end_text)
-        os.rmdir("compressmedia")
-        print(e)
-        return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-    await edit.delete()
-    os.remove(name)
-    os.remove(out)
-    await log.delete()
-    await LOG_END(event, log_end_text)
-    
-
- 
 
 
