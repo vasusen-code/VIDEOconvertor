@@ -10,3 +10,4 @@ dnspython
 telegraph
 Pillow>=5.3.0
 requests
+heroku3
