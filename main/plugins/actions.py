@@ -154,7 +154,7 @@ async def rem_thumbnail(event):
     
 #Heroku--------------------------------------------------------------------------------------------------------------
    
-async def restart(event):
+async def heroku_restart():
     HEROKU_API = config("HEROKU_API", default=None)
     HEROKU_APP_NAME = config("HEROKU_APP_NAME", default=None)
     x = None
@@ -164,6 +164,7 @@ async def restart(event):
         try:
             acc = heroku3.from_key(HEROKU_API)
             bot = Heroku.apps()[HEROKU_APP_NAME]
+            bot.restart()
             x = True
         except Exception as e:
             print(e)
