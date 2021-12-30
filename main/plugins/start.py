@@ -78,8 +78,9 @@ async def help(event):
 @Drone.on(events.callbackquery.CallbackQuery(data="plugins"))
 async def plugins(event):
     await event.edit(f'{help_text}',
-                    buttons=[[
-                         Button.inline("Menu.", data="menu2")]])
+                    buttons=[[Button.inline("Menu.", data="menu2")]])
+                   
+ #-----------------------------------------------------------------------------------------------                            
     
 @Drone.on(events.callbackquery.CallbackQuery(data="sett"))
 async def sett(event):    
@@ -109,7 +110,7 @@ async def res(event):
     result = await restart()
     if result is None:
         await event.edit("You have not filled `HEROKU_API` and `HEROKU_APP_NAME` vars.")
-    elif result if False:
+    elif result is False:
         await event.edit("An errot occured!")
     elif result is True:
         await event.edit("Restarting app, wait for a minute.")
