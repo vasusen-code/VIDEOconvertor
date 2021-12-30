@@ -8,7 +8,7 @@ from LOCAL.localisation import JPG as file
 from LOCAL.localisation import JPG4
 from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_text, SUPPORT_LINK
 from ethon.teleutils import mention
-from main.plugins.actions import set_thumbnail, rem_thumbnail, restart
+from main.plugins.actions import set_thumbnail, rem_thumbnail, heroku_restart
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
@@ -107,7 +107,7 @@ async def remt(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="restart"))
 async def res(event):
-    result = await restart()
+    result = await heroku_restart()
     if result is None:
         await event.edit("You have not filled `HEROKU_API` and `HEROKU_APP_NAME` vars.")
     elif result is False:
