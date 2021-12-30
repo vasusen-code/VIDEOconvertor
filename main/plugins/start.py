@@ -1,6 +1,7 @@
 #tg:ChauhanMahesh/DroneBots
 #github.com/vasusen-code
 
+import os
 from .. import Drone, ACCESS_CHANNEL
 from telethon import events, Button
 from LOCAL.localisation import START_TEXT as st
