@@ -8,7 +8,7 @@ from LOCAL.localisation import JPG as file
 from LOCAL.localisation import JPG4
 from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_text, SUPPORT_LINK
 from ethon.teleutils import mention
-from main.plugins.actions import set_thumbnail, rem_thumbnail
+from main.plugins.actions import set_thumbnail, rem_thumbnail, restart
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
@@ -69,7 +69,8 @@ async def help(event):
                          Button.inline("set THUMBNAIL.", data="sett"),
                          Button.inline("rem THUMBNAIL.", data='remt')],
                          [
-                         Button.inline("PLUGUNS..", data="plugins"),
+                         Button.inline("PLUGUNS.", data="plugins"),
+                         Button.inline("restart", data="restart),
                          Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
                          [
                          Button.inline("Menu.", data="menu2")]])
@@ -103,4 +104,12 @@ async def remt(event):
     await event.delete()
     await rem_thumbnail(event)
     
-    
+@Drone.on(events.callbackquery.CallbackQuery(data="restart"))
+async def res(event):
+    result = await restart()
+    if result is None:
+        await event.edit("You have not filled `HEROKU_API` and `HEROKU_APP_NAME` vars.")
+    elif result if False:
+        await event.edit("An errot occured!")
+    elif result is True:
+        await event.edit("Restarting app, wait for a minute.")
