@@ -163,7 +163,7 @@ async def heroku_restart():
     else:
         try:
             acc = heroku3.from_key(HEROKU_API)
-            bot = Heroku.apps()[HEROKU_APP_NAME]
+            bot = acc.apps()[HEROKU_APP_NAME]
             bot.restart()
             x = True
         except Exception as e:
