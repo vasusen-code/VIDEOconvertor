@@ -113,6 +113,6 @@ async def res(event):
     if result is None:
         await event.edit("You have not filled `HEROKU_API` and `HEROKU_APP_NAME` vars.")
     elif result is False:
-        await event.edit("An errot occured!")
+        await event.edit("An error occured!")
     elif result is True:
         await event.edit("Restarting app, wait for a minute.")
