@@ -9,7 +9,7 @@ CHANNEL_LINK = "https://t.me/DroneBots"
 
 SUPPORT_LINK = "https://t.me/TeamDrone"
 
-info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.2"   
+info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.3"   
 
 help_text = "Send me any media file to know the stuffs i can do.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
 
