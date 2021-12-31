@@ -101,7 +101,9 @@ async def sett(event):
 @Drone.on(events.callbackquery.CallbackQuery(data="remt"))
 async def remt(event):  
     await event.edit('Trying.')
-    await os.remove(f'{event.sender_id}.jpg')
-    await event.edit('Removed!')
-    
+    try:
+        await os.remove(f'{event.sender_id}.jpg')
+        await event.edit('Removed!')
+    except Exception:
+        await event.edit("No thumbnail saved.")
     
