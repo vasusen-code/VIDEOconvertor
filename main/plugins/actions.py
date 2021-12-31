@@ -149,6 +149,9 @@ async def set_thumbnail(event, img):
     
 async def rem_thumbnail(event):
     edit = await event.client.send_message(event.chat_id, 'Trying.')
+    T = await db.get_thumb(event.sender_id)
+    if T is None:
+        return await edit.edit('No thumbnail saved!')
     await db.rem_thumb_link(event.sender_id)
     await edit.edit('Removed!')
     
