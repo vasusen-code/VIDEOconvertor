@@ -102,7 +102,7 @@ async def sett(event):
 async def remt(event):  
     await event.edit('Trying.')
     try:
-        await os.remove(f'{event.sender_id}.jpg')
+        os.remove(f'{event.sender_id}.jpg')
         await event.edit('Removed!')
     except Exception:
         await event.edit("No thumbnail saved.")
