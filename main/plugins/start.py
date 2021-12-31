@@ -95,6 +95,8 @@ async def sett(event):
         await xx.delete()
         t = await event.client.send_message(event.chat_id, 'Trying.')
         path = await event.client.download_media(x.media)
+        if os.path.exists(f'{event.sender_id}.jpg'):
+            os.remove(f'{event.sender_id}.jpg')
         os.rename(path, f'./{event.sender_id}.jpg')
         await t.edit("Temporary thumbnail saved!")
         
