@@ -38,7 +38,7 @@ Deploy your own bot on heroku.
 
 `Warning` - There are two different branches available, look(above) which one you want to deploy. Go to `public` branch if you need bot for your `channel`.
   
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
+<p><a href="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fmaheshchauhan-hub%2FVIDEOconvertor%2Ftree%2Fmain&template=https%3A%2F%2Fgithub.com%2Fmaheshchauhan-hub%2FVIDEOconvertor%2Ftree%2Fmain"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
 
 `Alternate way:`
 
