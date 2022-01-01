@@ -3,7 +3,10 @@
 </p>
 <h1 align="center">
   <b>ᴠɪᴅᴇᴏ ᴄᴏɴᴠᴇʀᴛᴏʀ</b>
+  
+  
 <p align="center"><a href="https://github.com/vasusen-code/videoconvertor"><img src="https://github-readme-stats.vercel.app/api/pin?username=vasusen-code&show_icons=true&theme=dracula&hide_border=true&repo=VideoConvertor"></a></p>
+  
 </h1>
 
 `Main branch` - For personal use
