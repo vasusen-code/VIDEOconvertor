@@ -46,9 +46,9 @@ Deploy your own bot on heroku.
     <a href="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FVasusen-code%2FVIDEOconvertor%2Ftree%2Fmain&template=https%3A%2F%2Fgithub.com%2FVasusen-code%2FVIDEOconvertor%2Ftree%2Fmain"><img src="https://img.shields.io/badge/Deploy To Heroku-2CA5E0?style=for-the-badge&logo=heroku&logoColor=white" alt="" srcset=""></a> 
 </p>
 
-If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
+If facing any problem while deploying through heroku button, just fork and `deploy manually` by creating a new app in heroku.
 
-<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-gold?style=for-the-badge&logo=telegraph" width="250""/></a></p>
+<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-white?style=for-the-badge&logo=telegraph" width="250""/></a></p>
 
 Add this buildpack if deploying manually (Read tutorial) : 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
