@@ -5,8 +5,9 @@
   <b>ᴠɪᴅᴇᴏ ᴄᴏɴᴠᴇʀᴛᴏʀ</b>
 </h1>
 
-<b>A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.</b>   
 
+<p align="left"><a href="https://github.com/vasusen-code/videoconvertor"><img src="https://github-readme-stats.vercel.app/api/pin?username=vasusen-code&show_icons=true&theme=dracula&hide_border=true&repo=VideoConvertor"></a></p>
+  
 `Main branch` - For personal use
 <p align="left">
 <a href="https://github.com/vasusen-code/VIDEOconvertor/tree/main"> <img src="https://img.shields.io/badge/Github-main%20branch-blue?style=for-the-badge&logo=github" width="220""/></a>
@@ -46,7 +47,10 @@ Deploy your own bot on heroku.
 </p>
 
 If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
-Add this buildpack if deploying manually: 
+
+<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-gold?style=for-the-badge&logo=telegraph" width="250""/></a></p>
+
+Add this buildpack if deploying manually (Read tutorial) : 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
 
