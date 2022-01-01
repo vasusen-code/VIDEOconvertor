@@ -6,7 +6,7 @@
 </h1>
 
 
-<p align="center"><a href="https://github.com/vasusen-code/videoconvertor"><img src="https://github-readme-stats.vercel.app/api/pin?username=vasusen-code&show_icons=true&theme=dracula&hide_border=true&repo=VideoConvertor"></a></p>
+<p align="left"><a href="https://github.com/vasusen-code/videoconvertor"><img src="https://github-readme-stats.vercel.app/api/pin?username=vasusen-code&show_icons=true&theme=dracula&hide_border=true&repo=VideoConvertor"></a></p>
   
 `Main branch` - For personal use
 <p align="left">
