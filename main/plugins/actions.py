@@ -39,7 +39,6 @@ db = Database(MONGODB_URI, 'videoconvertor')
 async def incomming(event):
     if not await db.is_user_exist(event.sender_id):
         await db.add_user(event.sender_id)
-    await event.forward_to(int(ACCESS_CHANNEL))
 
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="/users"))
 async def listusers(event):
