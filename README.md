@@ -57,6 +57,7 @@ AUTH_USERS COMMANDS:
   - `/allow <id>` : to unban
   - `/users` : count total users
   - `/msg <id>` : give this command replying to a message
+  - /bcast : Reply to any kind of message to broadcast it
   - menu >> settings >>  `restart`
   
 Deploy your own bot on heroku.
