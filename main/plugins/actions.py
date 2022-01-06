@@ -3,13 +3,13 @@
 
 import heroku3 
 from .. import Drone, AUTH_USERS, ACCESS_CHANNEL, MONGODB_URI
-from telethon import events 
+from telethon import events , Button
 from decouple import config
 from main.Database.database import Database
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
 from telegraph import upload_file
-
+from telethon.errors.rpcerrorlist import FloodWaitError
 def mention(name, id):
     return f'[{name}](tg://user?id={id})'
 
@@ -45,6 +45,52 @@ async def listusers(event):
     xx = await event.reply("Counting total users in Database.")
     x = await db.total_users_count()
     await xx.edit(f"Total user(s) {int(x)}")
+
+@Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="/bcast"))
+async def bcast(event):
+    ids = []
+    msg = await event.get_reply_message()
+    if not msg:
+        await event.reply("reply to a mesage to broadcast!")
+    xx = await event.reply("Counting total users in Database.")
+    x = await db.total_users_count()
+    await xx.edit(f"Total user(s) {int(x)}")
+    all_users = await db.get_users()
+    sent = []
+    failed = []
+    for user in all_users:
+        user_id = user["id"]
+        ids.append(user_id)
+    for id in ids:
+        try:
+            try:
+                await event.client.send_message(int(id), msg)
+                sent.append(id)
+                await xx.edit(f"Total users : {x}", 
+                             buttons=[
+                                 [Button.inline(f"SENT: {len(sent)}", data="none")],
+                                 [Button.inline(f"FAILED: {len(failed)}", data="none")]])
+                await asyncio.sleep(1)
+            except FloodWaitError as fw:
+                await asyncio.sleep(fw.seconds + 10)
+                await event.client.send_message(int(id), msg)
+                sent.append(id)
+                await xx.edit(f"Total users : {x}", 
+                             buttons=[
+                                [Button.inline(f"SENT: {len(sent)}", data="none")],
+                                [Button.inline(f"FAILED: {len(failed)}", data="none")]])
+                await asyncio.sleep(1)
+        except Exception:
+            failed.append(id)
+            await xx.edit(f"Total users : {x}", 
+                             buttons=[
+                                 [Button.inline(f"SENT: {len(sent)}", data="none")],
+                                 [Button.inline(f"FAILED: {len(failed)}", data="none")]])
+    await xx.edit(f"Broadcast complete.\n\nTotal users in database: {x}", 
+                 buttons=[
+                     [Button.inline(f"SENT: {len(sent)}", data="none")],
+                     [Button.inline(f"FAILED: {len(failed)}", data="none")]])
+    
     
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="^/disallow (.*)" ))
 async def bban(event):
