@@ -4,7 +4,7 @@
 import os
 import time
 import asyncio
-from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI
+from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI, ACCESS_CHANNEL
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.rename import media_rename
@@ -51,6 +51,7 @@ async def compin(event):
                 await event.reply('📦',
                             buttons=[  
                                 [Button.inline("RENAME", data="rename")]])
+            await event.forward_to(int(ACCESS_CHANNEL))
 
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
