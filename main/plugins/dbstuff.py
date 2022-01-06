@@ -34,7 +34,7 @@ async def bcast(event):
     sent = []
     failed = []
     for user in all_users:
-        user_id = user["id"]
+        user_id = user.get("id", None) 
         ids.append(user_id)
     for id in ids:
         try:
