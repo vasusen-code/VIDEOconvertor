@@ -63,11 +63,11 @@ async def source(event):
 async def help(event):
     await event.edit('**👥HELP & SETTINGS.**',
                     buttons=[[
-                         Button.inline("set THUMBNAIL.", data="sett"),
-                         Button.inline("rem THUMBNAIL.", data='remt')],
+                         Button.inline("set THUMBNAIL", data="sett"),
+                         Button.inline("rem THUMBNAIL", data='remt')],
                          [
-                         Button.inline("PLUGUNS..", data="plugins"),
-                         Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
+                         Button.inline("PLUGUNS", data="plugins"),
+                         Button.url("SUPPORT", url=f"{SUPPORT_LINK}")],
                          [
                          Button.inline("Menu.", data="menu2")]])
     
