@@ -8,7 +8,7 @@ SUPPORT_LINK = "https://t.me/TeamDrone"
 
 info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.3"   
 
-help_text = "Send me any video file to start compressing it or any kind of file to rename it.\n\n/compress - negligible loss compression\n/convert - change formats or extract audio of any video\n/rename - rename any file, extension not required\n/trim - cut your videos" 
+help_text = "Send me any video file to start compressing it or any kind of file to rename it.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
 
 source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
 
