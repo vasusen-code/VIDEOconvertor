@@ -16,7 +16,10 @@ from telethon.tl.types import DocumentAttributeVideo
 async def media_rename(event, msg, new_name):
     edit = await event.client.send_message(event.chat_id, 'Trying to process.', reply_to=msg.id)
     try:
-        THUMB = f'./{event.sender_id}.jpg'
+        if os.path.exists(f'./{event.sender_id}.jpg'):
+            THUMB = f'./{event.sender_id}.jpg'
+        else:
+            THUMB = t
     except Exception:
         THUMB = t
     Drone = event.client
