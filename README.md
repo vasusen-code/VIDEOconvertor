@@ -34,19 +34,11 @@ VARIABLES required are:
 
 * `BOT_UN` - Username of yout Bot.
 
-Deploy your own bot on heroku.
+Deploy your own bot on Railway.
 
 `Warning` - There are two different branches available, look(above) which one you want to deploy. Go to `public` branch if you need bot for your `channel`.
   
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="250""/></a></p>
-
-`Alternate way:`
-
-If facing any problem while deploying through heroku button, just fork and `deploy manually` by creating a new app in heroku.
-
-<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-grey?style=for-the-badge&logo=telegraph" width="250""/></a></p>
-
-Add this buildpack if deploying manually (Read tutorial) : 
+Add this buildpack if deploying : 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
 
