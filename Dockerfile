@@ -1,15 +1,13 @@
 FROM python:3.9
 
-RUN mkdir ./app
-RUN chmod 777 /app
-WORKDIR /app
+RUN mkdir /app/
+COPY . /app/
+WORKDIR /app/
 
-RUN apt -qq update --fix-missing
-RUN apt -qq install -y python3 \
-    ffmpeg \
-    python3-pip \
+RUN apt update && apt upgrade -y
+RUN apt install -y ffmpeg
     
-COPY requirements.txt .
+COPY requirements.txt 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
