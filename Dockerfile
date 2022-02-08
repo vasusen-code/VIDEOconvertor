@@ -6,11 +6,9 @@ WORKDIR /app
 
 RUN apt -qq update --fix-missing
 RUN apt -qq install -y git \
-    aria2 \
+    ffmpeg \
     python3 \
     python3-pip \
-    wget \
-    curl
     
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
