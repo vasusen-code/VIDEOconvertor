@@ -7,8 +7,8 @@ WORKDIR /app/
 RUN apt update && apt upgrade -y
 RUN apt install -y ffmpeg
     
-COPY requirements.txt 
+COPY . /requirements.txt 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . /docker.sh
 CMD ["bash","docker.sh"]
