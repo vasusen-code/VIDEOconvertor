@@ -37,7 +37,7 @@ async def compin(event):
                                 [Button.inline("RENAME", data="rename")]])
                 
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
-async def encode(event):
+async def _encode(event):
     await event.edit("🔀**ENCODE:**",
                     buttons=[
                         [Button.inline("360p", data="360"),
@@ -48,7 +48,7 @@ async def encode(event):
                         [Button.inline("BACK", data="back")]])
                          
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
-async def compress(event):
+async def _compress(event):
     await event.edit("**Your choice of compress?**",
                     buttons=[
                         [Button.inline("HEVC COMPRESS", data="hcomp"),
@@ -177,7 +177,7 @@ async def hcomp(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = f'-preset ultrafast -vcodec libx265 -crf 28 -acodec copy'
+        cmd = '-preset ultrafast -vcodec libx265 -crf 28 -acodec copy'
         await compress(event, msg, cmd)
         os.rmdir("compressmedia")
     else:
@@ -190,7 +190,7 @@ async def fcomp(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = f'-vf scale=-1:360 -c:v libx265 -crf 16 -preset ultrafast -c:a copy'
+        cmd = '-vf scale=-1:360 -c:v libx265 -crf 16 -preset ultrafast -c:a copy'
         await compress(event, msg, cmd)
         os.rmdir("compressmedia")
     else:
