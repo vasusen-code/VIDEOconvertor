@@ -48,7 +48,7 @@ async def encode(event):
                          
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def compress(event):
-    await event.edit("**Your choice of compress?**,
+    await event.edit("**Your choice of compress?**",
                     buttons=[
                         [Button.inline("HEVC COMPRESS", data="hcomp")
                         [Button.inline("FAST COMPRESS", data="fcomp")]
