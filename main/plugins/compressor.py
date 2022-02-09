@@ -16,7 +16,7 @@ from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 
-async def compress(event, msg, cmd):
+async def compress(event, msg, ffmpeg_cmd):
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
@@ -52,6 +52,7 @@ async def compress(event, msg, cmd):
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" {ffmpeg_cmd} """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**COMPRESSING:**')
     except Exception as e:
