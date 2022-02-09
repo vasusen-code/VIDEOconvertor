@@ -8,6 +8,7 @@ from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
+from main.plugins.encoder import _360p
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -18,6 +19,7 @@ async def compin(event):
             if 'video' in video:
                 await event.reply("📽",
                             buttons=[
+                                [Button.inline("ENCODE", data="encode")],
                                 [Button.inline("COMPRESS", data="compress"),
                                  Button.inline("CONVERT", data="convert")],
                                 [Button.inline("RENAME", data="rename"),
@@ -33,7 +35,13 @@ async def compin(event):
                 await event.reply('📦',
                             buttons=[  
                                 [Button.inline("RENAME", data="rename")]])
-
+                
+@Drone.on(events.callbackquery.CallbackQuery(data="encode"))
+async def encode(event):
+    await event.edit("🔃**ENCODE:**",
+                    buttons=[
+                        [Button.inline("360p", data="360")]])
+                         
                                              
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
@@ -160,7 +168,19 @@ async def compresss(event):
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
-    
+
+@Drone.on(events.callbackquery.CallbackQuery(data="360"))
+async def compresss(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        await _360p(event, msg)
+        os.rmdir("compressmedia")
+    else:
+        await event.edit("Another process in progress!")
+         
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):                            
     button = await event.get_message()
