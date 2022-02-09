@@ -8,7 +8,7 @@ from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
-from main.plugins.encoder import _360p
+from main.plugins.encoder import encode
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -164,7 +164,7 @@ async def compresss(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy """{out}""" -y'
+        cmd = f'-preset ultrafast -vcodec libx265 -crf 28 -acodec copy'
         await compress(event, msg, cmd)
         os.rmdir("compressmedia")
     else:
