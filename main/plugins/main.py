@@ -51,7 +51,7 @@ async def encode(event):
 async def compress(event):
     await event.edit("**Your choice of compress?**",
                     buttons=[
-                        [Button.inline("HEVC COMPRESS", data="hcomp")
+                        [Button.inline("HEVC COMPRESS", data="hcomp"),
                          Button.inline("FAST COMPRESS", data="fcomp")],
                         [Button.inline("BACK", data="back")]])
                                           
