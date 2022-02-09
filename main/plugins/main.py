@@ -38,11 +38,23 @@ async def compin(event):
                 
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def encode(event):
-    await event.edit("🔃**ENCODE:**",
+    await event.edit("🔀**ENCODE:**",
                     buttons=[
-                        [Button.inline("360p", data="360")]])
+                        [Button.inline("360p", data="360"),
+                        [Button.inline("480p", data="480"),
+                        [Button.inline("720p", data="720")],
+                        [Button.inline("x264", data="264"),
+                        [Button.inline("x265", data="265")]])
                          
-                                             
+@Drone.on(events.callbackquery.CallbackQuery(data="compress"))
+async def compress(event):
+    await event.edit("**Your choice of compress?**,
+                    buttons=[
+                        [Button.inline("HEVC COMPRESS", data="hcomp")
+                        [Button.inline("FAST COMPRESS", data="fcomp")]
+                    ])
+                         
+                                          
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
     await event.edit("🔃**CONVERT:**",
@@ -157,8 +169,8 @@ async def rename(event):
             return await cm.edit("An error occured while waiting for the response.")
     await media_rename(event, msg, new_name)                     
                    
-@Drone.on(events.callbackquery.CallbackQuery(data="compress"))
-async def compresss(event):
+@Drone.on(events.callbackquery.CallbackQuery(data="hcomp"))
+async def hcomp(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
     if not os.path.isdir("compressmedia"):
@@ -169,7 +181,21 @@ async def compresss(event):
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
+                        
+@Drone.on(events.callbackquery.CallbackQuery(data="fcomp"))
+async def fcomp(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        cmd = f'-vf scale=-1:360 -c:v libx265 -crf 16 -preset ultrafast -c:a copy'
+        await compress(event, msg, cmd)
+        os.rmdir("compressmedia")
+    else:
+        await event.edit("Another process in progress!")
 
+                        
 @Drone.on(events.callbackquery.CallbackQuery(data="360"))
 async def encode(event):
     button = await event.get_message()
