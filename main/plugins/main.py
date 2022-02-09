@@ -44,14 +44,16 @@ async def encode(event):
                         [Button.inline("480p", data="480"),
                         [Button.inline("720p", data="720")],
                         [Button.inline("x264", data="264"),
-                        [Button.inline("x265", data="265")]])
+                        [Button.inline("x265", data="265")],
+                        [Button.inline("BACK", data="back")]])
                          
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def compress(event):
     await event.edit("**Your choice of compress?**",
                     buttons=[
                         [Button.inline("HEVC COMPRESS", data="hcomp")
-                        [Button.inline("FAST COMPRESS", data="fcomp")]
+                        [Button.inline("FAST COMPRESS", data="fcomp")],
+                        [Button.inline("BACK", data="back")],
                     ])
                          
                                           
@@ -73,6 +75,7 @@ async def convert(event):
 async def back(event):
     await event.edit("📽",
                     buttons=[
+                        [Button.inline("ENCODE", data="encode")],
                         [Button.inline("COMPRESS", data="compress"),
                          Button.inline("CONVERT", data="convert")],
                         [Button.inline("RENAME", data="rename"),
