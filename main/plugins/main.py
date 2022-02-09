@@ -164,20 +164,21 @@ async def compresss(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        await compress(event, msg)
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy """{out}""" -y'
+        await compress(event, msg, cmd)
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
 
 @Drone.on(events.callbackquery.CallbackQuery(data="360"))
-async def compresss(event):
+async def encode(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
-        await _360p(event, msg)
-        os.rmdir("compressmedia")
+        os.mkdir("encodemedia")
+        await encode(event, msg, 360)
+        os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
          
