@@ -27,7 +27,7 @@ async def compin(event):
                                 ]
                         await conv.send_message("📽",
                                                 buttons=buttons)
-                        response = await conv.get_respone()
+                        response = await conv.get_response()
                         await respond(event, conv, response)
                     except Exception as e:
                         print(e)
@@ -43,7 +43,7 @@ async def compin(event):
                 async with Drone.conversation(event.chat_id) as conv:
                     try:
                         await conv.send_message('📦', buttons=[[Button.text('RENAME', resize=True, single_use=True)]])
-                        response = await conv.get_respone()
+                        response = await conv.get_response()
                         await respond(event, conv, response)
                     except Exception as e:
                         print(e)
@@ -74,7 +74,7 @@ async def _compress(event, conv):
                                 buttons=[
                                     [Button.text("HVEC COMPRESS", resize=True, single_use=True)],
                                     [Button.text("FAST COMPRESS", resize=True, single_use=True)]])
-        response = await conv.get_respone()
+        response = await conv.get_response()
         await __compress(event, respone) 
     except Exception as e:
         print(e)
