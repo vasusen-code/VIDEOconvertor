@@ -16,15 +16,22 @@ async def compin(event):
         media = event.media
         if media:
             video = event.file.mime_type
-            if 'video' in video:
-                await event.reply("📽",
-                            buttons=[
-                                [Button.inline("ENCODE", data="encode")],
-                                [Button.inline("COMPRESS", data="compress"),
-                                 Button.inline("CONVERT", data="convert")],
-                                [Button.inline("RENAME", data="rename"),
-                                 Button.inline("TRIM", data="trim")]
-                            ])
+            if 'video' in video or if event.video:
+                async with Drone.conversation(event.chat_id) as conv:
+                    try:
+                        buttons=[[Button.text("ENCODE", resize=True, single_use=True)], 
+                                 [Button.text("COMPRESS", resize=True, single_use=True),
+                                  Button.text("CONVERT", resize=True, single_use=True)],
+                                 [Button.text("RENAME", resize=True, single_use=True),
+                                  Button.text("TRIM", resize=True, single_use=True)]
+                                ]
+                        x = await conv.send_message("📽",
+                                                buttons=buttons)
+                        response = await conv.get_respone()
+                        await respond(event, conv, response)
+                    except:
+                        await x.edit("Cannot wait more long for your response!")
+                        return
             elif 'png' in video:
                 return
             elif 'jpeg' in video:
@@ -32,10 +39,22 @@ async def compin(event):
             elif 'jpg' in video:
                 return    
             else:
-                await event.reply('📦',
-                            buttons=[  
-                                [Button.inline("RENAME", data="rename")]])
-                
+                async with Drone.conversation(event.chat_id) as conv:
+                    try:
+                        x = await conv.send_message('📦', buttons=[[Button.text('RENAME', resize=True, single_use=True)]])
+                        response = await conv.get_respone()
+                        await respond(event, conv, response)
+                    except:
+                        await x.edit("Cannot wait more longer for your response!")
+                        return
+                 
+async def response(event, conv, response):
+    text = response.text
+    if text == "COMPRESS":
+        await _compress(event, conv) 
+    else:
+        await conv.reply("**Invalid response!**")
+        
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def _encode(event):
     await event.edit("🔀**ENCODE:**",
@@ -47,14 +66,17 @@ async def _encode(event):
                          Button.inline("x265", data="265")],
                         [Button.inline("BACK", data="back")]])
                          
-@Drone.on(events.callbackquery.CallbackQuery(data="compress"))
-async def _compress(event):
-    await event.edit("**Your choice of compress?**",
-                    buttons=[
-                        [Button.inline("HEVC COMPRESS", data="hcomp"),
-                         Button.inline("FAST COMPRESS", data="fcomp")],
-                        [Button.inline("BACK", data="back")]])
-                                          
+async def _compress(event, conv):
+    try: 
+        x = await conv.send_message("**Your choice of compress?**",
+                                buttons=[
+                                    [Button.text("HVEC COMPRESS", resize=True, single_use=True)],
+                                     Button.text("FAST COMPRESS", resize=True, single_use=True)]])
+        response = await conv.get_respone()
+        await __compress(event, respone) 
+    except:
+        await x.edit("Cannot wait more longer for your response!")
+        
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
     await event.edit("🔃**CONVERT:**",
@@ -170,33 +192,30 @@ async def rename(event):
             return await cm.edit("An error occured while waiting for the response.")
     await media_rename(event, msg, new_name)                     
                    
-@Drone.on(events.callbackquery.CallbackQuery(data="hcomp"))
-async def hcomp(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
+async def hcomp(msg):
     if not os.path.isdir("compressmedia"):
-        await event.delete()
         os.mkdir("compressmedia")
         cmd = '-preset ultrafast -vcodec libx265 -crf 28 -acodec copy'
-        await compress(event, msg, cmd)
+        await compress(msg, msg, cmd)
         os.rmdir("compressmedia")
     else:
-        await event.edit("Another process in progress!")
-                        
-@Drone.on(events.callbackquery.CallbackQuery(data="fcomp"))
-async def fcomp(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
+        await msg.send_message(msg.chat_id, "Another process in progress!")
+
+async def fcomp(msg):
     if not os.path.isdir("compressmedia"):
-        await event.delete()
         os.mkdir("compressmedia")
         cmd = '-vf scale=-1:360 -c:v libx265 -crf 16 -preset ultrafast -c:a copy'
-        await compress(event, msg, cmd)
+        await compress(msg, msg, cmd)
         os.rmdir("compressmedia")
     else:
-        await event.edit("Another process in progress!")
+        await msg.send_message(msg.chat_id, "Another process in progress!")
 
-                        
+async def __compress(event, response):
+    if response.text == "HVEC COMPRESS":
+        await hcomp(event)
+    if response.text == "FAST COMPRESS":
+        await fcomp(event)
+        
 @Drone.on(events.callbackquery.CallbackQuery(data="360"))
 async def _360(event):
     button = await event.get_message()
