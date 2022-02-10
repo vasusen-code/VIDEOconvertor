@@ -75,7 +75,7 @@ async def _compress(event, conv):
                                     [Button.text("HVEC COMPRESS", resize=True, single_use=True)],
                                     [Button.text("FAST COMPRESS", resize=True, single_use=True)]])
         response = await conv.get_response()
-        await __compress(event, respone) 
+        await __compress(event, response) 
     except Exception as e:
         print(e)
         await conv.send_message("Cannot wait more longer for your response!")
