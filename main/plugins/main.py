@@ -79,7 +79,7 @@ async def _encode(event, conv):
     except Exception as e:
         print(e)
         return await conv.send_message("Cannot wait more longer for your response!")
-    await conv.cancel()
+    conv.cancel()
     await __encode(event, response)
     
 async def _compress(event, conv):
@@ -92,7 +92,7 @@ async def _compress(event, conv):
     except Exception as e:
         print(e)
         return await conv.send_message("Cannot wait more longer for your response!")
-    await conv.cancel()
+    conv.cancel()
     await __compress(event, response) 
     
 async def _convert(event, conv):
@@ -111,7 +111,7 @@ async def _convert(event, conv):
         response = await conv.get_response()
     except Exception:
         return await conv.send_message("Cannot wait more longer for your response!")
-    await conv.cancel()
+    conv.cancel()
     await __convert(event, response)
     
 #-----------------------------------------------------------------------------------------
@@ -187,7 +187,7 @@ async def __rename(msg, conv):
         except Exception as e: 
             print(e)
             return await conv.send_message("No response found.")
-    await conv.cancel()
+    conv.cancel()
     await media_rename(msg, msg, new_name)                     
                    
 async def hcomp(msg):
@@ -245,6 +245,6 @@ async def __trim(event, conv):
         except Exception as e: 
             print(e)
             return await conv.send_message("No response found.")
-        await conv.cancel()
+        conv.cancel()
         await trim(event, event, st, et)
             
