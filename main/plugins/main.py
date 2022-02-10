@@ -29,7 +29,8 @@ async def compin(event):
                                                 buttons=buttons)
                         response = await conv.get_respone()
                         await respond(event, conv, response)
-                    except:
+                    except Exception as e:
+                        print(e)
                         await conv.send_message("Cannot wait more longer for your response!")
                         return
             elif 'png' in video:
@@ -44,7 +45,8 @@ async def compin(event):
                         await conv.send_message('📦', buttons=[[Button.text('RENAME', resize=True, single_use=True)]])
                         response = await conv.get_respone()
                         await respond(event, conv, response)
-                    except:
+                    except Exception as e:
+                        print(e)
                         await conv.send_message("Cannot wait more longer for your response!")
                         return
                  
@@ -74,7 +76,8 @@ async def _compress(event, conv):
                                     [Button.text("FAST COMPRESS", resize=True, single_use=True)]])
         response = await conv.get_respone()
         await __compress(event, respone) 
-    except:
+    except Exception as e:
+        print(e)
         await conv.send_message("Cannot wait more longer for your response!")
         
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
