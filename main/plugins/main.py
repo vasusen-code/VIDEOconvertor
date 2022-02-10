@@ -57,7 +57,11 @@ async def respond(event, conv, response):
     if text == "ENCODE":
         await _encode(event, conv) 
     if text == "RENAME":
+        await conv.cancel_all()
         await __rename(event)
+    if text == "TRIM":
+        await conv.cancel_all()
+        await __trim(event)
     else:
         await conv.send_message("**Invalid response!**")
         
