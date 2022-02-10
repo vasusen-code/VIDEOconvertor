@@ -14,6 +14,8 @@ from datetime import datetime as dt
 from telethon.tl.types import DocumentAttributeVideo
 
 async def mp3(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -60,6 +62,8 @@ async def mp3(event, msg):
     os.remove(f'{out}.mp3')                           
                        
 async def flac(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -108,6 +112,8 @@ async def flac(event, msg):
     os.remove(f'{out}.flac')                 
 
 async def wav(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -156,6 +162,8 @@ async def wav(event, msg):
     os.remove(f'{out}.wav')                 
                                        
 async def mp4(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -201,6 +209,8 @@ async def mp4(event, msg):
     os.remove(f'{out}.mp4')                 
                                            
 async def mkv(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -246,6 +256,8 @@ async def mkv(event, msg):
     os.remove(f'{out}')
              
 async def webm(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -291,6 +303,8 @@ async def webm(event, msg):
     os.remove(f'{out}')
              
 async def file(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
@@ -326,6 +340,8 @@ async def file(event, msg):
     os.remove(name)                           
     
 async def video(event, msg):
+    name = ""
+    out = ""
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process!", reply_to=msg.id)
     if hasattr(msg.media, "document"):
