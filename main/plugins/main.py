@@ -19,8 +19,8 @@ async def compin(event):
             if 'video' in video or event.video:
                 async with Drone.conversation(event.chat_id) as conv:
                     try:
-                        buttons = event.client.build_reply_markup(
-                            [[Button.text("ENCODE", resize=True, single_use=True)], 
+                        buttons = [
+                            [Button.text("ENCODE", resize=True, single_use=True)], 
                             [Button.text("COMPRESS", resize=True, single_use=True),
                              Button.text("CONVERT", resize=True, single_use=True)],
                             [Button.text("RENAME", resize=True, single_use=True),
