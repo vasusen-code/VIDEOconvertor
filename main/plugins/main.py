@@ -20,11 +20,11 @@ async def compin(event):
                 async with Drone.conversation(event.chat_id) as conv:
                     try:
                         buttons = event.client.build_reply_markup(
-                            [Button.text("ENCODE", resize=True, single_use=True)], 
+                            [[Button.text("ENCODE", resize=True, single_use=True)], 
                             [Button.text("COMPRESS", resize=True, single_use=True),
                              Button.text("CONVERT", resize=True, single_use=True)],
                             [Button.text("RENAME", resize=True, single_use=True),
-                             Button.text("TRIM", resize=True, single_use=True)])
+                             Button.text("TRIM", resize=True, single_use=True)]])
                         await conv.send_message("📽",
                                                 buttons=buttons)
                         response = await conv.get_response()
