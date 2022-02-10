@@ -67,7 +67,7 @@ async def respond(event, conv, response):
     else:
         await conv.send_message("**Invalid response!**")
         
-async def _encode(event):
+async def _encode(event, conv):
     try: 
         await conv.send_message("🔀**ENCODE into?**",
                                 buttons=[
