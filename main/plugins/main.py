@@ -16,7 +16,7 @@ async def compin(event):
         media = event.media
         if media:
             video = event.file.mime_type
-            if 'video' in video or if event.video:
+            if 'video' in video or event.video:
                 async with Drone.conversation(event.chat_id) as conv:
                     try:
                         buttons=[[Button.text("ENCODE", resize=True, single_use=True)], 
