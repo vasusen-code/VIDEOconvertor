@@ -143,7 +143,7 @@ async def __convert(event, response):
     if text == 'FILE':
         await vtmp3(event)
     else:
-        await event.client.send_message(event.chat_id, "**Invalid response!**)
+        await event.client.send_message(event.chat_id, "**Invalid response!**")
         
 async def vtmp3(msg):
     if not os.path.isdir("audioconvert"):
