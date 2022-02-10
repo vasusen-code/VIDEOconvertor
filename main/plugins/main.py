@@ -25,7 +25,7 @@ async def compin(event):
                                  [Button.text("RENAME", resize=True, single_use=True),
                                   Button.text("TRIM", resize=True, single_use=True)]
                                 ]
-                        x = await conv.send_message("📽",
+                        await conv.send_message("📽",
                                                 buttons=buttons)
                         response = await conv.get_respone()
                         await respond(event, conv, response)
@@ -41,7 +41,7 @@ async def compin(event):
             else:
                 async with Drone.conversation(event.chat_id) as conv:
                     try:
-                        x = await conv.send_message('📦', buttons=[[Button.text('RENAME', resize=True, single_use=True)]])
+                        await conv.send_message('📦', buttons=[[Button.text('RENAME', resize=True, single_use=True)]])
                         response = await conv.get_respone()
                         await respond(event, conv, response)
                     except:
@@ -53,7 +53,7 @@ async def response(event, conv, response):
     if text == "COMPRESS":
         await _compress(event, conv) 
     else:
-        await conv.reply("**Invalid response!**")
+        await conv.send_message("**Invalid response!**")
         
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def _encode(event):
@@ -68,14 +68,14 @@ async def _encode(event):
                          
 async def _compress(event, conv):
     try: 
-        x = await conv.send_message("**Your choice of compress?**",
+        await conv.send_message("**Your choice of compress?**",
                                 buttons=[
                                     [Button.text("HVEC COMPRESS", resize=True, single_use=True)],
                                     [Button.text("FAST COMPRESS", resize=True, single_use=True)]])
         response = await conv.get_respone()
         await __compress(event, respone) 
     except:
-        await x.edit("Cannot wait more longer for your response!")
+        await conv.send_message("Cannot wait more longer for your response!")
         
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
