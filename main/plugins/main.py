@@ -74,12 +74,12 @@ async def _encode(event, conv):
                                      Button.text("480", resize=True, single_use=True),
                                      Button.text("720", resize=True, single_use=True)]
                                     [Button.text("x265", resize=True, single_use=True),
-                                     Button.text("x264", resize=True, single_use=True)],
-                                    [Button.text("BACK", resize=True, single_use=True)]])
+                                     Button.text("x264", resize=True, single_use=True)]])
         response = await conv.get_response()
     except Exception as e:
         print(e)
         return await conv.send_message("Cannot wait more longer for your response!")
+    await conv.cancel()
     await __encode(event, response)
     
 async def _compress(event, conv):
@@ -92,6 +92,7 @@ async def _compress(event, conv):
     except Exception as e:
         print(e)
         return await conv.send_message("Cannot wait more longer for your response!")
+    await conv.cancel()
     await __compress(event, response) 
     
 async def _convert(event, conv):
@@ -110,18 +111,9 @@ async def _convert(event, conv):
         response = await conv.get_response()
     except Exception:
         return await conv.send_message("Cannot wait more longer for your response!")
+    await conv.cancel()
     await __convert(event, response)
     
-@Drone.on(events.callbackquery.CallbackQuery(data="back"))
-async def back(event):
-    await event.edit("📽",
-                    buttons=[
-                        [Button.inline("ENCODE", data="encode")],
-                        [Button.inline("COMPRESS", data="compress"),
-                         Button.inline("CONVERT", data="convert")],
-                        [Button.inline("RENAME", data="rename"),
-                         Button.inline("TRIM", data="trim")]])
-                            
 #-----------------------------------------------------------------------------------------
 
 async def __convert(event, response):
@@ -195,6 +187,7 @@ async def __rename(msg, conv):
         except Exception as e: 
             print(e)
             return await conv.send_message("No response found.")
+    await conv.cancel()
     await media_rename(msg, msg, new_name)                     
                    
 async def hcomp(msg):
@@ -252,5 +245,6 @@ async def __trim(event, conv):
         except Exception as e: 
             print(e)
             return await conv.send_message("No response found.")
+        await conv.cancel()
         await trim(event, event, st, et)
             
