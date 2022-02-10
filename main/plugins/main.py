@@ -24,7 +24,7 @@ async def compin(event):
                             [Button.text("COMPRESS", resize=True, single_use=True),
                              Button.text("CONVERT", resize=True, single_use=True)],
                             [Button.text("RENAME", resize=True, single_use=True),
-                             Button.text("TRIM", resize=True, single_use=True)]])
+                             Button.text("TRIM", resize=True, single_use=True)]]
                         await conv.send_message("📽",
                                                 buttons=buttons)
                         response = await conv.get_response()
@@ -77,11 +77,10 @@ async def _encode(event):
                                      Button.text("x264", resize=True, single_use=True)],
                                     [Button.text("BACK", resize=True, single_use=True)]])
         response = await conv.get_response()
-        await __encode(event, response)
     except Exception as e:
         print(e)
-        await conv.send_message("Cannot wait more longer for your response!")
-        
+        return await conv.send_message("Cannot wait more longer for your response!")
+    await __encode(event, response)
 async def _compress(event, conv):
     try: 
         await conv.send_message("**Your choice of compress?**",
@@ -89,25 +88,29 @@ async def _compress(event, conv):
                                     [Button.text("HVEC COMPRESS", resize=True, single_use=True)],
                                     [Button.text("FAST COMPRESS", resize=True, single_use=True)]])
         response = await conv.get_response()
-        await __compress(event, response) 
     except Exception as e:
         print(e)
-        await conv.send_message("Cannot wait more longer for your response!")
-        
-@Drone.on(events.callbackquery.CallbackQuery(data="convert"))
-async def convert(event):
-    await event.edit("🔃**CONVERT:**",
-                    buttons=[
-                        [Button.inline("MP3", data="mp3"),
-                         Button.inline("FLAC", data="flac"),
-                         Button.inline("WAV", data="wav")],
-                        [Button.inline("MP4", data="mp4"),
-                         Button.inline("WEBM", data="webm"),
-                         Button.inline("MKV", data="mkv")],
-                        [Button.inline("FILE", data="file"),
-                         Button.inline("VIDEO", data="video")],
-                        [Button.inline("BACK", data="back")]])
-                        
+        return await conv.send_message("Cannot wait more longer for your response!")
+    await __compress(event, response) 
+    
+async def _convert(event, conv):
+    try:
+        await conv.send_message("🔃**CONVERT:**",
+                         buttons=[
+                             [Button.text("MP3", resize=True, single_use=True),
+                              Button.text("FLAC", resize=True, single_use=True),
+                              Button.text("WAV", resize=True, single_use=True)],
+                             [Button.text("MP4", resize=True, single_use=True),
+                              Button.text("WEBM", resize=True, single_use=True),
+                              Button.text("MKV", resize=True, single_use=True)],
+                             [Button.text("FILE", resize=True, single_use=True),
+                              Button.text("VIDEO", resize=True, single_use=True)],
+                             [Button.text("BACK", resize=True, single_use=True)]])
+        response = await conv.get_response()
+    except Exception:
+        return await conv.send_message("Cannot wait more longer for your response!")
+    await __convert(event, response)
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="back"))
 async def back(event):
     await event.edit("📽",
@@ -120,76 +123,65 @@ async def back(event):
                             
 #-----------------------------------------------------------------------------------------
 
-@Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
-async def vtmp3(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
+async def __convert(event, response):
+    text = response.text
+    if text == 'MP3':
+        await vtmp3(event)
+    if text == 'FLAC':
+        await vtflac(event)
+    if text == 'WAV':
+        await vtwav(event)
+    if text == 'MP4':
+        await vtmp4(event)
+    if text == 'MKV':
+        await vtmkv(event)
+    if text == 'WEBM':
+        await vtwebm(event)
+    if text == 'VIDEO':
+        await vtvideo(event)
+    if text == 'FILE':
+        await vtmp3(event)
+    else:
+        await event.client.send_message(event.chat_id, "**Invalid response!**)
+        
+async def vtmp3(msg):
     if not os.path.isdir("audioconvert"):
-        await event.delete()
         os.mkdir("audioconvert")
         await mp3(event, msg)
         os.rmdir("audioconvert")
     else:
-        await event.edit("Another process in progress!")
+        await msg.client.send_message(msg.chat_id, "Another process in progress!")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="flac"))
-async def vtflac(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
+async def vtflac(msg):
     if not os.path.isdir("audioconvert"):
-        await event.delete()
         os.mkdir("audioconvert")
         await flac(event, msg)
         os.rmdir("audioconvert")
     else:
-        await event.edit("Another process in progress!")
+        await msg.client.send_message(msg.chat_id, "Another process in progress!")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="wav"))
-async def vtwav(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
+async def vtwav(msg):
     if not os.path.isdir("audioconvert"):
-        await event.delete()
         os.mkdir("audioconvert")
         await wav(event, msg)
         os.rmdir("audioconvert")
     else:
-        await event.edit("Another process in progress!")
+        await msg.client.send_message(msg.chat_id, "Another process in progress!")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="mp4"))
-async def vtmp4(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
-    await event.delete()
-    await mp4(event, msg)
+async def vtmp4(msg):
+    await mp4(msg, msg)
     
-@Drone.on(events.callbackquery.CallbackQuery(data="mkv"))
-async def vtmkv(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
-    await event.delete()
-    await mkv(event, msg)  
+async def vtmkv(msg):
+    await mkv(msg, msg)  
     
-@Drone.on(events.callbackquery.CallbackQuery(data="webm"))
-async def vtwebm(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
-    await event.delete()
-    await webm(event, msg)  
+async def vtwebm(msg):
+    await webm(msg, msg)  
     
-@Drone.on(events.callbackquery.CallbackQuery(data="file"))
-async def vtfile(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
-    await event.delete()
+async def vtfile(msg):
     await file(event, msg)    
 
-@Drone.on(events.callbackquery.CallbackQuery(data="video"))
-async def ftvideo(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message() 
-    await event.delete()
-    await video(event, msg)
+async def vtvideo(msg):
+    await video(msg, msg)
     
 async def __rename(msg):         
     markup = msg.client.build_reply_markup(Button.force_reply())
