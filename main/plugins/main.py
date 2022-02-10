@@ -72,7 +72,7 @@ async def _encode(event, conv):
                                     [Button.text("240", resize=True, single_use=True),
                                      Button.text("360", resize=True, single_use=True),
                                      Button.text("480", resize=True, single_use=True),
-                                     Button.text("720", resize=True, single_use=True)]
+                                     Button.text("720", resize=True, single_use=True)],
                                     [Button.text("x265", resize=True, single_use=True),
                                      Button.text("x264", resize=True, single_use=True)]])
         response = await conv.get_response()
