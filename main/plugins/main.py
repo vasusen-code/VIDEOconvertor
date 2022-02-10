@@ -71,7 +71,7 @@ async def _compress(event, conv):
         x = await conv.send_message("**Your choice of compress?**",
                                 buttons=[
                                     [Button.text("HVEC COMPRESS", resize=True, single_use=True)],
-                                     Button.text("FAST COMPRESS", resize=True, single_use=True)]])
+                                    [Button.text("FAST COMPRESS", resize=True, single_use=True)]])
         response = await conv.get_respone()
         await __compress(event, respone) 
     except:
