@@ -81,6 +81,7 @@ async def _encode(event):
         print(e)
         return await conv.send_message("Cannot wait more longer for your response!")
     await __encode(event, response)
+    
 async def _compress(event, conv):
     try: 
         await conv.send_message("**Your choice of compress?**",
