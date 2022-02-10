@@ -57,7 +57,7 @@ async def respond(event, conv, response):
     if text == "ENCODE":
         await _encode(event, conv) 
     if text == "RENAME":
-        awair __rename(event)
+        await __rename(event)
     else:
         await conv.send_message("**Invalid response!**")
         
