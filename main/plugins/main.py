@@ -62,6 +62,8 @@ async def respond(event, conv, response):
     if text == "TRIM":
         await conv.cancel_all()
         await __trim(event)
+    if text == "CONVERT":
+        await _convert(event, conv) 
     else:
         await conv.send_message("**Invalid response!**")
         
