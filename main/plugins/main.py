@@ -19,12 +19,12 @@ async def compin(event):
             if 'video' in video or event.video:
                 async with Drone.conversation(event.chat_id) as conv:
                     try:
-                        buttons=[[Button.text("ENCODE", resize=True, single_use=True)], 
-                                 [Button.text("COMPRESS", resize=True, single_use=True),
-                                  Button.text("CONVERT", resize=True, single_use=True)],
-                                 [Button.text("RENAME", resize=True, single_use=True),
-                                  Button.text("TRIM", resize=True, single_use=True)]
-                                ]
+                        buttons = event.client.build_reply_markup(
+                            [Button.text("ENCODE", resize=True, single_use=True)], 
+                            [Button.text("COMPRESS", resize=True, single_use=True),
+                             Button.text("CONVERT", resize=True, single_use=True)],
+                            [Button.text("RENAME", resize=True, single_use=True),
+                             Button.text("TRIM", resize=True, single_use=True)])
                         await conv.send_message("📽",
                                                 buttons=buttons)
                         response = await conv.get_response()
@@ -54,20 +54,30 @@ async def respond(event, conv, response):
     text = response.text
     if text == "COMPRESS":
         await _compress(event, conv) 
+    if text == "ENCODE":
+        await _encode(event, conv) 
+    if text == "RENAME":
+        awair __rename(event)
     else:
         await conv.send_message("**Invalid response!**")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def _encode(event):
-    await event.edit("🔀**ENCODE:**",
-                    buttons=[
-                        [Button.inline("360p", data="360"),
-                         Button.inline("480p", data="480"),
-                         Button.inline("720p", data="720")],
-                        [Button.inline("x264", data="264"),
-                         Button.inline("x265", data="265")],
-                        [Button.inline("BACK", data="back")]])
-                         
+    try: 
+        await conv.send_message("🔀**ENCODE into?**",
+                                buttons=[
+                                    [Button.text("240", resize=True, single_use=True),
+                                     Button.text("360", resize=True, single_use=True),
+                                     Button.text("480", resize=True, single_use=True),
+                                     Button.text("720", resize=True, single_use=True)]
+                                    [Button.text("x265", resize=True, single_use=True),
+                                     Button.text("x264", resize=True, single_use=True)],
+                                    [Button.text("BACK", resize=True, single_use=True)]])
+        response = await conv.get_response()
+        await __encode(event, response)
+    except Exception as e:
+        print(e)
+        await conv.send_message("Cannot wait more longer for your response!")
+        
 async def _compress(event, conv):
     try: 
         await conv.send_message("**Your choice of compress?**",
@@ -177,23 +187,18 @@ async def ftvideo(event):
     await event.delete()
     await video(event, msg)
     
-@Drone.on(events.callbackquery.CallbackQuery(data="rename"))
-async def rename(event):                            
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
-    await event.delete()
-    async with Drone.conversation(event.chat_id) as conv: 
-        cm = await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.")                              
+async def __rename(msg):         
+    markup = msg.client.build_reply_markup(Button.force_reply())
+    async with Drone.conversation(msg.chat_id) as conv: 
+        cm = await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.", buttons=markup)                              
         try:
             m = await conv.get_reply()
             new_name = m.text
             await cm.delete()                    
-            if not m:                
-                return await cm.edit("No response found.")
         except Exception as e: 
             print(e)
-            return await cm.edit("An error occured while waiting for the response.")
-    await media_rename(event, msg, new_name)                     
+            return await conv.send_message("No response found.")
+    await media_rename(msg, msg, new_name)                     
                    
 async def hcomp(msg):
     if not os.path.isdir("compressmedia"):
@@ -218,69 +223,37 @@ async def __compress(event, response):
         await hcomp(event)
     if response.text == "FAST COMPRESS":
         await fcomp(event)
+      
+async def __encode(msg, response):
+    resolutions = ['240', '360', '480', '720']
+    libs = ['x264', 'x265']
+    text = response.text
+    if text in resolutions:
+        if not os.path.isdir("encodemedia"):
+            os.mkdir("encodemedia")
+            await encode(msg, msg, text)
+            os.rmdir("encodemedia")
+        else:
+            await msg.send_message(msg.chat_id, "Another process in progress!")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="360"))
-async def _360(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
-    if not os.path.isdir("encodemedia"):
-        await event.delete()
-        os.mkdir("encodemedia")
-        await encode(event, msg, 360)
-        os.rmdir("encodemedia")
-    else:
-        await event.edit("Another process in progress!")
-        
-@Drone.on(events.callbackquery.CallbackQuery(data="480"))
-async def _480(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
-    if not os.path.isdir("encodemedia"):
-        await event.delete()
-        os.mkdir("encodemedia")
-        await encode(event, msg, 480)
-        os.rmdir("encodemedia")
-    else:
-        await event.edit("Another process in progress!")
-        
-@Drone.on(events.callbackquery.CallbackQuery(data="720"))
-async def _720(event):
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
-    if not os.path.isdir("encodemedia"):
-        await event.delete()
-        os.mkdir("encodemedia")
-        await encode(event, msg, 720)
-        os.rmdir("encodemedia")
-    else:
-        await event.edit("Another process in progress!")
-         
-@Drone.on(events.callbackquery.CallbackQuery(data="trim"))
-async def vtrim(event):                            
-    button = await event.get_message()
-    msg = await button.get_reply_message()  
-    await event.delete()
+async def __trim(event):                            
     markup = event.client.build_reply_markup(Button.force_reply())
     async with Drone.conversation(event.chat_id) as conv: 
         try:
             xx = await conv.send_message("send me the start time of the video you want to trim from as a reply to this. \n\nIn format hh:mm:ss , for eg: `01:20:69` ", buttons=markup)
             x = await conv.get_reply()
             st = x.text
-            await xx.delete()                    
-            if not st:               
-                return await xx.edit("No response found.")
+            await xx.delete()                 
         except Exception as e: 
             print(e)
-            return await xx.edit("An error occured while waiting for the response.")
+            return await conv.send_message("No response found.")
         try:
             xy = await conv.send_message("send me the end time of the video you want to trim till as a reply to this.  \n\nIn format hh:mm:ss , for eg: `01:20:69` ", buttons=markup)
             y = await conv.get_reply()
             et = y.text
             await xy.delete()                    
-            if not et:                
-                return await xy.edit("No response found.")
         except Exception as e: 
             print(e)
-            return await xy.edit("An error occured while waiting for the response.")
-        await trim(event, msg, st, et)
+            return await conv.send_message("No response found.")
+        await trim(event, event, st, et)
             
