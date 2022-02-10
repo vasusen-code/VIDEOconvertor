@@ -30,7 +30,7 @@ async def compin(event):
                         response = await conv.get_respone()
                         await respond(event, conv, response)
                     except:
-                        await x.edit("Cannot wait more long for your response!")
+                        await conv.send_message("Cannot wait more longer for your response!")
                         return
             elif 'png' in video:
                 return
@@ -45,7 +45,7 @@ async def compin(event):
                         response = await conv.get_respone()
                         await respond(event, conv, response)
                     except:
-                        await x.edit("Cannot wait more longer for your response!")
+                        await conv.send_message("Cannot wait more longer for your response!")
                         return
                  
 async def response(event, conv, response):
