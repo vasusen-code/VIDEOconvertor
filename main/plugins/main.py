@@ -57,11 +57,9 @@ async def respond(event, conv, response):
     if text == "ENCODE":
         await _encode(event, conv) 
     if text == "RENAME":
-        await conv.cancel_all()
-        await __rename(event)
+        await __rename(event, conv)
     if text == "TRIM":
-        await conv.cancel_all()
-        await __trim(event)
+        await __trim(event, conv)
     if text == "CONVERT":
         await _convert(event, conv) 
     else:
@@ -186,9 +184,9 @@ async def vtfile(msg):
 async def vtvideo(msg):
     await video(msg, msg)
     
-async def __rename(msg):         
+async def __rename(msg, conv):         
     markup = msg.client.build_reply_markup(Button.force_reply())
-    async with Drone.conversation(msg.chat_id) as conv: 
+    if event.media:
         cm = await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.", buttons=markup)                              
         try:
             m = await conv.get_reply()
@@ -235,9 +233,9 @@ async def __encode(msg, response):
         else:
             await msg.send_message(msg.chat_id, "Another process in progress!")
         
-async def __trim(event):                            
+async def __trim(event, conv):                            
     markup = event.client.build_reply_markup(Button.force_reply())
-    async with Drone.conversation(event.chat_id) as conv: 
+    if event.media:
         try:
             xx = await conv.send_message("send me the start time of the video you want to trim from as a reply to this. \n\nIn format hh:mm:ss , for eg: `01:20:69` ", buttons=markup)
             x = await conv.get_reply()
