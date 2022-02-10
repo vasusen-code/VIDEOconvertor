@@ -50,7 +50,7 @@ async def compin(event):
                         await conv.send_message("Cannot wait more longer for your response!")
                         return
                  
-async def response(event, conv, response):
+async def respond(event, conv, response):
     text = response.text
     if text == "COMPRESS":
         await _compress(event, conv) 
