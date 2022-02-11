@@ -52,7 +52,7 @@ async def compress(event, msg, ffmpeg_cmd):
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name} """' + ffmpeg_cmd + f" {out} " -y'
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name} """' + ffmpeg_cmd + f' """{out}"""  -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**COMPRESSING:**')
     except Exception as e:
