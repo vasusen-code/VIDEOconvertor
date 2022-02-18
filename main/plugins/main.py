@@ -20,9 +20,10 @@ async def compin(event):
                 await event.reply("📽",
                             buttons=[
                                 [Button.inline("ENCODE", data="encode")],
-                                [Button.inline("COMPRESS", data="compress"),
-                                 Button.inline("CONVERT", data="convert")],
+                                [Button.inline("COMPRESS", data="compress")],
+                                [Button.inline("CONVERT", data="convert")],
                                 [Button.inline("RENAME", data="rename"),
+                                 Button.inline("SSHOTS", data="sshots"),
                                  Button.inline("TRIM", data="trim")]
                             ])
             elif 'png' in video:
@@ -50,7 +51,7 @@ async def _encode(event):
                          
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def _compress(event):
-    await event.edit("**Your choice of compress?**",
+    await event.edit("**🗜COMPRESS:**",
                     buttons=[
                         [Button.inline("HEVC COMPRESS", data="hcomp"),
                          Button.inline("FAST COMPRESS", data="fcomp")],
@@ -75,11 +76,12 @@ async def back(event):
     await event.edit("📽",
                     buttons=[
                         [Button.inline("ENCODE", data="encode")],
-                        [Button.inline("COMPRESS", data="compress"),
-                         Button.inline("CONVERT", data="convert")],
+                        [Button.inline("COMPRESS", data="compress")],
+                        [Button.inline("CONVERT", data="convert")],
                         [Button.inline("RENAME", data="rename"),
+                         Button.inline("SSHOTS", data="sshots"),
                          Button.inline("TRIM", data="trim")]])
-                            
+                    
 #-----------------------------------------------------------------------------------------
 
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
