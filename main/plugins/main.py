@@ -9,6 +9,7 @@ from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from main.plugins.encoder import encode
+from main.plugins.ssgen import screenshot
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -272,7 +273,13 @@ async def _720(event):
         os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
-         
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="sshots"))
+async def ss_(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await screenshot(event, msg) 
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):                            
     button = await event.get_message()
