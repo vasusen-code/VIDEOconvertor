@@ -39,7 +39,7 @@ async def compin(event):
                 
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def _encode(event):
-    await event.edit("🔀**ENCODE:**",
+    await event.edit("🔀ENCODE:",
                     buttons=[
                         [Button.inline("240p", data="240"),
                          Button.inline("360p", data="360")],
@@ -51,7 +51,7 @@ async def _encode(event):
                          
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def _compress(event):
-    await event.edit("**🗜COMPRESS:**",
+    await event.edit("🗜COMPRESS:",
                     buttons=[
                         [Button.inline("HEVC COMPRESS", data="hcomp"),
                          Button.inline("FAST COMPRESS", data="fcomp")],
@@ -59,7 +59,7 @@ async def _compress(event):
                                           
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
 async def convert(event):
-    await event.edit("🔃**CONVERT:**",
+    await event.edit("🔃CONVERT:",
                     buttons=[
                         [Button.inline("MP3", data="mp3"),
                          Button.inline("FLAC", data="flac"),
@@ -73,13 +73,14 @@ async def convert(event):
                         
 @Drone.on(events.callbackquery.CallbackQuery(data="back"))
 async def back(event):
-    await event.edit("📽",
+    await event.edit("📽", buttons=[
                     [Button.inline("ENCODE", data="encode"),
                      Button.inline("COMPRESS", data="compress")],
                     [Button.inline("CONVERT", data="convert"),
                      Button.inline("RENAME", data="rename")],
                     [Button.inline("SSHOTS", data="sshots"),
                      Button.inline("TRIM", data="trim")]])
+    
 #-----------------------------------------------------------------------------------------
 
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
