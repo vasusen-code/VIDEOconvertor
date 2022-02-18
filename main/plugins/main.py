@@ -206,7 +206,7 @@ async def _265(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = '-c:v libx265 -vtag hvc1 -c:a copy'
+        cmd = '-preset ultrafast -vcodec libx265 -crf 0 -acodec copy'
         await compress(event, msg, cmd, "**ENCODING:**")
         os.rmdir("compressmedia")
     else:
@@ -219,7 +219,7 @@ async def _264(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = '-c:v libx264 -vtag hvc1'
+        cmd = '-preset ultrafast -vcodec libx264 -crf 0 -acodec copy'
         await compress(event, msg, cmd, ps_name="**ENCODING:**")
         os.rmdir("compressmedia")
     else:
