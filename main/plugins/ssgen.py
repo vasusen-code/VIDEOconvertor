@@ -1,17 +1,24 @@
 #Github.com/Vasusen-code
 
 import os
+import time
 import subprocess
 import asyncio
 from datetime import datetime as dt
 from ethon.telefunc import fast_download
+from ethon.pyfunc import video_metadata
+from telethon import events
 
 async screenshot(event, msg):
     Drone = event.client
     name = dt.now().isoformat("_", "seconds") + ".mp4"
     if msg.file.name:
         name = msg.file.name
-    #fdl
+    try:
+        await fast_download(name, file, Drone, edit, time.time(), "**DOWNLOADING:**")
+    except Exception as e:
+        print(e)
+        return await edit.edit(f"An error occured while downloading.") 
     pictures = []
     captions = []
     n = [9, 8, 7, 6, 5, 4, 3, 2, 1.5, 1.25]
