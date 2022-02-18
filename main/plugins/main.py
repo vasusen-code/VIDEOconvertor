@@ -217,8 +217,8 @@ async def _264(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = '-c:v libx264 -vtag hvc1 -c:a copy'
-        await compress(event, msg, cmd, "**ENCODING:**")
+        cmd = '-c:v libx264 -vtag hvc1'
+        await compress(event, msg, cmd, ps_name="**ENCODING:**")
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
