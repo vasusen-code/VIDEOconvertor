@@ -39,7 +39,7 @@ async def ssgen(video, time_stamp):
     else:
         None       
         
-async screenshot(event, msg):
+async def screenshot(event, msg):
     Drone = event.client
     name = dt.now().isoformat("_", "seconds") + ".mp4"
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
