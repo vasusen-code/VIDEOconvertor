@@ -40,8 +40,9 @@ async def compin(event):
 async def _encode(event):
     await event.edit("🔀**ENCODE:**",
                     buttons=[
-                        [Button.inline("360p", data="360"),
-                         Button.inline("480p", data="480"),
+                        [Button.inline("240p", data="240"),
+                         Button.inline("360p", data="360")],
+                        [Button.inline("480p", data="480"),
                          Button.inline("720p", data="720")],
                         [Button.inline("x264", data="264"),
                          Button.inline("x265", data="265")],
@@ -182,7 +183,7 @@ async def hcomp(event):
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
-                        
+ 
 @Drone.on(events.callbackquery.CallbackQuery(data="fcomp"))
 async def fcomp(event):
     button = await event.get_message()
@@ -195,8 +196,46 @@ async def fcomp(event):
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
+  
+@Drone.on(events.callbackquery.CallbackQuery(data="265"))
+async def _265(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        cmd = '-c:v libx265 -vtag hvc1 -c:a copy'
+        await compress(event, msg, cmd, "**ENCODING:**")
+        os.rmdir("compressmedia")
+    else:
+        await event.edit("Another process in progress!")
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="264"))
+async def _264(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        cmd = '-c:v libx264 -vtag hvc1 -c:a copy'
+        await compress(event, msg, cmd, "**ENCODING:**")
+        os.rmdir("compressmedia")
+    else:
+        await event.edit("Another process in progress!")
+    
 
-                        
+@Drone.on(events.callbackquery.CallbackQuery(data="240"))
+async def _240(event):
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("encodemedia"):
+        await event.delete()
+        os.mkdir("encodemedia")
+        await encode(event, msg, 240)
+        os.rmdir("encodemedia")
+    else:
+        await event.edit("Another process in progress!")
+        
 @Drone.on(events.callbackquery.CallbackQuery(data="360"))
 async def _360(event):
     button = await event.get_message()
