@@ -277,7 +277,8 @@ async def _720(event):
 @Drone.on(events.callbackquery.CallbackQuery(data="sshots"))
 async def ss_(event):
     button = await event.get_message()
-    msg = await button.get_reply_message() 
+    msg = await button.get_reply_message()
+    await event.delete()
     await screenshot(event, msg) 
     
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
