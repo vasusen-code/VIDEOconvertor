@@ -1,3 +1,6 @@
+# To-Do:
+# all of these will be used from ethon lib from next update
+
 START_TEXT = "Send me any file to begin."
 
 FORCE_SUB_TEXT = "In order to use this bot, you've to join my parent channel."
@@ -6,9 +9,9 @@ CHANNEL_LINK = "https://t.me/DroneBots"
 
 SUPPORT_LINK = "https://t.me/TeamDrone"
 
-info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.3"   
+info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.3.9"   
 
-help_text = "Send me any video file to start compressing it or any kind of file to rename it.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
+help_text = "Send me any video file to start compressing it or any kind of file to rename it.\n\nencode - encode your video into different lib format or resolution\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\nsshots - generate 10 screenshots of your video\ntrim - cut your videos" 
 
 source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
 
