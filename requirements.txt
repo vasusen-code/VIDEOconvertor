@@ -1,4 +1,5 @@
-https://github.com/vasusen-code/cryptg/archive/refs/tags/0.2.1.zip
+cryptg
+ethon==1.0.7
 python-decouple
 telethon
-ethon==1.0.7
+
