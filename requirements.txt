@@ -1,5 +1,4 @@
 git+https://github.com/cher-nov/cryptg
 python-decouple
 telethon
-telethon-tgcrypto
 ethon==1.0.7
