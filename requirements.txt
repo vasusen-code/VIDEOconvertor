@@ -1,4 +1,4 @@
-git+https://github.com/cher-nov/cryptg
+https://github.com/vasusen-code/cryptg/archive/refs/tags/0.2.1.zip
 python-decouple
 telethon
 ethon==1.0.7
