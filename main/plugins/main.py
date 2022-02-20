@@ -256,12 +256,12 @@ async def fcomp(event):
         return await event.answer(f"You have to wait {300-round(present-float(last))} seconds more to start a new process!", alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         cmd = '-vf scale=-1:360 -c:v libx265 -crf 22 -preset ultrafast -c:a copy'
         await compress(event, msg, cmd)
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         now = time.time()
         timer.append(f'{now}')
         process1.append(f'{event.sender_id}')
@@ -284,12 +284,12 @@ async def hcomp(event):
         return await event.answer(f"You have to wait {300-round(present-float(last))} seconds more to start a new process!", alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         cmd = '-preset ultrafast -vcodec libx265 -crf 28 -acodec copy'
         await compress(event, msg, cmd)
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         now = time.time()
         timer.append(f'{now}')
         process1.append(f'{event.sender_id}')
@@ -310,12 +310,12 @@ async def _264(event):
         return await event.answer(t, alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         cmd = '-preset ultrafast -vcodec libx264 -crf 0 -acodec copy'
         await compress(event, msg, cmd, "**ENCODING:**")
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
@@ -330,12 +330,12 @@ async def _265(event):
         return await event.answer(t, alert=True)
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         cmd = '-preset ultrafast -vcodec libx265 -crf 0 -acodec copy'
         await compress(event, msg, cmd, "**ENCODING:**")
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
