@@ -53,7 +53,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     try:
         await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         await log.delete()
         await LOG_END(event, log_end_text)
         print(e)
@@ -68,7 +68,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     except Exception as e:
         await log.delete()
         await LOG_END(event, log_end_text)
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)  
     out2 = dt.now().isoformat("_", "seconds") + ".mp4" 
@@ -79,9 +79,9 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     os.rename(out, out2)
     i_size = os.path.getsize(name)
     f_size = os.path.getsize(out2)     
-    text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
-    if ps_name != "**COMPRESSSING:**":
-        text = F'**ENCODED by:** @{BOT_UN}'
+    text = F'**ENCODED by:** @{BOT_UN}'
+    if ps_name != "**ENCODING:**":
+        text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
     UT = time.time()
     if 'x-matroska' in mime:
         try:
@@ -90,7 +90,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
         except Exception as e:
             await log.delete()
             await LOG_END(event, log_end_text)
-            os.rmdir("compressmedia")
+            os.rmdir("encodemedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     elif 'webm' in mime:
@@ -100,7 +100,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
         except Exception as e:
             await log.delete()
             await LOG_END(event, log_end_text)
-            os.rmdir("compressmedia")
+            os.rmdir("encodemedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     else:
@@ -119,7 +119,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
             except Exception as e:
                 await log.delete()
                 await LOG_END(event, log_end_text)
-                os.rmdir("compressmedia")
+                os.rmdir("encodemedia")
                 print(e)
                 return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
