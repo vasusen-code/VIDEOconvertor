@@ -69,6 +69,9 @@ async def screenshot(event, msg):
     else:
         await edit.edit("No screenshots could be generated!")
     await edit.delete()
-    for pic in pictures:
-        os.remove(pic)
-    os.remove(name)
+    try:
+        for pic in pictures:
+             os.remove(pic)
+        os.remove(name)
+    except Exception:
+        pass
