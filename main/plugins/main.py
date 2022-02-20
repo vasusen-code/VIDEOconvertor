@@ -108,6 +108,26 @@ async def back(event):
 process1 = []
 timer = []
 
+#Set timer to avoid spam
+async def set_timer(event, list1, list2):
+    now = time.time()
+    list2.append(f'{now}')
+    list1.append(f'{event.sender_id}')
+    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
+    await asyncio.sleep(120)
+    list2.pop(int(timer.index(f'{now}')))
+    list1.pop(int(process1.index(f'{event.sender_id}')))
+    
+#check time left in timer
+async def check_timer(event, list1, list2):
+    if f'{event.sender_id}' in list1:
+        index = list1.index(f'{event.sender_id}')
+        last = list2[int(index)]
+        present = time.time()
+        return False, f"You have to wait {120-round(present-float(last))} seconds more to start a new process!"
+    else:
+        return True, None
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="mp3"))
 async def vtmp3(event):
     yy = await force_sub(event.sender_id)
@@ -279,7 +299,47 @@ async def hcomp(event):
         process1.pop(int(process1.index(f'{event.sender_id}')))
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
-    
+
+@Drone.on(events.callbackquery.CallbackQuery(data="264"))
+async def _264(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    s, t = await check_timer(event, process1, timer) 
+    if s == False:
+        return await event.answer(t, alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        cmd = '-preset ultrafast -vcodec libx264 -crf 0 -acodec copy'
+        await compress(event, msg, cmd, "**ENCODING:**")
+        os.rmdir("compressmedia")
+        await set_timer(event, process1, timer) 
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+      
+@Drone.on(events.callbackquery.CallbackQuery(data="265"))
+async def _265(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    s, t = await check_timer(event, process1, timer) 
+    if s == False:
+        return await event.answer(t, alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("compressmedia"):
+        await event.delete()
+        os.mkdir("compressmedia")
+        cmd = '-preset ultrafast -vcodec libx265 -crf 0 -acodec copy'
+        await compress(event, msg, cmd, "**ENCODING:**")
+        os.rmdir("compressmedia")
+        await set_timer(event, process1, timer) 
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):
     yy = await force_sub(event.sender_id)
