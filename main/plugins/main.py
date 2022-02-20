@@ -59,7 +59,7 @@ async def compin(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def _encode(event):
-    await event.edit("🔀ENCODE:",
+    await event.edit("**🔀ENCODE**",
                     buttons=[
                         [Button.inline("240p", data="240"),
                          Button.inline("360p", data="360")],
@@ -71,7 +71,7 @@ async def _encode(event):
      
 @Drone.on(events.callbackquery.CallbackQuery(data="compress"))
 async def _compress(event):
-    await event.edit("🗜COMPRESS:",
+    await event.edit("**🗜COMPRESS**",
                     buttons=[
                         [Button.inline("HEVC COMPRESS", data="hcomp"),
                          Button.inline("FAST COMPRESS", data="fcomp")],
@@ -81,7 +81,7 @@ async def _compress(event):
 async def convert(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    await event.edit("🔃**CONVERT:**",
+    await event.edit("🔃**CONVERT**",
                     buttons=[
                         [Button.inline("MP3", data="mp3"),
                          Button.inline("FLAC", data="flac"),
@@ -339,7 +339,83 @@ async def _265(event):
         await set_timer(event, process1, timer) 
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
-
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="240"))
+async def _240(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    s, t = await check_timer(event, process1, timer) 
+    if s == False:
+        return await event.answer(t, alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("encodemedia"):
+        await event.delete()
+        os.mkdir("encodemedia")
+        await encode(event, msg, 240)
+        os.rmdir("encodemedia")
+        await set_timer(event, process1, timer) 
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="360"))
+async def _360(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    s, t = await check_timer(event, process1, timer) 
+    if s == False:
+        return await event.answer(t, alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("encodemedia"):
+        await event.delete()
+        os.mkdir("encodemedia")
+        await encode(event, msg, 360)
+        os.rmdir("encodemedia")
+        await set_timer(event, process1, timer) 
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="480"))
+async def _480(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    s, t = await check_timer(event, process1, timer) 
+    if s == False:
+        return await event.answer(t, alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("encodemedia"):
+        await event.delete()
+        os.mkdir("encodemedia")
+        await encode(event, msg, 480)
+        os.rmdir("encodemedia")
+        await set_timer(event, process1, timer) 
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+        
+@Drone.on(events.callbackquery.CallbackQuery(data="720"))
+async def _720(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    s, t = await check_timer(event, process1, timer) 
+    if s == False:
+        return await event.answer(t, alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()  
+    if not os.path.isdir("encodemedia"):
+        await event.delete()
+        os.mkdir("encodemedia")
+        await encode(event, msg, 720)
+        os.rmdir("encodemedia")
+        await set_timer(event, process1, timer) 
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+             
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):
     yy = await force_sub(event.sender_id)
