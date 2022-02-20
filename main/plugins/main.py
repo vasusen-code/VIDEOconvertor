@@ -415,7 +415,29 @@ async def _720(event):
         await set_timer(event, process1, timer) 
     else:
         await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
-             
+          
+@Drone.on(events.callbackquery.CallbackQuery(data="sshots"))
+async def ss_(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    if f'{event.sender_id}' in process1:
+        index = process1.index(f'{event.sender_id}')
+        last = timer[int(index)]
+        present = time.time()
+        return await event.answer(f"You have to wait {120-round(present-float(last))} seconds more to start a new process!", alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()
+    await event.delete()
+    await screenshot(event, msg)    
+    now = time.time()
+    timer.append(f'{now}')
+    process1.append(f'{event.sender_id}')
+    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
+    await asyncio.sleep(120)
+    timer.pop(int(timer.index(f'{now}')))
+    process1.pop(int(process1.index(f'{event.sender_id}')))
+    
 @Drone.on(events.callbackquery.CallbackQuery(data="trim"))
 async def vtrim(event):
     yy = await force_sub(event.sender_id)
