@@ -20,7 +20,7 @@ from main.plugins.encoder import encode
 from main.plugins.ssgen import screenshot
 
 #Don't be a MF by stealing someone's hardwork.
-forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\nAlso join @DroneBots."
+forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\n〽️ Powered by @GroupDc."
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
@@ -36,7 +36,7 @@ async def compin(event):
                 return await event.reply(f'you are Banned to use me!\n\ncontact [SUPPORT]({SUPPORT_LINK})', link_preview=False)
             video = event.file.mime_type
             if 'video' in video:
-                await event.reply("📽",
+                await event.reply("📽 Here 🚀",
                             buttons=[
                                 [Button.inline("ENCODE", data="encode"),
                                  Button.inline("COMPRESS", data="compress")],
@@ -59,7 +59,7 @@ async def compin(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="encode"))
 async def _encode(event):
-    await event.edit("**🔀ENCODE**",
+    await event.edit("**🔀 ENCODE**",
                     buttons=[
                         [Button.inline("240p", data="240"),
                          Button.inline("360p", data="360")],
@@ -95,13 +95,13 @@ async def convert(event):
                         
 @Drone.on(events.callbackquery.CallbackQuery(data="back"))
 async def back(event):
-    await event.edit("📽", buttons=[
-                    [Button.inline("ENCODE", data="encode"),
-                     Button.inline("COMPRESS", data="compress")],
-                    [Button.inline("CONVERT", data="convert"),
-                     Button.inline("RENAME", data="rename")],
-                    [Button.inline("SSHOTS", data="sshots"),
-                     Button.inline("TRIM", data="trim")]])
+    await event.edit("📽 Here 🚀", buttons=[
+                    [Button.inline("Encode", data="encode"),
+                     Button.inline("Compress", data="compress")],
+                    [Button.inline("Convert", data="convert"),
+                     Button.inline("Rename", data="rename")],
+                    [Button.inline("Screenshot", data="sshots"),
+                     Button.inline("Trim", data="trim")]])
     
 #-----------------------------------------------------------------------------------------
 
@@ -233,7 +233,7 @@ async def rename(event):
     await event.delete()
     markup = event.client.build_reply_markup(Button.force_reply())
     async with Drone.conversation(event.chat_id) as conv: 
-        cm = await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.", buttons=markup)                              
+        cm = await conv.send_message("Send me a new name for the file as a `reply` to this message.\n\n**NOTE:** `.ext` is not required.\n\n ⭕ reply this message", buttons=markup)                              
         try:
             m = await conv.get_reply()
             new_name = m.text
