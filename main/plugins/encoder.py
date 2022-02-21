@@ -17,7 +17,7 @@ from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.actions import LOG_START, LOG_END
 
-async def encode(event, msg, scale):
+async def encode(event, msg, scale=0):
     ps_name = str(f"**{scale}p ENCODING:**")
     _ps = str(f"{scale}p ENCODE")
     Drone = event.client
@@ -59,7 +59,15 @@ async def encode(event, msg, scale):
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale={str(scale)}:-1 -c:a copy """{out}""" -y'
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=0:-1 -c:a copy """{out}""" -y'
+    if scale == 240:
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=240:-1 -c:a copy """{out}""" -y'
+    elif scale == 360:
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=360:-1 -c:a copy """{out}""" -y'
+    elif scale == 480:
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=480:-1 -c:a copy """{out}""" -y'
+    elif scale == 720:
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=720:-1 -c:a copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
