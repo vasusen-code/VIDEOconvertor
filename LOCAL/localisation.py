@@ -27,11 +27,11 @@ help_text = """**v1.4**
 
 •`Trim` - cut your videos"""
 
-source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
+source_text = "**Deploy your own bot**"
 
 DEV = "https://t.me/MaheshChauhan"
 
-spam_notice = "This bot is hosted on heroku, and hence can run just run one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
+spam_notice = "This bot is hosted on heroku, and hence can just run one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
 
 JPG = "LOCAL/video_convertor.jpg"
 
