@@ -354,7 +354,7 @@ async def _240(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, 240)
+        await encode(event, msg, '240')
         os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
     else:
@@ -373,7 +373,7 @@ async def _360(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, 360)
+        await encode(event, msg, '360')
         os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
     else:
@@ -392,7 +392,7 @@ async def _480(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, 480)
+        await encode(event, msg, '480')
         os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
     else:
@@ -411,7 +411,7 @@ async def _720(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, 720)
+        await encode(event, msg, '720')
         os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
     else:
