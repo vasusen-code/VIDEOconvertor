@@ -181,8 +181,7 @@ async def hcomp(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = "-preset ultrafast -vcodec libx265 -crf 28 -acodec copy"
-        await compress(event, msg, cmd)
+        await compress(event, msg, 1)
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
@@ -194,8 +193,7 @@ async def fcomp(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = "-vf scale=-1:360 -c:v libx265 -crf 22 -preset ultrafast -c:a copy"
-        await compress(event, msg, cmd)
+        await compress(event, msg, 2)
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
@@ -207,8 +205,7 @@ async def _265(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = "-preset ultrafast -vcodec libx265 -crf 23 -acodec copy"
-        await compress(event, msg, cmd, "**ENCODING:**")
+        await compress(event, msg, 3, "**ENCODING:**")
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
@@ -220,8 +217,7 @@ async def _264(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        cmd = "-preset ultrafast -vcodec libx264 -crf 23 -acodec copy"
-        await compress(event, msg, cmd, ps_name="**ENCODING:**")
+        await compress(event, msg, 4, ps_name="**ENCODING:**")
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
@@ -234,7 +230,7 @@ async def _240(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, "240")
+        await encode(event, msg, 240)
         os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
@@ -246,7 +242,7 @@ async def _360(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, "360")
+        await encode(event, msg, 360)
         os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
@@ -258,7 +254,7 @@ async def _480(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, "480")
+        await encode(event, msg, 480)
         os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
@@ -270,7 +266,7 @@ async def _720(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        await encode(event, msg, "720")
+        await encode(event, msg, 720)
         os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
