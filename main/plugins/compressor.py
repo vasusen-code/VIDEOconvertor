@@ -64,7 +64,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" {str(ffmpeg_cmd)} """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
+        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
         await log.delete()
         await LOG_END(event, log_end_text)
@@ -83,6 +83,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     if ps_name != "**ENCODING:**":
         text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
     UT = time.time()
+    await log.edit("Uploading file.")
     if 'x-matroska' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
