@@ -313,7 +313,7 @@ async def _264(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        cmd = '-preset ultrafast -vcodec libx264 -crf 0 -acodec copy'
+        cmd = '-preset ultrafast -vcodec libx264 -crf 23 -acodec copy'
         await compress(event, msg, cmd, "**ENCODING:**")
         os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
@@ -333,7 +333,7 @@ async def _265(event):
     if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
-        cmd = '-preset ultrafast -vcodec libx265 -crf 0 -acodec copy'
+        cmd = '-preset ultrafast -vcodec libx265 -crf 23 -acodec copy'
         await compress(event, msg, cmd, "**ENCODING:**")
         os.rmdir("encodemedia")
         await set_timer(event, process1, timer) 
