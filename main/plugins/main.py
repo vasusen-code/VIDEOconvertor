@@ -205,7 +205,7 @@ async def _265(event):
     if not os.path.isdir("compressmedia"):
         await event.delete()
         os.mkdir("compressmedia")
-        await compress(event, msg, ffmpeg_cmd=3, "**ENCODING:**")
+        await compress(event, msg, ffmpeg_cmd=3, ps_name="**ENCODING:**")
         os.rmdir("compressmedia")
     else:
         await event.edit("Another process in progress!")
