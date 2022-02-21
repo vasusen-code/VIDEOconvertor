@@ -15,7 +15,7 @@ from main.plugins.actions import set_thumbnail, rem_thumbnail, heroku_restart
 async def start(event):
     await event.reply(f'{st}', 
                       buttons=[
-                              [Button.inline("Menu.", data="menu")]
+                              [Button.inline("🔸Menu🔸", data="menu")]
                               ])
     tag = f'[{event.sender.first_name}](tg://user?id={event.sender_id})'
     await Drone.send_message(int(ACCESS_CHANNEL), f'{tag} started the BOT')
@@ -26,7 +26,7 @@ async def menu(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
-    await event.edit(f'**ℹ️NFO:**\n\n{info_text}',
+    await event.edit(f'**ℹ️NFO :**\n\n{info_text}',
                     buttons=[[
                          Button.inline("Menu.", data="menu")]])
     
@@ -38,8 +38,8 @@ async def notice(event):
 async def source(event):
     await event.edit(source_text,
                     buttons=[[
-                         Button.url("FOR PERSONAL USE", url="https://github.com/vasusen-code/videoconvertor/tree/main"),
-                         Button.url("FOR YOUR CHANNEL ", url="https://github.com/vasusen-code/videoconvertor/")]])
+                         Button.url("FOR PERSONAL USE", url="https://github.com/selfie-bd/videoconvertor/tree/main"),
+                         Button.url("FOR YOUR CHANNEL ", url="https://github.com/selfie-bd/videoconvertor/")]])
                          
                     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
