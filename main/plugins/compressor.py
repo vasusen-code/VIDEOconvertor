@@ -16,7 +16,7 @@ from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 
-async def compress(event, msg, ffmpeg_cmd, ps_name=None):
+async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     Drone = event.client
     if ps_name is None:
         ps_name = '**COMPRESSING:**'
