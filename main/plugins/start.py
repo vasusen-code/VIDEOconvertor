@@ -26,7 +26,7 @@ async def menu(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
-    await event.edit(f'**ℹ️NFO :**\n\n{info_text}',
+    await event.edit(f'**ℹ️NFO :**\n\n{info_text}\n\n⭕ @GroupDc',
                     buttons=[[
                          Button.inline("Menu.", data="menu")]])
     
@@ -44,7 +44,7 @@ async def source(event):
                     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
-    await event.edit('**👥HELP & SETTINGS**',
+    await event.edit('**👥HELP & SETTINGS**\n\n〽️ Powered by @Groupdcbots',
                     buttons=[[
                          Button.inline("SET THUMB", data="sett"),
                          Button.inline("REM THUMB", data='remt')],
