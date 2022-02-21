@@ -8,6 +8,7 @@ from LOCAL.localisation import JPG0 as file
 from LOCAL.localisation import JPG4
 from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_text, SUPPORT_LINK
 from ethon.teleutils import mention
+from ethon.mystarts impott vc_menu
 from main.plugins.actions import set_thumbnail, rem_thumbnail, heroku_restart
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
@@ -21,34 +22,13 @@ async def start(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="menu"))
 async def menu(event):
-    await event.client.send_file(event.chat_id, caption="**📑MENU.**", file=file,
-                    buttons=[[
-                         Button.inline("info.", data="info"),
-                         Button.inline("SOURCE-CODE", data="source")],
-                         [
-                         Button.inline("NOTICE.", data="notice"),
-                         Button.inline("Help/SETTINGS.", data="help")],
-                         [
-                         Button.url("DEVELOPER", url=f"{DEV}")]])
-    await event.delete()
+    await vc_menu(event)
     
-@Drone.on(events.callbackquery.CallbackQuery(data="menu2"))
-async def menu2(event):
-    await event.edit("**📑MENU.**",
-                    buttons=[[
-                         Button.inline("info.", data="info"),
-                         Button.inline("SOURCE-CODE", data="source")],
-                         [
-                         Button.inline("NOTICE.", data="notice"),
-                         Button.inline("Help/SETTINGS.", data="help")],
-                         [
-                         Button.url("DEVELOPER", url=f"{DEV}")]])
-       
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
     await event.edit(f'**ℹ️NFO:**\n\n{info_text}',
                     buttons=[[
-                         Button.inline("Menu.", data="menu2")]])
+                         Button.inline("Menu.", data="menu")]])
     
 @Drone.on(events.callbackquery.CallbackQuery(data="notice"))
 async def notice(event):
@@ -58,8 +38,8 @@ async def notice(event):
 async def source(event):
     await event.edit(source_text,
                     buttons=[[
-                         Button.url("Main.", url="https://github.com/vasusen-code/videoconvertor/tree/main"),
-                         Button.url("PUBLIC", url="https://github.com/vasusen-code/videoconvertor/tree/public")]])
+                         Button.url("FOR PERSONAL USE", url="https://github.com/vasusen-code/videoconvertor/tree/main"),
+                         Button.url("FOR YOUR CHANNEL ", url="https://github.com/vasusen-code/videoconvertor/")]])
                          
                     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
@@ -69,16 +49,16 @@ async def help(event):
                          Button.inline("set THUMBNAIL", data="sett"),
                          Button.inline("rem THUMBNAIL", data='remt')],
                          [
-                         Button.inline("PLUGUNS.", data="plugins"),
-                         Button.inline("restart", data="restart"),
-                         Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
+                         Button.inline("PLUGUNS", data="plugins"),
+                         Button.inline("RESTART", data="restart")],
+                         [Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
                          [
-                         Button.inline("Menu.", data="menu2")]])
+                         Button.inline("BACK", data="menu")]])
     
 @Drone.on(events.callbackquery.CallbackQuery(data="plugins"))
 async def plugins(event):
     await event.edit(f'{help_text}',
-                    buttons=[[Button.inline("Menu.", data="menu2")]])
+                    buttons=[[Button.inline("Menu.", data="menu")]])
                    
  #-----------------------------------------------------------------------------------------------                            
     

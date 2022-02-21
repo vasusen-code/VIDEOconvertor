@@ -17,9 +17,9 @@ from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 from main.plugins.actions import LOG_START, LOG_END
 
-async def compress(event, msg, ffmpeg_cmd, ps_name=None):
-    if ps_name is None:
-        ps_name = '**COMPRESSING:**'
+async def encode(event, msg, scale):
+    ps_name = str(f"**{scale}p ENCODING:**")
+    _ps = str(f"{scale}p ENCODE")
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
@@ -45,10 +45,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
         ext = (n.split("."))[1]
         out = new_name + ext
     DT = time.time()
-    _ps = "COMPRESS"
-    if ps_name != "**COMPRESSING:**":
-        _ps = "ENCODE"
-    log = await LOG_START(event, f'**{str(_ps)} PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
+    log = await LOG_START(event, f'**{_ps} PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
     log_end_text = f'**{_ps} PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
     try:
         await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
@@ -62,7 +59,7 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" {str(ffmpeg_cmd)} """{out}""" -y'
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale={str(scale)}:-1 -c:a copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
@@ -79,11 +76,9 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     os.rename(out, out2)
     i_size = os.path.getsize(name)
     f_size = os.path.getsize(out2)     
-    text = F'**ENCODED by:** @{BOT_UN}'
-    if ps_name != "**ENCODING:**":
-        text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
+    text = f'**{_ps}D by** : @{BOT_UN}'
     UT = time.time()
-    await log.edit("Uploading file.")
+    await log.edit("Uploading file")
     if 'x-matroska' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
@@ -130,5 +125,3 @@ async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     log_end_text2 = f'**{_ps} PROCESS FINISHED**\n\nTime Taken: {round((time.time()-DT)/60)} minutes\nInitial size: {i_size/1000000}mb.\nFinal size: {f_size/1000000}mb.\n\n[Bot is free now.]({SUPPORT_LINK})'
     await LOG_END(event, log_end_text2)
     
-
-
