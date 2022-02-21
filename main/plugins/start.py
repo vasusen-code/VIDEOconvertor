@@ -44,14 +44,14 @@ async def source(event):
                     
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
-    await event.edit('**👥HELP & SETTINGS.**',
+    await event.edit('**👥HELP & SETTINGS**',
                     buttons=[[
-                         Button.inline("set THUMBNAIL", data="sett"),
-                         Button.inline("rem THUMBNAIL", data='remt')],
+                         Button.inline("SET THUMB", data="sett"),
+                         Button.inline("REM THUMB", data='remt')],
                          [
-                         Button.inline("PLUGUNS", data="plugins"),
+                         Button.inline("PLUGINS", data="plugins"),
                          Button.inline("RESTART", data="restart")],
-                         [Button.url("SUPPORT.", url=f"{SUPPORT_LINK}")],
+                         [Button.url("SUPPORT", url=f"{SUPPORT_LINK}")],
                          [
                          Button.inline("BACK", data="menu")]])
     
