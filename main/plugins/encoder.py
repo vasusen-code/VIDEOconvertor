@@ -16,7 +16,7 @@ from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 
-async def _360p(event, msg):
+async def encode(event, msg, scale):
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
@@ -45,18 +45,18 @@ async def _360p(event, msg):
     try:
         await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     name =  '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -vf scale=-1:360 -c:v libx265 -crf 16 -preset ultrafast -c:a copy """{out}""" -y'
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale={str(scale)}:-1 -c:a copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**ECODING:**')
     except Exception as e:
-        os.rmdir("compressmedia")
+        os.rmdir("encodemedia")
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
     out2 = dt.now().isoformat("_", "seconds") + ".mp4" 
@@ -74,7 +74,7 @@ async def _360p(event, msg):
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
-            os.rmdir("compressmedia")
+            os.rmdir("encodemedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     elif 'x-matroska' in mime:
@@ -82,7 +82,7 @@ async def _360p(event, msg):
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
-            os.rmdir("compressmedia")
+            os.rmdir("encodemedia")
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     else:
@@ -99,7 +99,7 @@ async def _360p(event, msg):
                 uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
                 await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
             except Exception as e:
-                os.rmdir("compressmedia")
+                os.rmdir("encodemedia")
                 print(e)
                 return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()

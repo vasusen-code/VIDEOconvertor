@@ -16,8 +16,10 @@ from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
 
-async def compress(event, msg):
+async def compress(event, msg, ffmpeg_cmd, ps_name=None):
     Drone = event.client
+    if ps_name is None:
+        ps_name = '**COMPRESSING:**'
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
     if hasattr(msg.media, "document"):
@@ -52,9 +54,9 @@ async def compress(event, msg):
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy """{out}""" -y'
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" {str(ffmpeg_cmd)} """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, '**COMPRESSING:**')
+        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
     except Exception as e:
         os.rmdir("compressmedia")
         print(e)
@@ -67,7 +69,9 @@ async def compress(event, msg):
     os.rename(out, out2)
     i_size = os.path.getsize(name)
     f_size = os.path.getsize(out2)
-    text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
+    text = f'COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
+    if ps_name != "**ENCODING:**":
+        text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
     UT = time.time()
     if 'webm' in mime:
         try:

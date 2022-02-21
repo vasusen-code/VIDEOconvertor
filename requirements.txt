@@ -1,5 +1,5 @@
+cryptg
+ethon==1.3.7
 python-decouple
 telethon
-telethon-tgcrypto
-cryptg
-ethon==1.0.7
+

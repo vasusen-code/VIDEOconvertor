@@ -1,3 +1,6 @@
+#Don't be a thief by stealing other's Hardwork, it took time and effort to make this repo.
+#Respect my work by not making any changes here.
+
 START_TEXT = "Send me any file to begin."
 
 FORCE_SUB_TEXT = "In order to use this bot, you've to join my parent channel."
@@ -6,15 +9,29 @@ CHANNEL_LINK = "https://t.me/DroneBots"
 
 SUPPORT_LINK = "https://t.me/TeamDrone"
 
-info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.3"   
+info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.4"   
 
-help_text = "Send me any video file to start compressing it or any kind of file to rename it.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
+help_text = """**v1.4**
 
-source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
+•`Encode` - encode your video into different lib format or resolution
+
+•`HEVC compress` - negligible loss compression
+
+•`FAST compress` - Very fast and Efficient compression
+
+•`Convert` - change formats or extract audio of any video
+
+•`Rename` - rename any file, extension not required
+
+•`SSHOTS` - generate 10 screenshots of your video
+
+•`Trim` - cut your videos"""
+
+source_text = "**Deploy your own bot**"
 
 DEV = "https://t.me/MaheshChauhan"
 
-spam_notice = "This bot is hosted on heroku, and hence can run just run one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
+spam_notice = "This bot is hosted on heroku, and hence can just run one process at a time.Spamming the bot or encoding adult videos will lead you to a ban."
 
 JPG = "LOCAL/video_convertor.jpg"
 
