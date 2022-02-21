@@ -61,7 +61,7 @@ async def encode(event, msg, scale):
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale={str(scale)}:-1 -c:a copy """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, {ps_name})
+        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
         await log.delete()
         await LOG_END(event, log_end_text)
@@ -78,6 +78,7 @@ async def encode(event, msg, scale):
     f_size = os.path.getsize(out2)     
     text = f'**{_ps}D by** : @{BOT_UN}'
     UT = time.time()
+    await log.edit("Uploading file")
     if 'x-matroska' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
