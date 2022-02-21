@@ -11,7 +11,21 @@ SUPPORT_LINK = "https://t.me/TeamDrone"
 
 info_text = "This bot is developed by @MaheshChauhan\n\nWritten in python library TELETHON.\n\nBot by : @DroneBots\nSupport : @TeamDrone\n\nV1.3"   
 
-help_text = "Send me any media file to know the stuffs i can do.\n\ncompress - negligible loss compression\nconvert - change formats or extract audio of any video\nrename - rename any file, extension not required\ntrim - cut your videos" 
+help_text = """**v1.4**
+
+•`Encode` - encode your video into different lib format or resolution
+
+•`HEVC compress` - negligible loss compression
+
+•`FAST compress` - Very fast and Efficient compression
+
+•`Convert` - change formats or extract audio of any video
+
+•`Rename` - rename any file, extension not required
+
+•`SSHOTS` - generate 10 screenshots of your video
+
+•`Trim` - cut your videos"""
 
 source_text = "Deploy your own bot.\n\nMain branch - Personal use\nPublic branch - For your channel"
 
