@@ -68,7 +68,6 @@ async def encode(event, msg, scale=0):
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=-1:480 -c:v libx264 -crf 18 -c:a copy """{out}""" -y'
     elif scale == 720:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=-1:720 -c:v libx264 -crf 18 -c:a copy """{out}""" -y'
-    print(cmd)
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
