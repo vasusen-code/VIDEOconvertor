@@ -59,15 +59,15 @@ async def encode(event, msg, scale=0):
     os.rename(n, name)
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=0:-1 -c:a copy """{out}""" -y'
+    cmd = ''
     if scale == 240:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=240:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress """{progress}""" -i """{name}""" -filter:v scale=240:-1 -c:a copy """{out}""" -y'
     elif scale == 360:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=360:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress """{progress}""" -i """{name}""" -filter:v scale=360:-1 -c:a copy """{out}""" -y'
     elif scale == 480:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=480:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress """{progress}""" -i """{name}""" -filter:v scale=480:-1 -c:a copy """{out}""" -y'
     elif scale == 720:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=720:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress """{progress}""" -i """{name}""" -filter:v scale=720:-1 -c:a copy """{out}""" -y'
     print(cmd)
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
