@@ -6,7 +6,7 @@ import time
 import subprocess
 import re
 import os
-import ffmpeg
+from ffmpeg import probe
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
@@ -59,7 +59,7 @@ async def encode(event, msg, scale=0):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...")
-    vid = ffmpeg.probe(name)
+    vid = probe(name)
     hgt = int(vid['streams'][0]['height'])
     if scale == hgt:
         os.rmdir("encodemedia")
