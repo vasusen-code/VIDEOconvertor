@@ -92,7 +92,8 @@ async def vtmp3(event):
         await event.delete()
         os.mkdir("audioconvert")
         await mp3(event, msg)
-        os.rmdir("audioconvert")
+        if os.path.isdir("audioconvert"):
+            os.rmdir("audioconvert")
     else:
         await event.edit("Another process in progress!")
         
@@ -104,7 +105,8 @@ async def vtflac(event):
         await event.delete()
         os.mkdir("audioconvert")
         await flac(event, msg)
-        os.rmdir("audioconvert")
+        if os.path.isdir("audioconvert"):
+            os.rmdir("audioconvert")
     else:
         await event.edit("Another process in progress!")
         
@@ -116,7 +118,8 @@ async def vtwav(event):
         await event.delete()
         os.mkdir("audioconvert")
         await wav(event, msg)
-        os.rmdir("audioconvert")
+        if os.path.isdir("audioconvert"):
+            os.rmdir("audioconvert")
     else:
         await event.edit("Another process in progress!")
         
@@ -180,9 +183,10 @@ async def hcomp(event):
     msg = await button.get_reply_message()  
     if not os.path.isdir("compressmedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         await compress(event, msg, ffmpeg_cmd=1)
-        os.rmdir("compressmedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
  
@@ -190,11 +194,12 @@ async def hcomp(event):
 async def fcomp(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         await compress(event, msg, ffmpeg_cmd=2)
-        os.rmdir("compressmedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
   
@@ -202,11 +207,12 @@ async def fcomp(event):
 async def _265(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         await compress(event, msg, ffmpeg_cmd=3, ps_name="**ENCODING:**")
-        os.rmdir("compressmedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
         
