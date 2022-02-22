@@ -6,7 +6,7 @@ import time
 import subprocess
 import re
 import os
-from ffmpeg import probe
+import ffmpeg
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
@@ -59,13 +59,29 @@ async def encode(event, msg, scale=0):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...")
-    vid = probe(name)
+    vid = ffmpeg.probe(name)
     hgt = int(vid['streams'][0]['height'])
-    if scale == hgt:
+    wdt = int(vid['streams'][0]['width'])
+    res = [hgt, wdt]
+    if scale in res:
         os.rmdir("encodemedia")
-        await log.delete()
-        await LOG_END(event, log_end_text)
-        return await edit.edit(f"The video height is already {scale}.")
+        return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 240:
+        if 426 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 360:
+        if 640 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 480:
+        if 854 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 720:
+        if 1280 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
