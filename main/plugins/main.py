@@ -181,7 +181,7 @@ async def rename(event):
 async def hcomp(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
         os.mkdir("encodemedia")
         await compress(event, msg, ffmpeg_cmd=1)
@@ -220,11 +220,12 @@ async def _265(event):
 async def _264(event):
     button = await event.get_message()
     msg = await button.get_reply_message()  
-    if not os.path.isdir("compressmedia"):
+    if not os.path.isdir("encodemedia"):
         await event.delete()
-        os.mkdir("compressmedia")
+        os.mkdir("encodemedia")
         await compress(event, msg, ffmpeg_cmd=4, ps_name="**ENCODING:**")
-        os.rmdir("compressmedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
     
@@ -237,7 +238,8 @@ async def _240(event):
         await event.delete()
         os.mkdir("encodemedia")
         await encode(event, msg, scale=240)
-        os.rmdir("encodemedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
         
@@ -249,7 +251,8 @@ async def _360(event):
         await event.delete()
         os.mkdir("encodemedia")
         await encode(event, msg, scale=360)
-        os.rmdir("encodemedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
         
@@ -261,7 +264,8 @@ async def _480(event):
         await event.delete()
         os.mkdir("encodemedia")
         await encode(event, msg, scale=480)
-        os.rmdir("encodemedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
         
@@ -273,7 +277,8 @@ async def _720(event):
         await event.delete()
         os.mkdir("encodemedia")
         await encode(event, msg, scale=720)
-        os.rmdir("encodemedia")
+        if os.path.isdir("encodemedia"):
+            os.rmdir("encodemedia")
     else:
         await event.edit("Another process in progress!")
         
