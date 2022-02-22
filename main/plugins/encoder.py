@@ -59,23 +59,23 @@ async def encode(event, msg, scale=0):
     print(hgt)
     if scale in hgt:
         os.rmdir("encodemedia")
-        return await edit.edit(f"The video height is already {scale}.")
+        return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 240:
         if 426 in res:
             os.rmdir("encodemedia")
-            return await edit.edit(f"The video height is already {scale}.")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 360:
         if 640 in res:
             os.rmdir("encodemedia")
-            return await edit.edit(f"The video height is already {scale}.")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 480:
         if 854 in res:
             os.rmdir("encodemedia")
-            return await edit.edit(f"The video height is already {scale}.")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 720:
         if 1280 in res:
             os.rmdir("encodemedia")
-            return await edit.edit(f"The video height is already {scale}.")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
