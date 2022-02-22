@@ -54,6 +54,7 @@ async def encode(event, msg, scale=0):
     await edit.edit("Extracting metadata...")
     vid = ffmpeg.probe(name)
     hgt = int(vid['streams'][0]['height'])
+    print(hgt)
     if scale == hgt:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video height is already {scale}.")
