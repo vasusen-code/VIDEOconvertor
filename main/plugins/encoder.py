@@ -6,6 +6,7 @@ import time
 import subprocess
 import re
 import os
+import ffmpeg
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
@@ -57,6 +58,14 @@ async def encode(event, msg, scale=0):
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
+    await edit.edit("Extracting metadata...")
+    vid = ffmpeg.probe(name)
+    hgt = int(vid['streams'][0]['height'])
+    if scale == hgt:
+        os.rmdir("encodemedia")
+        await log.delete()
+        await LOG_END(event, log_end_text)
+        return await edit.edit(f"The video height is already {scale}.")
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
