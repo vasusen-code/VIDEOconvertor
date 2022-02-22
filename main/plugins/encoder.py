@@ -56,7 +56,6 @@ async def encode(event, msg, scale=0):
     hgt = int(vid['streams'][0]['height'])
     wdt = int(vid['streams'][0]['width'])
     res = [hgt, wdt]
-    print(hgt)
     if scale in res:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
@@ -88,7 +87,7 @@ async def encode(event, msg, scale=0):
     elif scale == 720:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=-1:720 -c:v libx264 -crf 22 -c:a copy """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, '**ECODING:**')
+        await ffmpeg_progress(cmd, name, progress, FT, edit, '**ENCODING:**')
     except Exception as e:
         os.rmdir("encodemedia")
         print(e)
