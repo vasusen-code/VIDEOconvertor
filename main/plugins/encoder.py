@@ -57,7 +57,7 @@ async def encode(event, msg, scale=0):
     wdt = int(vid['streams'][0]['width'])
     res = [hgt, wdt]
     print(hgt)
-    if scale in hgt:
+    if scale in res:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 240:
