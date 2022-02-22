@@ -54,10 +54,28 @@ async def encode(event, msg, scale=0):
     await edit.edit("Extracting metadata...")
     vid = ffmpeg.probe(name)
     hgt = int(vid['streams'][0]['height'])
+    wdt = int(vid['streams'][0]['width'])
+    res = [hgt, wdt]
     print(hgt)
-    if scale == hgt:
+    if scale in hgt:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video height is already {scale}.")
+    if scale == 240:
+        if 426 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video height is already {scale}.")
+    if scale == 360:
+        if 640 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video height is already {scale}.")
+    if scale == 480:
+        if 854 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video height is already {scale}.")
+    if scale == 720:
+        if 1280 in res:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video height is already {scale}.")
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
