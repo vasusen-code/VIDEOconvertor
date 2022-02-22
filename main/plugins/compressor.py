@@ -62,7 +62,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...")
-    vid = ffmpeg.probe('sample_video (1).mkv')
+    vid = ffmpeg.probe(name)
     codec = vid['streams'][0]['codec_name']
     hgt = int(vid['streams'][0]['height'])
     if ffmpeg_cmd == 2:
