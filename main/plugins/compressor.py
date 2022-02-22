@@ -52,6 +52,25 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     name =  '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
+    await edit.edit("Extracting metadata...")
+    vid = ffmpeg.probe(name)
+    codec = vid['streams'][0]['codec_name']
+    hgt = int(vid['streams'][0]['height'])
+    if ffmpeg_cmd == 2:
+        if hgt == 360:
+            await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
+            os.rmdir("encodemedia")
+            return
+    if ffmpeg_cmd == 3:
+        if codec == 'hevc':
+            await edit.edit("The given video is already in H.265 codec.")
+            os.rmdir("encodemedia")
+            return
+    if ffmpeg_cmd == 4:
+        if codec == 'h264':
+            await edit.edit("The given video is already in H.264 codec.")
+            os.rmdir("encodemedia")
+            return
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" None """{out}""" -y'
