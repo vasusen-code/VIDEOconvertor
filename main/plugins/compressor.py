@@ -59,7 +59,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     hgt = video_metadata(name)["height"]
     wdt = video_metadata(name)["width"]
     if ffmpeg_cmd == 2:
-        if hgt or wdt in [360, 640]:
+        if hgt == 360 or wdt == 640:
             await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
             os.rmdir("encodemedia")
             return
