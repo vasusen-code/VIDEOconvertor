@@ -64,9 +64,10 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     await edit.edit("Extracting metadata...")
     vid = ffmpeg.probe(name)
     codec = vid['streams'][0]['codec_name']
-    hgt = int(vid['streams'][0]['height'])
+    hgt = video_metadata(name)["height"]
+    wdt = video_metadata(name)["width"]
     if ffmpeg_cmd == 2:
-        if hgt == 360:
+        if hgt or wdt in [360, 640]:
             await log.delete()
             await LOG_END(event, log_end_text)
             await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
