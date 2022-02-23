@@ -55,24 +55,23 @@ async def encode(event, msg, scale=0):
     vid = ffmpeg.probe(name)
     hgt = int(vid['streams'][0]['height'])
     wdt = int(vid['streams'][0]['width'])
-    res = [hgt, wdt]
-    if scale in res:
+    if scale == wdt:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 240:
-        if 426 in res:
+        if 426 == hgt:
             os.rmdir("encodemedia")
             return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 360:
-        if 640 in res:
+        if 640 == hgt:
             os.rmdir("encodemedia")
             return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 480:
-        if 854 in res:
+        if 854 == hgt:
             os.rmdir("encodemedia")
             return await edit.edit(f"The video is already in {scale}p resolution.")
     if scale == 720:
-        if 1280 in res:
+        if 1280 == hgt:
             os.rmdir("encodemedia")
             return await edit.edit(f"The video is already in {scale}p resolution.")
     FT = time.time()
