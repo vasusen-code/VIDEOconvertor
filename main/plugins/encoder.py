@@ -78,13 +78,13 @@ async def encode(event, msg, scale=0):
     progress = f"progress-{FT}.txt"
     cmd = ''
     if scale == 240:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:240" -b:v 400k -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:240" -c:a copy """{out}""" -y'
     elif scale == 360:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:360" -b:v 750k -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:360" -c:a copy """{out}""" -y'
     elif scale == 480:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:480" -b:v 1000k -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:480" -c:a copy """{out}""" -y'
     elif scale == 720:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:720" -b:v 2500k -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale="-2:720" -c:a copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**ENCODING:**')
     except Exception as e:
