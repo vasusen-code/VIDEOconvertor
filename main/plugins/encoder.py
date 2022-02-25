@@ -79,7 +79,7 @@ async def encode(event, msg, scale=0):
     # -1:{scale} not working idk why
     nwdt = f"{int(wdt*hgt/scale)}"
     crf = {"240":"18", "360":"20", "480":"23", "720":"27"}
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s {str(nwdt)}x{str(scale)} -crf {str(crf.[str(scale)])} -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
+    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s {str(nwdt)}x{str(scale)} -crf {str(crf[str(scale)])} -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**ENCODING:**')
     except Exception as e:
