@@ -59,7 +59,7 @@ async def encode(event, msg, scale=0):
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
     cwdt = {"240":426, "360":640, "480":854, "720":1280}
-    if cwdt[f"{scale}] == wdt:
+    if cwdt[f"{scale}"] == wdt:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
     FT = time.time()
