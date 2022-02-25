@@ -58,26 +58,14 @@ async def encode(event, msg, scale=0):
     if scale == hgt:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
-    if scale == 240:
-        if 426 == wdt:
-            os.rmdir("encodemedia")
-            return await edit.edit(f"The video is already in {scale}p resolution.")
-    if scale == 360:
-        if 640 == wdt:
-            os.rmdir("encodemedia")
-            return await edit.edit(f"The video is already in {scale}p resolution.")
-    if scale == 480:
-        if 854 == wdt:
-            os.rmdir("encodemedia")
-            return await edit.edit(f"The video is already in {scale}p resolution.")
-    if scale == 720:
-        if 1280 == wdt:
-            os.rmdir("encodemedia")
-            return await edit.edit(f"The video is already in {scale}p resolution.")
+    cwdt = {"240":426, "360":640, "480":854, "720":1280}
+    if cwdt[f"{scale}] == wdt:
+        os.rmdir("encodemedia")
+        return await edit.edit(f"The video is already in {scale}p resolution.")
     FT = time.time()
     progress = f"progress-{FT}.txt"
     # -1:{scale} not working idk why
-    nwdt = f"{int(wdt*hgt/scale)}"
+    nwdt = f"{int(wdt*scale/hgt)}"
     crf = {"240":"18", "360":"20", "480":"23", "720":"27"}
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s {str(nwdt)}x{str(scale)} -crf {str(crf[str(scale)])} -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
