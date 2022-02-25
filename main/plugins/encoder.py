@@ -65,7 +65,7 @@ async def encode(event, msg, scale=0):
     FT = time.time()
     progress = f"progress-{FT}.txt"
     # -1:{scale} not working idk why
-    nwdt = f"{int((wdt*scale)+4/hgt)}"
+    nwdt = f"{int((wdt*scale)+20/hgt)}"
     crf = {"240":"18", "360":"20", "480":"23", "720":"27"}
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s {str(nwdt)}x{str(scale)} -crf {str(crf[str(scale)])} -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
