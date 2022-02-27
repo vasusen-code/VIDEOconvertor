@@ -3,6 +3,8 @@ from decouple import config
 import logging
 import time
 
+from ethon.pyfunc import bash
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
@@ -20,6 +22,11 @@ ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None)
 MONGODB_URI = config("MONGODB_URI", default=None)
 LIBRARY = config("LIBRARY", default="PYROGRAM")
 
+if LIBRARY != "TELETHON":
+    bash("pip install tgcrypto")
+else:
+    bash("pip install pyaesni")
+    
 Drone = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
 from pyrogram import Client
