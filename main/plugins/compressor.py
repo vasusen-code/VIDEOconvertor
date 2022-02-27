@@ -38,6 +38,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     log = await LOG_START(event, f'**{str(_ps)} PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
     log_end_text = f'**{_ps} PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
+    DT = time.time()
     try:
         n = await download(msg, edit) 
     except Exception as e:
