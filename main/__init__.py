@@ -31,7 +31,7 @@ PyroBot = Client(
 )    
 
 try:
-    Bot.start()
+    PyroBot.start()
 except Exception as e:
     print(e)
     sys.exit(1)
