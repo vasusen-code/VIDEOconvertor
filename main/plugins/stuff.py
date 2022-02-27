@@ -153,7 +153,7 @@ async def download(msg, reply=None):
     if reply is None:
         reply = await msg.reply("Preparing to Download.")
     if telethon != "TELETHON":
-        reply = await PyroBot.get_messages(reply.sender_id, reply.id)
+        reply = await PyroBot.get_messages(reply.chat_id, reply.id)
         msg = await PyroBot.get_messages(msg.sender_id, msg.id)
         file = await PyroBot.download_media(
             msg,
