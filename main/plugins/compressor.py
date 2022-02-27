@@ -17,6 +17,8 @@ from .. import Drone, BOT_UN, LOG_CHANNEL
 import asyncio, time, subprocess, re, os, ffmpeg
 from datetime import datetime as dt
 
+from pyrogram import Client
+
 from telethon import events
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
