@@ -15,9 +15,7 @@
 import os, time, subprocess, asyncio
 from datetime import datetime as dt
 
-from ethon.telefunc import fast_download
 from ethon.pyfunc import video_metadata
-
 from telethon import events
 
 from pyrogram import Client
