@@ -149,11 +149,9 @@ def TimeFormatter(milliseconds: int) -> str:
         ((str(seconds) + "s, ") if seconds else "")
     return tmp[:-2]
 
-async def download(msg, reply=None):
-    if reply is None:
-        reply = await msg.reply("Preparing to Download.")
+async def download(msg, reply):
     if telethon != "TELETHON":
-        reply = await PyroBot.get_messages(reply.chat_id, reply.id)
+        reply = await PyroBot.edit_message_text(msg.sender_id, msg.id, 'Preparing to download.')
         msg = await PyroBot.get_messages(msg.sender_id, msg.id)
         file = await PyroBot.download_media(
             msg,
