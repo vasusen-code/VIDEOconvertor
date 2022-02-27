@@ -26,6 +26,7 @@ from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 from main.plugins.actions import LOG_START, LOG_END
+from main.plugins.stuff import upload, download
 
 async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     if ps_name is None:
