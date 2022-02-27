@@ -203,7 +203,7 @@ async def upload(file, edit, caption=None, thumb=None):
             )
         elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
             await edit.edit("Uploading photo.")
-            await bot.send_file(edit.chat_id, file, caption=caption)
+            await PyroBot.send_file(edit.chat_id, file, caption=caption)
         else:
             await PyroBot.send_document(
                 edit.chat_id,
