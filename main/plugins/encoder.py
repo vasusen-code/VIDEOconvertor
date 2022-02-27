@@ -69,6 +69,7 @@ async def encode(event, msg, scale=0):
         if 1280 == wdt:
             os.rmdir("encodemedia")
             return await edit.edit(f"The video is already in {scale}p resolution.")
+    out = "compressed_" + dt.now().isoformat("_", "seconds") + ".mp4"
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
