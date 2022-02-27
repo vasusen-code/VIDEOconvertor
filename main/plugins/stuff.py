@@ -202,7 +202,10 @@ async def uploader(file, edit, caption=None, thumb=None):
                     time.time()
                 )
             )
-                    
+    else:
+        if str(file).split(".")[-1] in ['mp4', 'mkv']:
+            
+        
 
 
 
