@@ -1,4 +1,3 @@
-cryptg
 dnspython
 ethon==1.3.7
 ffmpeg-python
@@ -12,4 +11,4 @@ python-decouple
 requests
 telegraph
 telethon
-tgcrypto
+
