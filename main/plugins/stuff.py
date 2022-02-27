@@ -48,5 +48,30 @@ def dl_name(mime):
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webp" 
         return name
     
-async def downloader(event, msg, telethon=False):
+async def downloader(msg, reply=None):
+    if reply is None:
+        reply = await msg.reply("Preparing to Download.")
+    if telethon != True:
+        reply = await PyroBot.get_messages(reply.sender_id, reply.id)
+        msg = await PyroBot.get_messages(msg.sender_id, msg.id)
+        file = await PyroBot.download_media(
+            msg,
+            progress=PFP,
+            progress_args=(
+                PyroBot,
+                "**DOWNLOADING:**\n",
+                reply,
+                time.time()
+            )
+        )
+        return file
+    else:
+        name = msg.file.name
+        if name is None:
+            name = dl_name(msg.file.mime_type)
+        media = msg.media
+        if hasattr(msg.media, "document"):
+            media = msg.media.document
+        await fast_download(name, media, Drone, reply, time.time(), "**DOWNLOADING:**")
+        return name
     
