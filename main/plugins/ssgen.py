@@ -14,9 +14,13 @@
 
 import os, time, subprocess, asyncio
 from datetime import datetime as dt
+
 from ethon.telefunc import fast_download
 from ethon.pyfunc import video_metadata
+
 from telethon import events
+
+from pyrogram import Client
 
 def hhmmss(seconds):
     x = time.strftime('%H:%M:%S',time.gmtime(seconds))
@@ -50,16 +54,9 @@ async def ssgen(video, time_stamp):
         
 async def screenshot(event, msg):
     Drone = event.client
-    name = dt.now().isoformat("_", "seconds") + ".mp4"
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
-    if hasattr(msg.media, "document"):
-        file = msg.media.document
-    else:
-        file = msg.media
-    if msg.file.name:
-        name = msg.file.name
     try:
-        await fast_download(name, file, Drone, edit, time.time(), "**DOWNLOADING:**")
+        name = await download(msg, edit) 
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while downloading.") 
