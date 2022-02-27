@@ -18,6 +18,7 @@ FORCESUB = config("FORCESUB", default=None)
 FORCESUB_UN = config("FORCESUB_UN", default=None)
 ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None)
 MONGODB_URI = config("MONGODB_URI", default=None)
+LIBRARY = config("LIBRARY", default="PYROGRAM")
 
 Drone = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
