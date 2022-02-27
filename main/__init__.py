@@ -20,3 +20,18 @@ ACCESS_CHANNEL = config("ACCESS_CHANNEL", default=None)
 MONGODB_URI = config("MONGODB_URI", default=None)
 
 Drone = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
+
+from pyrogram import Client
+
+PyroBot = Client(
+    "PyroClient",
+    bot_token=BOT_TOKEN,
+    api_id=int(API_ID),
+    api_hash=API_HASH
+)    
+
+try:
+    Bot.start()
+except Exception as e:
+    print(e)
+    sys.exit(1)
