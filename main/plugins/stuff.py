@@ -1,7 +1,8 @@
+from .. import Drone, PyroBot
+from .. import LIBRARY as telethon
 import math, os, time, json
 from datetime import datetime as dt
 from decouple import config
-
 from telethon import events
 from ethon.pyfunc import fast_upload, fast_download
 
@@ -132,7 +133,6 @@ def TimeFormatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 async def downloader(msg, reply=None):
-    telethon = config("LIBRARY", default="PYROGRAM")
     if reply is None:
         reply = await msg.reply("Preparing to Download.")
     if telethon != "TELETHON":
@@ -159,10 +159,50 @@ async def downloader(msg, reply=None):
         await fast_download(name, media, Drone, reply, time.time(), "**DOWNLOADING:**")
         return name
     
-async def uploader(file, edit):
+async def uploader(file, edit, caption=None, thumb=None):
     telethon = config("LIBRARY", default="PYROGRAM")
     if telethon != "TELETHON":
-        
+        edit = await PyroBot.get_messages(edit.chat_id, edit.id)
+        if str(file).split(".")[-1] in ['mkv', 'mp4', 'webm']:
+            if str(file).split(".")[-1] in ['webm', 'mkv']:
+                path = str(file).split(".")[0] + ".mp4"
+                os.rename(file, path) 
+                file = str(file).split(".")[0] + ".mp4"
+            data = video_metadata(file)
+            duration = data["duration"]
+            await PyroBot.send_video(
+                chat_id=edit.chat_id,
+                video=file,
+                caption=caption,
+                supports_streaming=True,
+                duration=duration,
+                thumb=thumb,
+                progress=PFP,
+                progress_args=(
+                    PyroBot,
+                    '**UPLOADING:**\n',
+                    edit,
+                    time.time()
+                )
+            )
+        elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
+            await edit.edit("Uploading photo.")
+            await bot.send_file(edit.chat_id, file, caption=caption)
+        else:
+            await PyroBot.send_document(
+                edit.chat_id,
+                file, 
+                caption=caption,
+                thumb=thumb,
+                progress=PFP,
+                progress_args=(
+                    PyroBot,
+                    '**UPLOADING:**\n',
+                    edit,
+                    time.time()
+                )
+            )
+                    
 
 
 
