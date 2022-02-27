@@ -12,12 +12,7 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio
-import time
-import subprocess
-import re
-import os
-import ffmpeg
+import asyncio, time, subprocess, re, os, ffmpeg
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
