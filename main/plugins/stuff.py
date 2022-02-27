@@ -1,10 +1,27 @@
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
+
 from .. import Drone, PyroBot
 from .. import LIBRARY as telethon
 import math, os, time, json
 from datetime import datetime as dt
 from decouple import config
+from pyrogram import Client
 from telethon import events
-from ethon.pyfunc import fast_upload, fast_download
+from telethon.tl.types import DocumentAttributeVideo
+from ethon.telefunc import fast_upload, fast_download
+from ethon.pyfunc import video_metadata
 
 def dl_name(mime):
     name = None
@@ -132,7 +149,7 @@ def TimeFormatter(milliseconds: int) -> str:
         ((str(seconds) + "s, ") if seconds else "")
     return tmp[:-2]
 
-async def downloader(msg, reply=None):
+async def download(msg, reply=None):
     if reply is None:
         reply = await msg.reply("Preparing to Download.")
     if telethon != "TELETHON":
@@ -159,8 +176,7 @@ async def downloader(msg, reply=None):
         await fast_download(name, media, Drone, reply, time.time(), "**DOWNLOADING:**")
         return name
     
-async def uploader(file, edit, caption=None, thumb=None):
-    telethon = config("LIBRARY", default="PYROGRAM")
+async def upload(file, edit, caption=None, thumb=None):
     if telethon != "TELETHON":
         edit = await PyroBot.get_messages(edit.chat_id, edit.id)
         if str(file).split(".")[-1] in ['mkv', 'mp4', 'webm']:
