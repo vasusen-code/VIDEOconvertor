@@ -204,6 +204,40 @@ async def uploader(file, edit, caption=None, thumb=None):
             )
     else:
         if str(file).split(".")[-1] in ['mp4', 'mkv']:
+            metadata = video_metadata(file)
+            width = metadata["width"]
+            height = metadata["height"]
+            duration = metadata["duration"]
+            attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
+            parallel = await fast_upload(
+                file, 
+                file, 
+                time.time(),
+                Drone, 
+                edit, 
+                '**UPLOADING:**'
+            )
+            await Drone.send_file(
+                edit.chat_id, 
+                parallel, 
+                caption=caption,
+                thumb=thumb,
+                attributes=attributes, 
+                force_document=False
+            )  
+        else:
+            parallel = await fast_upload(
+                file,
+                file, 
+                time.time(),
+                Drone, 
+                edit, 
+                '**UPLOADING:**'
+            )
+            await Drone.send_file(edit.chat_id, parallel, caption=caption, thumb=thumb, force_document=True)  
+     
+            
+           
             
         
 
