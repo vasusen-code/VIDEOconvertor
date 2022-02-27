@@ -187,7 +187,7 @@ async def upload(file, edit, caption=None, thumb=None):
             data = video_metadata(file)
             duration = data["duration"]
             await PyroBot.send_video(
-                chat_id=edit.chat_id,
+                chat_id=edit.chat.id,
                 video=file,
                 caption=caption,
                 supports_streaming=True,
@@ -203,10 +203,10 @@ async def upload(file, edit, caption=None, thumb=None):
             )
         elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
             await edit.edit("Uploading photo.")
-            await PyroBot.send_file(edit.chat_id, file, caption=caption)
+            await PyroBot.send_file(edit.chat.id, file, caption=caption)
         else:
             await PyroBot.send_document(
-                edit.chat_id,
+                edit.chat.id,
                 file, 
                 caption=caption,
                 thumb=thumb,
@@ -250,7 +250,13 @@ async def upload(file, edit, caption=None, thumb=None):
                 edit, 
                 '**UPLOADING:**'
             )
-            await Drone.send_file(edit.chat_id, parallel, caption=caption, thumb=thumb, force_document=True)  
+            await Drone.send_file(
+                edit.chat_id, 
+                parallel, 
+                caption=caption, 
+                thumb=thumb, 
+                force_document=True
+            )  
      
             
            
