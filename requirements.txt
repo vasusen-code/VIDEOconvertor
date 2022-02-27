@@ -12,3 +12,4 @@ python-decouple
 requests
 telegraph
 telethon
+tgcrypto
