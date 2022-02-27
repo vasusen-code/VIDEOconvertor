@@ -47,3 +47,6 @@ def dl_name(mime):
     elif 'webp' in mime:
         name = "media_" + dt.now().isoformat("_", "seconds") + ".webp" 
         return name
+    
+async def downloader(event, msg, telethon=False):
+    
