@@ -16,13 +16,12 @@ import os, time, requests
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, MONGODB_URI
 from telethon import events
-from ethon.pyutils import rename
+from ethon.pyutils import rename, file_extension
 from ethon.pyfunc import video_metadata
 from LOCAL.localisation import SUPPORT_LINK
 from main.Database.database import Database
 from main.plugins.stuff import download, upload
 from LOCAL.localisation import JPG3 as t
-from telethon.tl.types import DocumentAttributeVideo
 
 async def media_rename(event, msg, new_name):
     edit = await event.client.send_message(event.chat_id, 'Trying to process.', reply_to=msg.id)
@@ -38,13 +37,14 @@ async def media_rename(event, msg, new_name):
         THUMB = t
     Drone = event.client
     try:  
-        await download(msg, reply=edit)
+        name = await download(msg, reply=edit)
     except Exception as e:
         await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
     await edit.edit("Renaming.")
     try:
+        out = new_name + file_extension(name)
         rename(name, out)
     except Exception as e:
         await edit.edit(f"An error occured while renaming.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
