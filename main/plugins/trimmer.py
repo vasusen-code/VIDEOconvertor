@@ -25,6 +25,7 @@ from ethon.pyfunc import video_metadata, bash
 from ethon.pyutils import rename
 
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
+from main.plugins.stuff import upload, download
 
 async def trim(event, msg, st, et):
     Drone = event.client
