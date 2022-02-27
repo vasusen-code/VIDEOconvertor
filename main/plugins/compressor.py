@@ -77,6 +77,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
             await edit.edit("The given video is already in H.264 codec.")
             os.rmdir("encodemedia")
             return
+    out = "compressed_" + dt.now().isoformat("_", "seconds") + ".mp4"
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" None """{out}""" -y'
