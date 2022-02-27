@@ -22,6 +22,8 @@ from telethon import events
 
 from pyrogram import Client
 
+from main.plugins.stuff import upload, download
+
 def hhmmss(seconds):
     x = time.strftime('%H:%M:%S',time.gmtime(seconds))
     return x
