@@ -14,12 +14,16 @@
 
 from .. import Drone, PyroBot
 from .. import LIBRARY as telethon
+
 import math, os, time, json
 from datetime import datetime as dt
 from decouple import config
+
 from pyrogram import Client
+
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
+
 from ethon.telefunc import fast_upload, fast_download
 from ethon.pyfunc import video_metadata
 
