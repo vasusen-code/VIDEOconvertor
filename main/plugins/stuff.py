@@ -180,7 +180,7 @@ async def download(msg, reply):
     
 async def upload(file, edit, caption=None, thumb=None):
     if telethon != "TELETHON":
-        edit = await PyroBot.get_messages(edit.chat_id, edit.id)
+        edit = await PyroBot.edit_message_text(edit.chat_id, edit.id, 'Starting Upload.')
         if str(file).split(".")[-1] in ['mkv', 'mp4', 'webm']:
             if str(file).split(".")[-1] in ['webm', 'mkv']:
                 path = str(file).split(".")[0] + ".mp4"
