@@ -1,5 +1,6 @@
 import math, os, time, json
 from datetime import datetime as dt
+from decouple import config
 
 from telethon import events
 from ethon.pyfunc import fast_upload, fast_download
@@ -131,9 +132,10 @@ def TimeFormatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 async def downloader(msg, reply=None):
+    telethon = config("LIBRARY", default="PYROGRAM")
     if reply is None:
         reply = await msg.reply("Preparing to Download.")
-    if telethon != True:
+    if telethon != "TELETHON":
         reply = await PyroBot.get_messages(reply.sender_id, reply.id)
         msg = await PyroBot.get_messages(msg.sender_id, msg.id)
         file = await PyroBot.download_media(
@@ -157,3 +159,13 @@ async def downloader(msg, reply=None):
         await fast_download(name, media, Drone, reply, time.time(), "**DOWNLOADING:**")
         return name
     
+async def uploader(file, edit):
+    telethon = config("LIBRARY", default="PYROGRAM")
+    if telethon != "TELETHON":
+        
+
+
+
+
+
+
