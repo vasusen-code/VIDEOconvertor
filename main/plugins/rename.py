@@ -15,9 +15,13 @@
 import os, time, requests
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, MONGODB_URI
+
+from pyrogram import Client
 from telethon import events
+
 from ethon.pyutils import rename, file_extension
 from ethon.pyfunc import video_metadata
+
 from LOCAL.localisation import SUPPORT_LINK
 from main.Database.database import Database
 from main.plugins.stuff import download, upload
@@ -37,7 +41,8 @@ async def media_rename(event, msg, new_name):
         THUMB = t
     Drone = event.client
     try:  
-        name = await download(msg, reply=edit)
+        name = await download(msg, edit)
+        print(name)
     except Exception as e:
         await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
