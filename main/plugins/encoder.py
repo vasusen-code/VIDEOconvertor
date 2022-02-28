@@ -1,11 +1,18 @@
-#TG:ChauhanMahesh/DroneBots
-#Github.com/vasusen-code
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio
-import time
-import subprocess
-import re
-import os
+import asyncio, time, subprocess, re, os, ffmpeg
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
@@ -57,17 +64,40 @@ async def encode(event, msg, scale=0):
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
+    await edit.edit("Extracting metadata...")
+    vid = ffmpeg.probe(name)
+    hgt = int(vid['streams'][0]['height'])
+    wdt = int(vid['streams'][0]['width'])
+    if scale == hgt:
+        os.rmdir("encodemedia")
+        return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 240:
+        if 426 == wdt:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 360:
+        if 640 == wdt:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 480:
+        if 854 == wdt:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
+    if scale == 720:
+        if 1280 == wdt:
+            os.rmdir("encodemedia")
+            return await edit.edit(f"The video is already in {scale}p resolution.")
     FT = time.time()
     progress = f"progress-{FT}.txt"
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=0:-1 -c:a copy """{out}""" -y'
+    cmd = ''
     if scale == 240:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=240:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 426x240 -crf 18 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     elif scale == 360:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=360:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 640x360 -crf 20 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     elif scale == 480:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=480:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 854x480 -crf 23 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     elif scale == 720:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -filter:v scale=720:-1 -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 1280x720 -crf 27 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:

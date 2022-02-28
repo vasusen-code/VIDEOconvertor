@@ -1,9 +1,18 @@
-#Tg:ChauhanMahesh/Dronebots
-#Github.com/vasusen-code
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import os
-import time
-import asyncio
+import os, time, asyncio
 from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI, ACCESS_CHANNEL
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
@@ -113,8 +122,8 @@ async def set_timer(event, list1, list2):
     now = time.time()
     list2.append(f'{now}')
     list1.append(f'{event.sender_id}')
-    await event.client.send_message(event.chat_id, 'You can start a new process again after 2 minutes.')
-    await asyncio.sleep(120)
+    await event.client.send_message(event.chat_id, 'You can start a new process again after 5 minutes.')
+    await asyncio.sleep(300)
     list2.pop(int(timer.index(f'{now}')))
     list1.pop(int(process1.index(f'{event.sender_id}')))
     
@@ -124,7 +133,7 @@ async def check_timer(event, list1, list2):
         index = list1.index(f'{event.sender_id}')
         last = list2[int(index)]
         present = time.time()
-        return False, f"You have to wait {120-round(present-float(last))} seconds more to start a new process!"
+        return False, f"You have to wait {300-round(present-float(last))} seconds more to start a new process!"
     else:
         return True, None
     

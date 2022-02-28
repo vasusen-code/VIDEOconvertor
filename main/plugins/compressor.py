@@ -1,11 +1,18 @@
-#TG:ChauhanMahesh/DroneBots
-#Github.com/vasusen-code
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio
-import time
-import subprocess
-import re
-import os
+import asyncio, time, subprocess, re, os, ffmpeg
 from datetime import datetime as dt
 from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
@@ -60,17 +67,43 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
+    await edit.edit("Extracting metadata...")
+    vid = ffmpeg.probe(name)
+    codec = vid['streams'][0]['codec_name']
+    hgt = video_metadata(name)["height"]
+    wdt = video_metadata(name)["width"]
+    if ffmpeg_cmd == 2:
+        if hgt == 360 or wdt == 640:
+            await log.delete()
+            await LOG_END(event, log_end_text)
+            await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
+            os.rmdir("encodemedia")
+            return
+    if ffmpeg_cmd == 3:
+        if codec == 'hevc':
+            await log.delete()
+            await LOG_END(event, log_end_text)
+            await edit.edit("The given video is already in H.265 codec.")
+            os.rmdir("encodemedia")
+            return
+    if ffmpeg_cmd == 4:
+        if codec == 'h264':
+            await log.delete()
+            await LOG_END(event, log_end_text)
+            await edit.edit("The given video is already in H.264 codec.")
+            os.rmdir("encodemedia")
+            return
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" None """{out}""" -y'
     if ffmpeg_cmd == 1:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy """{out}""" -y'
     elif ffmpeg_cmd == 2:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -vf scale=-1:360 -c:v libx265 -crf 22 -preset ultrafast -c:a copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx265 -crf 22 -preset ultrafast -s 640x360 -c:a copy """{out}""" -y'
     elif ffmpeg_cmd == 3:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 23 -acodec copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 18 -acodec copy """{out}""" -y'
     elif ffmpeg_cmd == 4:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 23 -acodec copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 18 -acodec copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
