@@ -15,6 +15,7 @@ BOT_TOKEN = config("BOT_TOKEN", default=None)
 BOT_UN = config("BOT_UN", default=None)
 LIBRARY = config("LIBRARY", default="PYROGRAM")
 
+from ethon.pyfunc import bash
 if LIBRARY != "TELETHON":
     bash("pip install tgcrypto")
 else:
