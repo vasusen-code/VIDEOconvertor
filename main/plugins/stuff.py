@@ -175,8 +175,8 @@ async def download(msg, reply):
         media = msg.media
         if hasattr(msg.media, "document"):
             media = msg.media.document
-        await fast_download(name, media, Drone, reply, time.time(), "**DOWNLOADING:**")
-        return name
+        await fast_download("./" + name, media, Drone, reply, time.time(), "**DOWNLOADING:**")
+        return "./" + name
     
 async def upload(file, edit, caption=None, thumb=None):
     if telethon != "TELETHON":
