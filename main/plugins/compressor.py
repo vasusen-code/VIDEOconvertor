@@ -77,7 +77,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     elif ffmpeg_cmd == 4:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 18 -acodec copy """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
+        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
     except Exception as e:
         os.rmdir("encodemedia")
         print(e)
