@@ -82,7 +82,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         os.rmdir("encodemedia")
         print(e)
         return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-    out2 = "_" + n
+    out2 = "./_" + n.split("/")[-1]
     os.rename(out, out2)
     i_size = os.path.getsize(name)
     f_size = os.path.getsize(out2)
