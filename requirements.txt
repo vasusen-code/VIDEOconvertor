@@ -1,4 +1,4 @@
-cryptg
+pyrogram
 telethon-tgcrypto
 ethon==1.3.7
 python-decouple
