@@ -1,55 +1,45 @@
-#TG:ChauhanMahesh/DroneBots
-#Github.com/vasusen-code
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio
-import time
-import subprocess
-import re
-import os
-import ffmpeg
-from datetime import datetime as dt
 from .. import Drone, BOT_UN
+
+import asyncio, time, subprocess, re, os, ffmpeg
+from datetime import datetime as dt
+
+from pyrogram import Client
+
 from telethon import events
-from ethon.telefunc import fast_download, fast_upload
+
 from ethon.pyfunc import video_metadata
+
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
-from telethon.errors.rpcerrorlist import MessageNotModifiedError
-from telethon.tl.types import DocumentAttributeVideo
+from main.plugins.stuff import upload, download
 
 async def encode(event, msg, scale=0):
+    ps_name = str(f"**{scale}p ENCODING:**")
+    _ps = str(f"{scale}p ENCODE")
     Drone = event.client
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
-    new_name = "out_" + dt.now().isoformat("_", "seconds")
-    if hasattr(msg.media, "document"):
-        file = msg.media.document
-    else:
-        file = msg.media
-    mime = msg.file.mime_type
-    if 'mp4' in mime:
-        n = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
-        out = new_name + ".mp4"
-    elif msg.video:
-        n = "media_" + dt.now().isoformat("_", "seconds") + ".mp4"
-        out = new_name + ".mp4"
-    elif 'x-matroska' in mime:
-        n = "media_" + dt.now().isoformat("_", "seconds") + ".mkv" 
-        out = new_name + ".mp4"            
-    elif 'webm' in mime:
-        n = "media_" + dt.now().isoformat("_", "seconds") + ".webm" 
-        out = new_name + ".mp4"
-    else:
-        n = msg.file.name
-        ext = (n.split("."))[1]
-        out = new_name + ext
     DT = time.time()
     try:
-        await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
+        n = await download(msg, edit) 
     except Exception as e:
         os.rmdir("encodemedia")
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
-    name =  '__' + dt.now().isoformat("_", "seconds") + ".mp4"
+    name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...")
     vid = ffmpeg.probe(name)
@@ -74,6 +64,7 @@ async def encode(event, msg, scale=0):
         if 1280 == wdt:
             os.rmdir("encodemedia")
             return await edit.edit(f"The video is already in {scale}p resolution.")
+    out = "compressed_" + dt.now().isoformat("_", "seconds") + ".mp4"
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
@@ -86,54 +77,23 @@ async def encode(event, msg, scale=0):
     elif scale == 720:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 1280x720 -crf 27 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, '**ENCODING:**')
+        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
     except Exception as e:
         os.rmdir("encodemedia")
         print(e)
-        return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)   
-    out2 = dt.now().isoformat("_", "seconds") + ".mp4" 
-    if msg.file.name:
-        out2 = msg.file.name
-    else:
-        out2 = dt.now().isoformat("_", "seconds") + ".mp4" 
+        return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)  
+    out2 = "./_" + n.split("/")[-1]
     os.rename(out, out2)
     i_size = os.path.getsize(name)
-    f_size = os.path.getsize(out2)
-    text = f'**ENCODED by** : @{BOT_UN}\n\nbefore encoding : `{i_size}`\nafter ecoding : `{f_size}`'
-    UT = time.time()
-    if 'webm' in mime:
-        try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
-        except Exception as e:
-            os.rmdir("encodemedia")
-            print(e)
-            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-    elif 'x-matroska' in mime:
-        try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
-        except Exception as e:
-            os.rmdir("encodemedia")
-            print(e)
-            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
-    else:
-        metadata = video_metadata(out2)
-        width = metadata["width"]
-        height = metadata["height"]
-        duration = metadata["duration"]
-        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
-        try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
-        except Exception:
-            try:
-                uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-                await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
-            except Exception as e:
-                os.rmdir("encodemedia")
-                print(e)
-                return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+    f_size = os.path.getsize(out2)     
+    text = f'**{_ps}D by** : @{BOT_UN}'
+    await log.edit("Uploading file")
+    try:
+        await upload(out2, edit, thumb=JPG, caption=text)
+    except Exception as e:
+        os.rmdir("encodemedia")
+        print(e)
+        return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out2)
