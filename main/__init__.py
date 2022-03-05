@@ -21,6 +21,7 @@ MONGODB_URI = config("MONGODB_URI", default=None)
 LIBRARY = config("LIBRARY", default="PYROGRAM")
 
 from ethon.pyfunc import bash
+
 if LIBRARY != "TELETHON":
     bash("pip install tgcrypto")
 else:
