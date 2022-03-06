@@ -87,7 +87,6 @@ async def encode(event, msg, scale=0):
     i_size = os.path.getsize(name)
     f_size = os.path.getsize(out2)     
     text = f'**{_ps}D by** : @{BOT_UN}'
-    await log.edit("Uploading file")
     try:
         await upload(out2, edit, thumb=JPG, caption=text)
     except Exception as e:
