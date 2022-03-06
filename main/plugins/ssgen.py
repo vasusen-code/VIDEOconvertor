@@ -1,13 +1,26 @@
-#Github.com/Vasusen-code
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import os
-import time
-import subprocess
-import asyncio
+import os, time, subprocess, asyncio
 from datetime import datetime as dt
-from ethon.telefunc import fast_download
+
 from ethon.pyfunc import video_metadata
 from telethon import events
+
+from pyrogram import Client
+
+from main.plugins.stuff import upload, download
 
 def hhmmss(seconds):
     x = time.strftime('%H:%M:%S',time.gmtime(seconds))
@@ -41,16 +54,9 @@ async def ssgen(video, time_stamp):
         
 async def screenshot(event, msg):
     Drone = event.client
-    name = dt.now().isoformat("_", "seconds") + ".mp4"
     edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
-    if hasattr(msg.media, "document"):
-        file = msg.media.document
-    else:
-        file = msg.media
-    if msg.file.name:
-        name = msg.file.name
     try:
-        await fast_download(name, file, Drone, edit, time.time(), "**DOWNLOADING:**")
+        name = await download(msg, edit) 
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while downloading.") 
@@ -69,6 +75,9 @@ async def screenshot(event, msg):
     else:
         await edit.edit("No screenshots could be generated!")
     await edit.delete()
-    for pic in pictures:
-        os.remove(pic)
-    os.remove(name)
+    try:
+        for pic in pictures:
+             os.remove(pic)
+        os.remove(name)
+    except Exception:
+        pass
