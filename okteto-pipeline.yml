@@ -1,0 +1,3 @@
+devs:
+  - api/okteto.yml
+  - frontend/okteto.yml
