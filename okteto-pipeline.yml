@@ -1,7 +1,7 @@
 icon: https://apps.okteto.com/movies/icon.png
 deploy:
-  - okteto build -t okteto.dev/api:${OKTETO_GIT_COMMIT} api
-  - okteto build -t okteto.dev/frontend:${OKTETO_GIT_COMMIT} frontend
+  - okteto build -t okteto.dev/api:${OKTETO_GIT_COMMIT} 
+  - okteto build -t okteto.dev/frontend:${OKTETO_GIT_COMMIT} 
 devs:
   - api/okteto.yml
   - frontend/okteto.yml
