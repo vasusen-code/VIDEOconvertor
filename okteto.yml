@@ -1,5 +1,0 @@
-services:
-    build: .
-    command: ["bash", "convertor.sh"]
-    ports:
-      - 80:80
