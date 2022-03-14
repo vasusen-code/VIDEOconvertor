@@ -2,3 +2,9 @@ build:
   docker:
     dockerfile: Dockerfile
 command : ["bash", "convertor.sh"]
+
+services:
+  areyouok:
+    build: .
+    ports:
+      - 80:80
