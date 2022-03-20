@@ -18,7 +18,7 @@
 <a href="https://github.com/vasusen-code/VIDEOconvertor/tree/public"> <img src="https://img.shields.io/badge/Github-public%20branch-blueviolet?style=for-the-badge&logo=github" width="220""/></a>
 </p>
 
-`Telegran Channel` - DroneBots
+`Telegran Channel` - @MOVIES_AFLAM
 <p><a href="https://t.me/movies_aflam"> <img src="https://img.shields.io/badge/Telegram-Join%20Channel-gold?style=for-the-badge&logo=telegram" width="220""/></a></p>
 
 # Public branch
