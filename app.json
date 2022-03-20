@@ -10,7 +10,7 @@
     ],
     "repository": "https://github.com/vasusen-code/VideoConvertor",
     "website": "",
-    "success_url": "https://t.me/DroneBots",
+    "success_url": "https://t.me/movies_aflam",
     "env": {
         "API_HASH": {
             "description": "Your API HASH from my.telegram.org",

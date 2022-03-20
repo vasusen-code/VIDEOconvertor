@@ -29,7 +29,7 @@ from main.plugins.encoder import encode
 from main.plugins.ssgen import screenshot
 
 #Don't be a MF by stealing someone's hardwork.
-forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\nAlso join @DroneBots."
+forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\nAlso join @movies_aflam."
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def compin(event):
