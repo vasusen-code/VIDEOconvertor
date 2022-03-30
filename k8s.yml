@@ -1,0 +1,33 @@
+apiVersion: apps/v1.4
+kind: Deployment
+metadata:
+  name: Video-Convertor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Video-Convertor
+  template:
+    metadata:
+      labels:
+        app: Video-Convertor
+    spec:
+      containers:
+      - image: okteto/hello-world:python
+        name: Video-Convertor
+
+---
+
+apiVersion: v1.4
+kind: Service
+metadata:
+  name: hello-world
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP  
+  ports:
+  - name: "Video-Convertor"
+    port: 8080
+  selector:
+    app: Video-Convertor
