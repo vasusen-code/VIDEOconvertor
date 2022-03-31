@@ -34,8 +34,10 @@ VARIABLES required are:
 
 * `BOT_UN` - Username of yout Bot.
 
-Deploy your own bot on heroku.
+# Deploy
 
+Deploy your bot on `heroku`
+  
 `Warning` - There are two different branches available, look(above) which one you want to deploy. Go to [public](github.com/vasusen-code/videoconvertor) branch if you need bot for your `channel`.
   
 `Fork and Click on Deploy in your fork`
@@ -50,6 +52,10 @@ If facing any problem while deploying through heroku button, just fork and `depl
 Add this buildpack if deploying manually (Read tutorial) : 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
+
+Deploy your bot on `Okteto`
+  
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/vasusen-code/videoconvertor/tree/main)
 
 LICENSE:
 
