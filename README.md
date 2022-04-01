@@ -60,7 +60,9 @@ AUTH_USERS COMMANDS:
   - `/bcast` : Reply to any kind of message to broadcast it
   - `menu` >> `settings` >>  `restart`
   
-Deploy your own bot on heroku.
+# Deploy
+  
+Deploy your own bot on `heroku`
 
 `Warning` - There are two different branches available, look above which one you want to deploy. Go to [main](https://github.com/vasusen-code/VIDEOconvertor/tree/main) branch if you need bot for your `personal` needs.
   
@@ -73,6 +75,10 @@ If facing any problem while deploying through heroku button, just fork and deplo
 Add this buildpack if deploying manually: 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
+
+Deploy your bot on `Okteto`
+  
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com)
 
 LICENSE:
 
