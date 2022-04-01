@@ -1,5 +1,4 @@
-#TG:ChauhanMahesh/DroneBots
-#Github#  This file is part of the VIDEOconvertor distribution.
+#  This file is part of the VIDEOconvertor distribution.
 #  Copyright (c) 2021 vasusen-code ; All rights reserved. 
 #
 #  This program is free software: you can redistribute it and/or modify
