@@ -1,0 +1,3 @@
+icon: https://te.legra.ph/file/74976a427b0f36dc3bd25.jpg
+deploy:
+    - okteto stack deploy --build -f okteto-stack.yml
