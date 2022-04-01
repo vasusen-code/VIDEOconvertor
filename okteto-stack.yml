@@ -6,6 +6,13 @@ services:
       API_HASH: $API_HASH  
       BOT_TOKEN: $BOT_TOKEN 
       BOT_UN: $BOT_UN
+      AUTH_USERS: $AUTH_USERS
+      LOG_CHANNEL: $LOG_CHANNEL
+      LOG_ID: $LOG_ID
+      FORCESUB: $FORCESUB
+      FORCESUB_UN: $FORCESUB_UN
+      ACCESS_CHANNEL: $ACCESS_CHANNEL
+      MONGODB_URI: $MONGODB_URI
     ports:
       - 8080
     resources:
