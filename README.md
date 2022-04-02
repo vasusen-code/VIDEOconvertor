@@ -76,6 +76,8 @@ Add these buildpacks if deploying manually:
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
 
+<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-grey?style=for-the-badge&logo=telegraph" width="250""/></a></p>
+
 Deploy your bot on `Okteto`
   
 [![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com)
