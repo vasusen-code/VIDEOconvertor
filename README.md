@@ -71,8 +71,8 @@ Deploy your own bot on `heroku`
 
 `Alternate way:`
 
-If facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
-Add this buildpack if deploying manually: 
+If you are facing any problem while deploying through heroku button, just fork and deploy manually by creating a new app in heroku.
+Add these buildpacks if deploying manually: 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
 
