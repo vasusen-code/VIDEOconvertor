@@ -47,12 +47,12 @@ Deploy your bot on `heroku`
 
 If you are facing any problem while deploying through heroku button, just fork and `deploy manually` by creating a new app in heroku.
 
-<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-grey?style=for-the-badge&logo=telegraph" width="250""/></a></p>
-
 Add these buildpacks if you are deploying manually (Read tutorial) : 
 
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 - `heroku/python`
+
+<p><a href="https://telegra.ph/Manual-Deploy-Video-Convertor-12-31"> <img src="https://img.shields.io/badge/Manual%20Deploy%20Tutorial-grey?style=for-the-badge&logo=telegraph" width="250""/></a></p>
 
 Deploy your bot on `Okteto`
   
