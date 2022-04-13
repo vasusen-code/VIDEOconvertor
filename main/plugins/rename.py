@@ -13,16 +13,19 @@
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 import os, time, requests
+
 from datetime import datetime as dt
-from .. import Drone, BOT_UN, MONGODB_URI
 from telethon import events
+from telethon.tl.types import DocumentAttributeVideo
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyutils import rename
 from ethon.pyfunc import video_metadata
-from LOCAL.localisation import SUPPORT_LINK
+
+from .. import Drone, BOT_UN, MONGODB_URI
+
 from main.Database.database import Database
 from LOCAL.localisation import JPG3 as t
-from telethon.tl.types import DocumentAttributeVideo
+from LOCAL.localisation import SUPPORT_LINK
 
 async def media_rename(event, msg, new_name):
     edit = await event.client.send_message(event.chat_id, 'Trying to process.', reply_to=msg.id)
