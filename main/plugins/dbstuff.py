@@ -12,9 +12,11 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-from .. import Drone, AUTH_USERS, MONGODB_URI
 from telethon import events, Button
 from decouple import config
+
+from .. import Drone, AUTH_USERS, MONGODB_URI
+
 from main.Database.database import Database
 
 #Database command handling--------------------------------------------------------------------------
