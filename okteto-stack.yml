@@ -13,8 +13,6 @@ services:
       FORCESUB_UN: $FORCESUB_UN
       ACCESS_CHANNEL: $ACCESS_CHANNEL
       MONGODB_URI: $MONGODB_URI
-    ports:
-      - 8080
     resources:
       cpu: 1000m
       memory: 3Gi
