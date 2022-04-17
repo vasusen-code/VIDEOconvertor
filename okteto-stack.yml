@@ -6,8 +6,6 @@ services:
       API_HASH: $API_HASH  
       BOT_TOKEN: $BOT_TOKEN 
       BOT_UN: $BOT_UN
-    ports:
-      - 8080
     resources:
       cpu: 1000m
       memory: 3Gi
