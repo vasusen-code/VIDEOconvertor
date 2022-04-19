@@ -13,16 +13,19 @@
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 import asyncio, time, subprocess, re, os, ffmpeg
+
 from datetime import datetime as dt
-from .. import Drone, BOT_UN, LOG_CHANNEL
 from telethon import events
-from ethon.telefunc import fast_download, fast_upload
-from ethon.pyfunc import video_metadata
-from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
-from LOCAL.utils import ffmpeg_progress
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
+from ethon.telefunc import fast_download, fast_upload
+from ethon.pyfunc import video_metadata
+
+from .. import Drone, BOT_UN, LOG_CHANNEL
+
 from main.plugins.actions import LOG_START, LOG_END
+from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
+from LOCAL.utils import ffmpeg_progress
 
 async def encode(event, msg, scale=0):
     ps_name = str(f"**{scale}p ENCODING:**")

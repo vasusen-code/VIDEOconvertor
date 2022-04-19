@@ -13,20 +13,23 @@
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 import os, time, asyncio
-from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI, ACCESS_CHANNEL
+
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
+from ethon.telefunc import fast_download
+from ethon.pyfunc import video_metadata
+
+from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI, ACCESS_CHANNEL
+
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
 from main.plugins.convertor import mp3, flac, wav, mp4, mkv, webm, file, video
 from main.Database.database import Database
-from LOCAL.localisation import source_text, SUPPORT_LINK
 from main.plugins.actions import force_sub
-from ethon.telefunc import fast_download
-from ethon.pyfunc import video_metadata
 from main.plugins.encoder import encode
 from main.plugins.ssgen import screenshot
+from LOCAL.localisation import source_text, SUPPORT_LINK
 
 #Don't be a MF by stealing someone's hardwork.
 forcesubtext = f"Hey there!To use this bot you've to join @{FORCESUB_UN}.\n\n〽️ Powered by @GroupDc."
