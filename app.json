@@ -8,7 +8,7 @@
         "compressor",
         "bot"
     ],
-    "repository": "https://github.com/vasusen-code/VideoConvertor",
+    "repository": "https://github.com/tiditos224/VideoConvertor",
     "website": "",
     "success_url": "https://t.me/DroneBots",
     "env": {
