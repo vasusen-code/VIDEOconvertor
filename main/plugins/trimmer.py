@@ -12,17 +12,19 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import time
-import os
+import time, os
+
 from datetime import datetime as dt
-from .. import Drone, BOT_UN
 from telethon import events
+from telethon.errors.rpcerrorlist import MessageNotModifiedError
+from telethon.tl.types import DocumentAttributeVideo
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata, bash
 from ethon.pyutils import rename
+
+from .. import Drone, BOT_UN
+
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
-from telethon.errors.rpcerrorlist import MessageNotModifiedError
-from telethon.tl.types import DocumentAttributeVideo
 
 async def trim(event, msg, st, et):
     Drone = event.client
