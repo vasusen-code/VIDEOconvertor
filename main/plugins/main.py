@@ -13,8 +13,11 @@
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 import os
-from .. import Drone 
+
 from telethon import events, Button
+
+from .. import Drone 
+
 from main.plugins.rename import media_rename
 from main.plugins.compressor import compress
 from main.plugins.trimmer import trim
