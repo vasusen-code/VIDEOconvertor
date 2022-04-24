@@ -12,17 +12,18 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import os
-import subprocess
-import time
-from .. import BOT_UN
+import os, subprocess, time
+
+from datetime import datetime as dt
 from telethon import events
-from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2
+from telethon.tl.types import DocumentAttributeVideo
 from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import bash, video_metadata
 from ethon.pyutils import rename
-from datetime import datetime as dt
-from telethon.tl.types import DocumentAttributeVideo
+
+from .. import BOT_UN
+
+from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2
 
 async def mp3(event, msg):
     Drone = event.client
