@@ -34,7 +34,7 @@ VARIABLES required are:
 
 * `BOT_UN` - Username of yout Bot.
 
-# Deploy
+# Deploy (🌟Star the repo) 
 
 Deploy your bot on `heroku`
   
