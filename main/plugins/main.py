@@ -332,12 +332,16 @@ async def fcomp(event):
             try:
                 xx = await conv.send_message("Send me the `percentage` upto which you want to compress the video as a `reply`.\neg: `75`\n\n**Note:** The percentage should be between 10 & 90 only.", buttons=markup)
                 x = await conv.get_reply()
-                perct = x.text
+                perct = int(x.text)
                 await xx.delete()                    
-                if not perct:               
+                if not x and not perct:               
                     return await xx.edit("No response found.")
+            except ValueError:
+                os.rmdir("encodemedia")
+                return await xx.edit("Percentage should only be an integer.")
             except Exception as e: 
                 print(e)
+                os.rmdir("encodemedia")
                 return await xx.edit("An error occured while waiting for the response.")
             if int(perct) < 10:
                 perct = 10
