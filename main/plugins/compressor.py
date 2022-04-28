@@ -94,10 +94,10 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None, perct=None):
     elif ffmpeg_cmd == 4:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 20 -acodec copy -c:s copy """{out}""" -y'
     elif ffmpeg_cmd == 5:
-        filesize = os.stat(out).st_size
+        filesize = os.stat(name).st_size
         calculated_percentage = 100 - perct
         target_size = (calculated_percentage / 100)*filesize
-        target_bitrate = int(math.floor(target_size * 8 / video_metadata(out)["duration"]))
+        target_bitrate = int(math.floor(target_size * 8 / video_metadata(name)["duration"]))
         if target_bitrate // 1000000 >= 1:
             bitrate = str(target_bitrate//1000000) + "M"
         elif target_bitrate // 1000 > 1:
