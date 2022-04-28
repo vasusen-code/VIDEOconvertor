@@ -12,7 +12,7 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio, time, subprocess, re, os, ffmpeg
+import asyncio, time, subprocess, re, os, ffmpeg, math
 
 from datetime import datetime as dt
 from telethon import events
@@ -27,7 +27,7 @@ from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 from main.plugins.actions import LOG_START, LOG_END
 
-async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
+async def compress(event, msg, ffmpeg_cmd=0, ps_name=None, perct=None):
     if ps_name is None:
         ps_name = '**COMPRESSING:**'
     Drone = event.client
@@ -107,6 +107,16 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 18 -acodec copy -c:s copy """{out}""" -y'
     elif ffmpeg_cmd == 4:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 18 -acodec copy -c:s copy """{out}""" -y'
+    elif ffmpeg_cmd == 5:
+        filesize = os.stat(video_file).st_size
+        calculated_percentage = 100 - perct
+        target_size = (calculated_percentage / 100)*filesize
+        target_bitrate = int(math.floor(target_size * 8 / video_metadata(out)["duration"]))
+        if target_bitrate // 1000000 >= 1:
+            bitrate = str(target_bitrate//1000000) + "M"
+        elif target_bitrate // 1000 > 1:
+            bitrate = str(target_bitrate//1000) + "k"
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -tune film -buffsize """{bitrate}""" -b:v """{bitrate}""" -acodec copy -c:s copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
