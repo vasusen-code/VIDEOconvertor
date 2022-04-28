@@ -85,8 +85,9 @@ async def _encode(event):
 async def _compress(event):
     await event.edit("**🗜COMPRESS**",
                     buttons=[
-                        [Button.inline("HEVC COMPRESS", data="hcomp"),
-                         Button.inline("FAST COMPRESS", data="fcomp")],
+                        [Button.inline("HEVC COMPRESS", data="hcomp")],
+                        [Button.inline("SONIC COMPRESS", data="scomp")],
+                        [Button.inline("FAST COMPRESS", data="fcomp")],
                         [Button.inline("BACK", data="back")]])
 
 @Drone.on(events.callbackquery.CallbackQuery(data="convert"))
@@ -257,8 +258,8 @@ async def rename(event):
             return await cm.edit("An error occured while waiting for the response.")
     await media_rename(event, msg, new_name)  
     
-@Drone.on(events.callbackquery.CallbackQuery(data="fcomp"))
-async def fcomp(event):
+@Drone.on(events.callbackquery.CallbackQuery(data="scomp"))
+async def scomp(event):
     yy = await force_sub(event.sender_id)
     if yy is True:
         return await event.reply(forcesubtext)
@@ -300,6 +301,49 @@ async def hcomp(event):
         await event.delete()
         os.mkdir("encodemedia")
         await compress(event, msg, ffmpeg_cmd=1)
+        os.rmdir("encodemedia")
+        now = time.time()
+        timer.append(f'{now}')
+        process1.append(f'{event.sender_id}')
+        await event.client.send_message(event.chat_id, 'You can start a new process again after 5 minutes.')
+        await asyncio.sleep(300)
+        timer.pop(int(timer.index(f'{now}')))
+        process1.pop(int(process1.index(f'{event.sender_id}')))
+    else:
+        await event.edit(f"Another process in progress!\n\n**[LOG CHANNEL](https://t.me/{LOG_CHANNEL})**", link_preview=False)
+
+@Drone.on(events.callbackquery.CallbackQuery(data="fcomp"))
+async def fcomp(event):
+    yy = await force_sub(event.sender_id)
+    if yy is True:
+        return await event.reply(forcesubtext)
+    if f'{event.sender_id}' in process1:
+        index = process1.index(f'{event.sender_id}')
+        last = timer[int(index)]
+        present = time.time()
+        return await event.answer(f"You have to wait {300-round(present-float(last))} seconds more to start a new process!", alert=True)
+    button = await event.get_message()
+    msg = await button.get_reply_message()
+    if not os.path.isdir("encodemedia"):
+        await event.delete()
+        os.mkdir("encodemedia")
+        markup = event.client.build_reply_markup(Button.force_reply())
+        async with Drone.conversation(event.chat_id) as conv: 
+            try:
+                xx = await conv.send_message("Send me the `percentage` upto which you want to compress the video as a `reply`.\neg: `75`\n\n**Note:** The percentage should be between 10 & 90 only.", buttons=markup)
+                x = await conv.get_reply()
+                perct = x.text
+                await xx.delete()                    
+                if not perct:               
+                    return await xx.edit("No response found.")
+            except Exception as e: 
+                print(e)
+                return await xx.edit("An error occured while waiting for the response.")
+            if int(perct) < 10:
+                perct = 10
+            if int(perct) > 90:
+                perct = 90
+        await compress(event, msg, ffmpeg_cmd=5, perct=int(perct))
         os.rmdir("encodemedia")
         now = time.time()
         timer.append(f'{now}')
