@@ -102,7 +102,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None, perct=None):
             bitrate = str(f"{target_bitrate//1000000}M")
         elif target_bitrate // 1000 > 1:
             bitrate = str(f"{target_bitrate//1000}K")
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -buffsize """{bitrate}""" -b:v """{bitrate}""" -tune film -acodec copy -c:s copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -b:v {bitrate} -buffsize {bitrate} -tune film -acodec copy -c:s copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
     except Exception as e:
