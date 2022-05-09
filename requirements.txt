@@ -7,7 +7,6 @@ motor
 Pillow>=5.3.0
 pymongo
 pymongo[srv]
-python-decouple
 requests
 telegraph
 tgcrypto
