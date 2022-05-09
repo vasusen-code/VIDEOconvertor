@@ -1,6 +1,4 @@
 cryptg
-ethon==1.3.7
+ethon==1.3.8 #for VC
 ffmpeg-python
-python-decouple
-telethon
 tgcrypto
