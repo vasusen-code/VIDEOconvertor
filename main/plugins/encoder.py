@@ -24,7 +24,7 @@ from ethon.pyfunc import video_metadata
 from .. import Drone, BOT_UN
 
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
-from LOCAL.utils import ffmpeg_progress
+from LOCAL.utils import ffmpeg_exec_progress
 
 async def encode(event, msg, scale=0):
     Drone = event.client
