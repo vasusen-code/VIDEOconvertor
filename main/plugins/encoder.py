@@ -91,9 +91,9 @@ async def encode(event, msg, scale=0):
     elif scale == 360:
         cmd = ["ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", f"{progress}", "-i", f"{name}", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:360", "-crf", "27", -"c:a", "libopus", "-ac", "2", "-ab", "128k", "-c:s", "copy", f"{out}", "-y"]
     elif scale == 480:
-        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", f"{progress}", "-i", f"{name}", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:480", "-crf", "27", -"c:a", "libopus", "-ac", "2", "-ab", "128k", "-c:s", "copy", f"{out}", "-y"]
+        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", f"{progress}", "-i", f"{name}", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:480", "-crf", "27", -"c:a", "libopus", "-ac", "2", "-ab", "256k", "-c:s", "copy", f"{out}", "-y"]
     elif scale == 720:
-        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", f"{progress}", "-i", f"{name}", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:720", "-crf", "27", -"c:a", "libopus", "-ac", "2", "-ab", "128k", "-c:s", "copy", f"{out}", "-y"]
+        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", f"{progress}", "-i", f"{name}", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:720", "-crf", "27", -"c:a", "libopus", "-ac", "2", "-ab", "256k", "-c:s", "copy", f"{out}", "-y"]
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, '**ENCODING:**')
     except Exception as e:
