@@ -12,7 +12,7 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio, time, subprocess, re, os, ffmpeg
+import asyncio, time, subprocess, re, os
 
 from datetime import datetime as dt
 from telethon import events
@@ -63,23 +63,11 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     name =  '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...")
-    vid = ffmpeg.probe(name)
-    codec = vid['streams'][0]['codec_name']
     hgt = video_metadata(name)["height"]
     wdt = video_metadata(name)["width"]
     if ffmpeg_cmd == 2:
         if hgt == 360 or wdt == 640:
             await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
-            os.rmdir("encodemedia")
-            return
-    if ffmpeg_cmd == 3:
-        if codec == 'hevc':
-            await edit.edit("The given video is already in H.265 codec.")
-            os.rmdir("encodemedia")
-            return
-    if ffmpeg_cmd == 4:
-        if codec == 'h264':
-            await edit.edit("The given video is already in H.264 codec.")
             os.rmdir("encodemedia")
             return
     FT = time.time()
