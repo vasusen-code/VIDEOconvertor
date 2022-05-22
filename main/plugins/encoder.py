@@ -86,11 +86,16 @@ async def encode(event, msg, scale=0):
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ["Join @MaheshChauhan"]
+    aspect = 1
+    if ((int(hgt)) % 2) == 0:
+        aspect = 3
+    else:
+        aspect = 2
     if scale == 240:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
             "-i", name, 
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:240",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", f"scale=-{aspect}:240", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "128k", 
             "-c:s", "copy", 
             out, "-y"
@@ -98,7 +103,8 @@ async def encode(event, msg, scale=0):
     elif scale == 360:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
-            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:360", 
+            "-i", name, 
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", f"scale=-{aspect}:360", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "128k", 
             "-c:s", "copy", 
             out, "-y"
@@ -106,7 +112,8 @@ async def encode(event, msg, scale=0):
     elif scale == 480:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
-            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:480",
+            "-i", name, 
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", f"scale=-{aspect}:480", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "256k", 
             "-c:s", "copy", 
             out, "-y"
@@ -114,7 +121,8 @@ async def encode(event, msg, scale=0):
     elif scale == 720:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
-            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:720",
+            "-i", name, 
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", f"scale=-{aspect}720", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "256k", 
             "-c:s", "copy", 
             out, "-y"
