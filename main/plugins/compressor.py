@@ -24,7 +24,7 @@ from ethon.pyfunc import video_metadata
 from .. import Drone, BOT_UN
 
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
-from LOCAL.utils import ffmpeg_progress
+from LOCAL.utils import ffmpeg_progress, ffmpeg_exec_progress
 
 async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     Drone = event.client
@@ -76,13 +76,23 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     if ffmpeg_cmd == 1:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 28 -acodec copy -c:s copy """{out}""" -y'
     elif ffmpeg_cmd == 2:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx265 -crf 22 -preset ultrafast -s 640x360 -c:a copy -c:s copy """{out}""" -y'
+        cmd = [
+            "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
+            "-i", name, 
+            "-c:v", "libx265", "-crf 22", "-preset", "ultrafast", "-vf", "scale=-1:360", 
+            "-c:a", "copy", 
+            "-c:s", "copy", 
+            out, "-y"
+        ]
     elif ffmpeg_cmd == 3:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 20 -acodec copy -c:s copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -acodec copy -c:s copy """{out}""" -y'
     elif ffmpeg_cmd == 4:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 20 -acodec copy -c:s copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -acodec copy -c:s copy """{out}""" -y'
     try:
-        await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
+        if ffmpeg_cmd != 2:
+            await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
+        else:
+            await ffmpeg_exec_progress(cmd, name, progress, FT, edit, ps_name)
     except Exception as e:
         os.rmdir("encodemedia")
         print(e)
