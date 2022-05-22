@@ -90,7 +90,7 @@ async def encode(event, msg, scale=0):
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
             "-i", name, 
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:240", "-crf", "27", 
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:240",
             "-c:a", "libopus", "-ac", "2", "-ab", "128k", 
             "-c:s", "copy", 
             out, "-y"
@@ -98,7 +98,7 @@ async def encode(event, msg, scale=0):
     elif scale == 360:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
-            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:360", "-crf", "27", 
+            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:360", 
             "-c:a", "libopus", "-ac", "2", "-ab", "128k", 
             "-c:s", "copy", 
             out, "-y"
@@ -106,7 +106,7 @@ async def encode(event, msg, scale=0):
     elif scale == 480:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
-            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:480", "-crf", "27", 
+            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:480",
             "-c:a", "libopus", "-ac", "2", "-ab", "256k", 
             "-c:s", "copy", 
             out, "-y"
@@ -114,7 +114,7 @@ async def encode(event, msg, scale=0):
     elif scale == 720:
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
-            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:720", "-crf", "27", 
+            "-i", name, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=-1:720",
             "-c:a", "libopus", "-ac", "2", "-ab", "256k", 
             "-c:s", "copy", 
             out, "-y"
