@@ -90,7 +90,7 @@ async def encode(event, msg, scale=0):
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
             "-i", name, 
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=426:trunc(ow/a/2)*2", "-crf", "22",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "faster", "-vf", "scale=426:trunc(ow/a/2)*2", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "128k", 
             "-c:s", "copy", 
             out, "-y"
@@ -99,7 +99,7 @@ async def encode(event, msg, scale=0):
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
             "-i", name, 
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=640:trunc(ow/a/2)*2", "-crf", "22",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "faster", "-vf", "scale=640:trunc(ow/a/2)*2", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "128k", 
             "-c:s", "copy", 
             out, "-y"
@@ -108,7 +108,7 @@ async def encode(event, msg, scale=0):
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
             "-i", name, 
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=854:trunc(ow/a/2)*2", "-crf", "22",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "faster", "-vf", "scale=854:trunc(ow/a/2)*2", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "256k", 
             "-c:s", "copy", 
             out, "-y"
@@ -117,7 +117,7 @@ async def encode(event, msg, scale=0):
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "quiet", "-progress", progress, 
             "-i", name, 
-            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "ultrafast", "-vf", "scale=1280:trunc(ow/a/2)*2", "-crf", "22",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "faster", "-vf", "scale=1280:trunc(ow/a/2)*2", "-crf", "22",
             "-c:a", "libopus", "-ac", "2", "-ab", "256k", 
             "-c:s", "copy", 
             out, "-y"
