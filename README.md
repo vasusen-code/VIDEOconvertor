@@ -60,7 +60,7 @@ AUTH_USERS COMMANDS:
   - `/bcast` : Reply to any kind of message to broadcast it
   - `menu` >> `settings` >>  `restart`
   
-# Deploy
+# Deploy (🌟Star the repo) 
   
 Deploy your own bot on `heroku`
 
