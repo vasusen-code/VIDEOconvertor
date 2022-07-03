@@ -12,7 +12,7 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio, time, subprocess, re, os, ffmpeg
+import asyncio, time, subprocess, re, os
 
 from datetime import datetime as dt
 from telethon import events
@@ -68,9 +68,9 @@ async def encode(event, msg, scale=0):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...")
-    vid = ffmpeg.probe(name)
-    hgt = int(vid['streams'][0]['height'])
-    wdt = int(vid['streams'][0]['width'])
+    vid = video_metadata(name)
+    hgt = int(vid['height'])
+    wdt = int(vid['width'])
     if scale == hgt:
         os.rmdir("encodemedia")
         return await edit.edit(f"The video is already in {scale}p resolution.")
