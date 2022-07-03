@@ -84,9 +84,9 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     elif ffmpeg_cmd == 2:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx265 -crf 22 -preset ultrafast -s 640x360 -c:a copy -c:s copy """{out}""" -y'
     elif ffmpeg_cmd == 3:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx265 -crf 20 -acodec copy -c:s copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset faster -vcodec libx265 -crf 23 -acodec copy -c:s copy """{out}""" -y'
     elif ffmpeg_cmd == 4:
-        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset ultrafast -vcodec libx264 -crf 20 -acodec copy -c:s copy """{out}""" -y'
+        cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -preset faster -vcodec libx264 -crf 23 -acodec copy -c:s copy """{out}""" -y'
     try:
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name)
     except Exception as e:
