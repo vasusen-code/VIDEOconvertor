@@ -81,13 +81,6 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
             await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
             os.rmdir("encodemedia")
             return
-    if ffmpeg_cmd == 3:
-        if codec == 'hevc':
-            await log.delete()
-            await LOG_END(event, log_end_text)
-            await edit.edit("The given video is already in H.265 codec.")
-            os.rmdir("encodemedia")
-            return
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" None """{out}""" -y'
