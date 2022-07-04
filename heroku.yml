@@ -1,0 +1,5 @@
+build:
+  docker:
+    drone: Dockerfile
+run:
+  drone: bash convertor.sh
