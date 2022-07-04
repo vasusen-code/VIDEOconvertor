@@ -2,4 +2,4 @@ build:
   docker:
     drone: Dockerfile
 run:
-  drone: bash converter.sh
+  drone: bash convertor.sh
