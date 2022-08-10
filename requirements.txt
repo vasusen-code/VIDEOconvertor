@@ -1,5 +1,5 @@
 https://github.com/vasusen-code/my-tt/archive/refs/tags/v1.24.0.zip
-cryptg
+https://github.com/vasusen-code/my-ctg/archive/refs/tags/0.2.1.zip
 dnspython
 ethon==1.3.8 #for VC
 heroku3
@@ -9,4 +9,4 @@ pymongo
 pymongo[srv]
 requests
 telegraph
-tgcrypto
+
