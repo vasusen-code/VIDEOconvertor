@@ -9,4 +9,4 @@ pymongo
 pymongo[srv]
 requests
 telegraph
-
+tgcrypto
