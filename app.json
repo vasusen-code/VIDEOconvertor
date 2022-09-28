@@ -1,0 +1,78 @@
+{
+    "name": "VideoConvertor",
+    "description": "A stable and Fast telegram video convertor bot which can compress, convert(video into audio and other video formats), rename and trim.",
+    "logo": "",
+    "keywords": [
+        "Best",
+        "telegram",
+        "compressor",
+        "bot"
+    ],
+    "repository": "https://github.com/vasusen-code/VideoConvertor",
+    "website": "",
+    "success_url": "https://t.me/DroneBots",
+    "env": {
+        "API_HASH": {
+            "description": "Your API HASH from my.telegram.org",
+            "value": ""
+        },
+        "API_ID": {
+            "description": "Your API ID from my.telegram.org",
+            "value": ""
+        },
+        "BOT_TOKEN": {
+            "description": "Bot token, get it from @BotFather.",
+            "value": ""
+        },
+        "AUTH_USERS": {
+            "description": "Bot owner's UserID.",
+            "value": ""
+        },
+        "HEROKU_API": {
+            "description": "Your heroku app name(optional, add only if you want to restart directly from tg.",
+            "value": "",
+            "required": false
+        },
+        "HEROKU_APP_NAME": {
+            "description": "Your heroku api, you can get it from heroku account settings(optional, add only if you want to restart directly from tg.",
+            "value": "",
+            "required": false
+        },
+        "LOG_CHANNEL": {
+            "description": "Log channel username, without using '@'.",
+            "value": ""
+        },
+        "LOG_ID": {
+            "description": "Log channel `ID` (Should be Public)",
+            "value": ""
+        },
+        "ACCESS_CHANNEL": {
+            "description": "Private group id to spy users.(Should be public group)",
+            "value": ""
+        },
+        "MONGODB_URI": {
+            "description": "Your mongodb url here.",
+            "value": ""
+        },
+        "FORCESUB": {
+            "description": "Channel id to which u want user be force subcribed.(Should be public)",
+            "value": ""
+        },
+        "FORCESUB_UN": {
+            "description": "Forcesub channel's username.",
+            "value": ""
+        },
+        "BOT_UN": {
+            "description": "Username of your bot.",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        },
+        {
+            "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+        }
+    ]
+}
