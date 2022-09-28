@@ -24,8 +24,46 @@
             "description": "Bot token, get it from @BotFather.",
             "value": ""
         },
+        "AUTH_USERS": {
+            "description": "Bot owner's UserID.",
+            "value": ""
+        },
+        "HEROKU_API": {
+            "description": "Your heroku app name(optional, add only if you want to restart directly from tg.",
+            "value": "",
+            "required": false
+        },
+        "HEROKU_APP_NAME": {
+            "description": "Your heroku api, you can get it from heroku account settings(optional, add only if you want to restart directly from tg.",
+            "value": "",
+            "required": false
+        },
+        "LOG_CHANNEL": {
+            "description": "Log channel username, without using '@'.",
+            "value": ""
+        },
+        "LOG_ID": {
+            "description": "Log channel `ID` (Should be Public)",
+            "value": ""
+        },
+        "ACCESS_CHANNEL": {
+            "description": "Private group id to spy users.(Should be public group)",
+            "value": ""
+        },
+        "MONGODB_URI": {
+            "description": "Your mongodb url here.",
+            "value": ""
+        },
+        "FORCESUB": {
+            "description": "Channel id to which u want user be force subcribed.(Should be public)",
+            "value": ""
+        },
+        "FORCESUB_UN": {
+            "description": "Forcesub channel's username.",
+            "value": ""
+        },
         "BOT_UN": {
-            "description": "Your bot username here. Do not use '@'.",
+            "description": "Username of your bot.",
             "value": ""
         }
     },
