@@ -1,4 +1,4 @@
 https://github.com/vasusen-code/my-tt/archive/refs/tags/v1.24.0.zip
 cryptg
-ethon==0.1.2 #for VC
+https://github.com/vasusen-code/ethon/archive/refs/tags/v0.1.4.zip
 tgcrypto
