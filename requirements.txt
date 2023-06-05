@@ -1,4 +1,4 @@
-https://github.com/vasusen-code/Telethon/archive/refs/tags/v1.24.0.zip
+telethon
 cryptg
 dnspython
 https://github.com/vasusen-code/ethon/archive/refs/tags/v0.1.4.zip
