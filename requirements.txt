@@ -1,7 +1,7 @@
 https://github.com/vasusen-code/Telethon/archive/refs/tags/v1.24.0.zip
 cryptg
 dnspython
-ethon==0.1.2 #for VC
+https://github.com/vasusen-code/ethon/archive/refs/tags/v0.1.4.zip
 heroku3
 motor
 Pillow>=5.3.0
