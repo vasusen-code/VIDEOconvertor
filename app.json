@@ -8,25 +8,25 @@
         "compressor",
         "bot"
     ],
-    "repository": "https://github.com/vasusen-code/VideoConvertor",
+    "repository": "https://github.com/amitnara125/VideoConvertor",
     "website": "",
     "success_url": "https://t.me/DroneBots",
     "env": {
         "API_HASH": {
             "description": "Your API HASH from my.telegram.org",
-            "value": ""
+            "value": "531dbf42d387514dc43da07db9f2dc8f"
         },
         "API_ID": {
             "description": "Your API ID from my.telegram.org",
-            "value": ""
+            "value": "7774029"
         },
         "BOT_TOKEN": {
             "description": "Bot token, get it from @BotFather.",
-            "value": ""
+            "value": "5316639488:AAEiy0MI7CnlIgbXK8E12XSfGNUGDorrXNo"
         },
         "BOT_UN": {
             "description": "Your bot username here. Do not use '@'.",
-            "value": ""
+            "value": "kapilcompress10bot"
         }
     },
     "buildpacks": [
